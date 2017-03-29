@@ -3,8 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.2"
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
   defaultConfig {
     applicationId "ceg.avtechlabs.mba"
     minSdkVersion 21

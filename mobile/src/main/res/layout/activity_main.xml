@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+  <RelativeLayout
     android:id="@+id/activity_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,10 +9,50 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ceg.avtechlabs.mba.activities.MainActivity">
+    tools:context="ceg.avtechlabs.mba.ui.MainActivity">
 
-  <TextView
-      android:layout_width="wrap_content"
+  <Button
+      android:text="Marketing"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Hello World!"/>
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:id="@+id/buttonMarketing"
+      android:onClick="loadMarketingFeeds"/>
+
+  <Button
+      android:text="Finance"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/buttonMarketing"
+      android:layout_centerHorizontal="true"
+      android:id="@+id/buttonFinance"
+      android:onClick="loadFinanceFeeds"/>
+
+
+  <Button
+      android:text="Economics"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/buttonFinance"
+      android:layout_alignStart="@+id/buttonFinance"
+      android:id="@+id/buttonEconomics"
+      android:onClick="loadEconomicsFeeds"/>
+
+  <Button
+      android:text="Leadership"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/buttonEconomics"
+      android:layout_alignStart="@+id/buttonEconomics"
+      android:id="@+id/buttonLeadership"
+      android:onClick="loadLeadershipFeeds"/>
+
+  <Button
+      android:text="Others"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/buttonLeadership"
+      android:id="@+id/buttonOthers"
+      android:onClick="loadOtherFeeds"/>
 </RelativeLayout>

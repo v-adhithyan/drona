@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="marketing">
+    <item>http://madovermarketing.com/</item>
+    <item>http://www.ducttapemarketing.com/blog/</item>
+  </string-array>
+
+  <string-array name="finance">
+    <item>http://www.iimahd.ernet.in/~jrvarma/blog/index.cgi</item>
+    <item>http://www.nytimes.com/pages/business/dealbook/index.html</item>
+    <item>http://www.mergersandinquisitions.com/</item>
+    <item>https://www.wallstreetprep.com/wsp-blog/</item>
+    <item>http://www.wallstreetoasis.com/</item>
+    <item>http://ftalphaville.ft.com/</item>
+  </string-array>
+
+  <string-array name="economics">
+    <item>http://freakonomics.com/blog/</item>
+    <item>http://whynationsfail.com/</item>
+    <item>http://economixcomix.com/</item>
+    <item>http://johnhcochrane.blogspot.in/</item>
+    <item>http://investing.curiouscatblog.net/</item>
+    <item>http://www.nytimes.com/upshot/</item>
+    <item>http://economistsview.typepad.com/</item>
+    <item>http://www.themoneyillusion.com/</item>
+  </string-array>
+
+  <string-array name="leadership">
+    <item>http://guykawasaki.com/</item>
+    <item>http://www.allthingsworkplace.com/</item>
+    <item>http://sethgodin.typepad.com/</item>
+    <item>http://leanin.org/</item>
+    <item>http://switchandshift.com/blog</item>
+    <item>http://bigthink.com/</item>
+  </string-array>
+
+  <string-array name="others">
+    <item>http://bobsutton.typepad.com/my_weblog/</item>
+    <item>https://hbr.org/</item>
+  </string-array>
+
+</resources>
