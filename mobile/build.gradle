@@ -37,8 +37,9 @@ dependencies {
 
   // Alert
   compile 'cn.pedant.sweetalert:library:1.3'
-  compile 'com.github.yalantis:Side-Menu.Android:1.0.1'
+  compile 'it.neokree:MaterialTabs:0.11'
   compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+  compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
   // rss library
   compile ('com.crazyhitty.chdev.ks:rss-manager:0.75'){

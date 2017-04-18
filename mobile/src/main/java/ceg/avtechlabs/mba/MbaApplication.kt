@@ -9,7 +9,7 @@ class MbaApplication : Application() {
         super.onCreate()
 
         val font = CalligraphyConfig.Builder()
-                . setDefaultFontPath("fonts/proximanovaregular.ttf")
+                .setDefaultFontPath("fonts/proximanova.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         CalligraphyConfig.initDefault(font)

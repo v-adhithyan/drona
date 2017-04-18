@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string-array name="marketing">
+  <string-array name="Marketing">
     <item>http://madovermarketing.com/</item>
     <item>http://www.ducttapemarketing.com/blog/</item>
   </string-array>
 
-  <string-array name="finance">
+  <string-array name="Finance">
     <item>http://www.iimahd.ernet.in/~jrvarma/blog/index.cgi</item>
     <item>http://www.nytimes.com/pages/business/dealbook/index.html</item>
     <item>http://www.mergersandinquisitions.com/</item>
@@ -15,7 +15,7 @@
     <item>http://ftalphaville.ft.com/</item>
   </string-array>
 
-  <string-array name="economics">
+  <string-array name="Economics">
     <item>http://freakonomics.com/blog/</item>
     <item>http://whynationsfail.com/</item>
     <item>http://economixcomix.com/</item>
@@ -26,7 +26,7 @@
     <item>http://www.themoneyillusion.com/</item>
   </string-array>
 
-  <string-array name="leadership">
+  <string-array name="Leadership">
     <item>http://guykawasaki.com/</item>
     <item>http://www.allthingsworkplace.com/</item>
     <item>http://sethgodin.typepad.com/</item>
@@ -35,8 +35,8 @@
     <item>http://bigthink.com/</item>
   </string-array>
 
-  <string-array name="others">
-    <item>http://bobsutton.typepad.com/my_weblog/</item>
+  <string-array name="Others">
+    <item>http://bobsutton.typepad.com/my_webl/</item>
     <item>https://hbr.org/</item>
   </string-array>
 

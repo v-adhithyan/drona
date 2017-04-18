@@ -16,34 +16,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadMarketingFeeds(v: View) {
-        val alert = SweetAlertDialog(this)
-        alert.titleText = "Marketing"
-        alert.show()
+        val topic = getString(R.string.topic_marketing)
+        startReader(topic)
     }
 
     fun loadFinanceFeeds(v: View) {
-        /*val alert = SweetAlertDialog(this)
-        alert.titleText = "Finance"
-        alert.show()*/
-        val intent = Intent(this, DisplayActivity::class.java)
-        startActivity(intent)
+        val topic = getString(R.string.topic_finance)
+        startReader(topic)
     }
 
     fun loadEconomicsFeeds(v: View) {
-        val alert = SweetAlertDialog(this)
-        alert.titleText = "Economics"
-        alert.show()
+        val topic = getString(R.string.topic_economics)
+        startReader(topic)
     }
 
     fun loadLeadershipFeeds(v: View) {
-        val alert = SweetAlertDialog(this)
-        alert.titleText = "Leadership"
-        alert.show()
+        val topic = getString(R.string.topic_leadership)
+        startReader(topic)
     }
 
     fun loadOtherFeeds(v: View) {
-        val alert = SweetAlertDialog(this)
-        alert.titleText = "Other"
-        alert.show()
+        val topic = getString(R.string.topic_others)
+        startReader(topic)
+    }
+    
+    private fun startReader(topic: String) {
+        val intent = Intent(this, ReaderActivity::class.java)
+        intent.putExtra(ReaderActivity.TOPIC, topic)
+        startActivity(intent)
     }
 }

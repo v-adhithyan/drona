@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">MBA</string>
+
+  <string name="topic_marketing">Marketing</string>
+  <string name="topic_finance">Finance</string>
+  <string name="topic_economics">Economics</string>
+  <string name="topic_leadership">Leadership</string>
+  <string name="topic_others">Others</string>
+
 </resources>
