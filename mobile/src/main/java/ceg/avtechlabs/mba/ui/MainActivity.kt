@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun startReader(topic: String) {
-        val intent = Intent(this, ReaderActivity::class.java)
-        intent.putExtra(ReaderActivity.TOPIC, topic)
+        val intent = Intent(this, DisplayActivity::class.java)
+        intent.putExtra(DisplayActivity.TOPIC, topic)
         startActivity(intent)
     }
 }
