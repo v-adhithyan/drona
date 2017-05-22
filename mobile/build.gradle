@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  buildToolsVersion "25.0.3"
   defaultConfig {
     applicationId "ceg.avtechlabs.mba"
     minSdkVersion 17
@@ -33,9 +33,9 @@ dependencies {
   wearApp project(':wear')
 
   compile 'com.google.android.gms:play-services:9.4.0'
-  compile 'com.android.support:appcompat-v7:25.0.1'
-  compile 'com.android.support:cardview-v7:25.0.1'
-  compile 'com.android.support:recyclerview-v7:25.0.1'
+  compile 'com.android.support:appcompat-v7:25.3.1'
+  compile 'com.android.support:cardview-v7:25.3.1'
+  compile 'com.android.support:recyclerview-v7:25.3.1'
 
   // Alert
   compile 'cn.pedant.sweetalert:library:1.3'

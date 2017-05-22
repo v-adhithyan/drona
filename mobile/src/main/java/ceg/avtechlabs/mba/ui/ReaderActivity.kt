@@ -19,6 +19,8 @@ class ReaderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
 
+        val url = intent.getStringExtra(DisplayActivity.URL)
+
         val webview = findViewById(R.id.webview) as WebView
         webview.showContextMenu()
         webview.settings.javaScriptEnabled = true
@@ -29,6 +31,6 @@ class ReaderActivity : AppCompatActivity() {
                 //progressDialog?.dismiss()
             }
         })
-        //webview.loadUrl(url)
+        webview.loadUrl(url)
     }
 }

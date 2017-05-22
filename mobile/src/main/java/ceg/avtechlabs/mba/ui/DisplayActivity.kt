@@ -10,7 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.adapters.RecyclerViewAdapter
+import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
 import ceg.avtechlabs.mba.models.AdapterObject
 import ceg.avtechlabs.mba.util.Logger
 import com.crazyhitty.chdev.ks.rssmanager.RSS
@@ -36,7 +36,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
         layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
-        recycler_view.layoutManager = layoutManager
+        recycler_view.layoutManager = layoutManager!!
 
         val topic = intent.getStringExtra(TOPIC)
         title = topic + " feeds"
@@ -58,19 +58,21 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             url = "http://bobsutton.typepad.com/my_webl/"
         }
 
+        url = "https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss"
         progressDialog = ProgressDialog(this)
         progressDialog?.setMessage("Please wait ..")
-        //progressDialog?.show()
-        //rssReader.loadFeeds(url)
+        progressDialog?.show()
+        rssReader.loadFeeds(url)
 
         val array = ArrayList<AdapterObject>()
         array.add(AdapterObject("hello", "1"))
         array.add(AdapterObject("afdadf", "2"))
-        recycler_view.adapter = RecyclerViewAdapter(array)
+        //recycler_view.adapter = RecyclerViewAdapter(array)
     }
 
     companion object {
         val TOPIC = "topic"
+        val URL = "url"
     }
 
 
@@ -78,7 +80,10 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun rssFeedsLoaded(rssList: MutableList<RSS>?) {
-
+    override fun rssFeedsLoaded(rssList: List<RSS>) {
+        runOnUiThread {
+            progressDialog?.dismiss()
+            recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
+        }
     }
 }
