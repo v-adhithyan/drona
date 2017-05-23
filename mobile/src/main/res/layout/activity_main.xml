@@ -1,58 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <RelativeLayout
-    android:id="@+id/activity_main"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ceg.avtechlabs.mba.ui.MainActivity">
 
-  <Button
-      android:text="Marketing"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:id="@+id/buttonMarketing"
-      android:onClick="loadMarketingFeeds"/>
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content">
 
-  <Button
-      android:text="Finance"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonMarketing"
-      android:layout_centerHorizontal="true"
-      android:id="@+id/buttonFinance"
-      android:onClick="loadFinanceFeeds"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:id="@+id/mytrips"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight="0.5"
+          android:backgroundTint="#ff000000"
+          android:gravity="center_horizontal"
+          android:onClick="loadMarketingFeeds">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
 
 
-  <Button
-      android:text="Economics"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonFinance"
-      android:layout_alignStart="@+id/buttonFinance"
-      android:id="@+id/buttonEconomics"
-      android:onClick="loadEconomicsFeeds"/>
+          <com.facebook.drawee.view.SimpleDraweeView
+              android:id="@+id/imageview_marketing"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_weight="4"
+              android:alpha="0.6"
+              android:contentDescription="@string/topic_marketing"
+              android:padding="10dp"
+              android:scaleType="centerCrop" />
 
-  <Button
-      android:text="Leadership"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonEconomics"
-      android:layout_alignStart="@+id/buttonEconomics"
-      android:id="@+id/buttonLeadership"
-      android:onClick="loadLeadershipFeeds"/>
 
-  <Button
-      android:text="Others"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonLeadership"
-      android:id="@+id/buttonOthers"
-      android:onClick="loadOtherFeeds"/>
-</RelativeLayout>
+          <TextView
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:layout_marginBottom="10dp"
+              android:layout_weight="1.6"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center"
+              android:padding="2dp"
+              android:text="@string/topic_marketing"
+              android:textColor="#ffffff"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+
+        </FrameLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/vehicle"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight="0.5"
+          android:backgroundTint="#ff000000"
+          android:gravity="center_horizontal"
+          android:onClick="loadFinanceFeeds">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+
+          <com.facebook.drawee.view.SimpleDraweeView
+              android:id="@+id/imageview_finance"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_weight="4"
+              android:alpha="0.6"
+              android:contentDescription="@string/topic_finance"
+              android:padding="10dp"
+              android:scaleType="centerCrop" />
+
+
+          <TextView
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:layout_marginBottom="10dp"
+              android:layout_weight="1.6"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center"
+              android:padding="2dp"
+              android:text="@string/topic_finance"
+              android:textColor="#ffffff"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+
+        </FrameLayout>
+      </LinearLayout>
+
+
+      <LinearLayout
+          android:id="@+id/accomo"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight="0.5"
+          android:backgroundTint="#ff000000"
+          android:gravity="center_horizontal"
+          android:onClick="loadEconomicsFeeds">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+
+          <com.facebook.drawee.view.SimpleDraweeView
+              android:id="@+id/imageview_economics"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_weight="4"
+              android:alpha="0.6"
+              android:contentDescription="@string/topic_economics"
+              android:padding="10dp"
+              android:scaleType="centerCrop" />
+
+
+          <TextView
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:layout_marginBottom="10dp"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center"
+              android:padding="2dp"
+              android:text="@string/topic_economics"
+              android:textColor="#ffffff"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+
+        </FrameLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/shopping"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight="0.5"
+          android:backgroundTint="#ff000000"
+          android:gravity="center_horizontal"
+          android:onClick="loadLeadershipFeeds">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+
+          <com.facebook.drawee.view.SimpleDraweeView
+              android:id="@+id/imageview_leadership"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_weight="4"
+              android:alpha="0.6"
+              android:contentDescription="@string/topic_leadership"
+              android:padding="10dp"
+              android:scaleType="centerCrop" />
+
+
+          <TextView
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:layout_marginBottom="10dp"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center"
+              android:padding="2dp"
+              android:text="@string/topic_leadership"
+              android:textColor="#ffffff"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+
+        </FrameLayout>
+      </LinearLayout>
+
+
+      <LinearLayout
+          android:id="@+id/realtime"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight="0.5"
+          android:backgroundTint="#ff000000"
+          android:gravity="center_horizontal"
+          android:onClick="loadOtherFeeds">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+
+          <com.facebook.drawee.view.SimpleDraweeView
+              android:id="@+id/imageview_others"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_weight="4"
+              android:alpha="0.6"
+              android:contentDescription="@string/topic_others"
+              android:padding="10dp"
+              android:scaleType="centerCrop" />
+
+
+          <TextView
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:layout_marginBottom="10dp"
+              android:layout_weight="1.6"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center"
+              android:padding="2dp"
+              android:text="@string/topic_others"
+              android:textColor="#ffffff"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+
+        </FrameLayout>
+      </LinearLayout>
+
+
+    </LinearLayout>
+  </ScrollView>
+

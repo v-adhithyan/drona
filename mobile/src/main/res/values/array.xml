@@ -2,42 +2,42 @@
 <resources>
 
   <string-array name="Marketing">
-    <item>http://madovermarketing.com/</item>
-    <item>http://www.ducttapemarketing.com/blog/</item>
+    <!--item>http://madovermarketing.com/</item-->
+    <item>http://feeds2.feedburner.com/ducttapemarketing/nRUD</item>
   </string-array>
 
   <string-array name="Finance">
     <item>https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss</item>
-    <item>http://www.nytimes.com/pages/business/dealbook/index.html</item>
-    <item>http://www.mergersandinquisitions.com/</item>
-    <item>https://www.wallstreetprep.com/wsp-blog/</item>
-    <item>http://www.wallstreetoasis.com/</item>
-    <item>http://ftalphaville.ft.com/</item>
+    <item>http://rss.nytimes.com/services/xml/rss/nyt/Business.xml</item>
+    <!--item>http://www.mergersandinquisitions.com/</item-->
+    <!--item>https://www.wallstreetprep.com/wsp-blog/</item-->
+    <!--item>http://www.wallstreetoasis.com/</item-->
+    <!--item>http://ftalphaville.ft.com/</item-->
   </string-array>
 
   <string-array name="Economics">
-    <item>http://freakonomics.com/blog/</item>
+    <!--item>http://freakonomics.com/blog/</item>
     <item>http://whynationsfail.com/</item>
-    <item>http://economixcomix.com/</item>
-    <item>http://johnhcochrane.blogspot.in/</item>
-    <item>http://investing.curiouscatblog.net/</item>
-    <item>http://www.nytimes.com/upshot/</item>
-    <item>http://economistsview.typepad.com/</item>
-    <item>http://www.themoneyillusion.com/</item>
+    <item>http://economixcomix.com/</item-->
+    <item>http://johnhcochrane.blogspot.com/feeds/posts/default</item>
+    <!--item>http://investing.curiouscatblog.net/</item-->
+    <item>http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml</item>
+    <item>http://feeds2.feedburner.com/EconomistsView?fmt=xml</item>
+    <item>http://feeds2.feedburner.com/Themoneyillusion?fmt=xml</item>
   </string-array>
 
   <string-array name="Leadership">
-    <item>http://guykawasaki.com/</item>
-    <item>http://www.allthingsworkplace.com/</item>
-    <item>http://sethgodin.typepad.com/</item>
-    <item>http://leanin.org/</item>
-    <item>http://switchandshift.com/blog</item>
-    <item>http://bigthink.com/</item>
+    <!--item>http://guykawasaki.com/</item-->
+    <item>http://feeds2.feedburner.com/allthingsworkplace?fmt=xml</item>
+    <!--item>http://sethgodin.typepad.com/</item-->
+    <!--item>http://leanin.org/</item-->
+    <!--item>http://switchandshift.com/blog</item-->
+    <item>http://feeds2.feedburner.com/bigthink/main?fmt=xml</item>
   </string-array>
 
   <string-array name="Others">
-    <item>http://bobsutton.typepad.com/my_webl/</item>
-    <item>https://hbr.org/</item>
+    <!--item>http://bobsutton.typepad.com/my_webl/</item-->
+    <item>http://feeds2.hbr.org/harvardbusiness</item>
   </string-array>
 
 </resources>

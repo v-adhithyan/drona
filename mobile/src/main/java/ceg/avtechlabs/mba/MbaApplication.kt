@@ -1,6 +1,7 @@
 package ceg.avtechlabs.mba
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class MbaApplication : Application() {
@@ -13,5 +14,7 @@ class MbaApplication : Application() {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         CalligraphyConfig.initDefault(font)
+
+        Fresco.initialize(this)
     }
 }

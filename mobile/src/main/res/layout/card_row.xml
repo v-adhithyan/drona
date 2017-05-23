@@ -2,42 +2,58 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
   <android.support.v7.widget.CardView
       android:id="@+id/card_view"
-      android:layout_width="fill_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="center"
       android:layout_margin="5dp"
       card_view:cardCornerRadius="2dp"
       card_view:contentPadding="10dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+      <com.facebook.drawee.view.SimpleDraweeView
+          android:id="@+id/feed_icon"
+          android:layout_width="130dp"
+          android:layout_height="130dp"
+          fresco:placeholderImage="@drawable/ic_launcher" />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
       <TextView
           android:id="@+id/card_title"
-          android:layout_width="wrap_content"
+          android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:layout_alignParentTop="true"
           android:textStyle="bold"
           android:textAlignment="center"
+          fontPath="fonts/proximanova.ttf"
           android:text="Title"/>
 
       <TextView
           android:id="@+id/card_description"
-          android:layout_width="wrap_content"
+          android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:layout_below="@+id/card_title"
           android:textAlignment="gravity"
           android:text="Description"
+          fontPath="fonts/proximanova.ttf"
           android:layout_marginTop="10dp"/>
 
-    </RelativeLayout>
+      </RelativeLayout>
+
+    </LinearLayout>
 
   </android.support.v7.widget.CardView>
 
