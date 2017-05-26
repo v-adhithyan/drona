@@ -47,7 +47,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@+id/card_title"
           android:textAlignment="gravity"
-          android:text="Description"
+          android:text="No description"
           fontPath="fonts/proximanova.ttf"
           android:layout_marginTop="10dp"/>
 

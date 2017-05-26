@@ -51,7 +51,8 @@ class FeedsRecyclerViewAdapter(private val context: Context, private val rssList
 
     override fun onBindViewHolder(holder: DataObjectHolder, position: Int) {
         holder.title.setText(items.get(position).title)
-        holder.description.setText(Html.fromHtml(items.get(position).description))
+        var description = items.get(position).description
+        description?.let { holder.description.setText(Html.fromHtml(description)) }
         holder.feedIcon.setImageURI(Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png"))
         holder.description.setOnClickListener {
             val intent = Intent(context, ReaderActivity::class.java)

@@ -145,7 +145,7 @@
         </FrameLayout>
       </LinearLayout>
 
-      <LinearLayout
+      <!--LinearLayout
           android:id="@+id/shopping"
           android:layout_width="match_parent"
           android:layout_height="200dp"
@@ -187,7 +187,7 @@
 
 
         </FrameLayout>
-      </LinearLayout>
+      </LinearLayout-->
 
 
       <LinearLayout

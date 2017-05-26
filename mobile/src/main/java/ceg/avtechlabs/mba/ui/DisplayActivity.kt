@@ -2,6 +2,7 @@ package ceg.avtechlabs.mba.ui
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -26,7 +27,7 @@ import java.util.*
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
     //var url:String? = null
-    var progressDialog: ProgressDialog? = null
+    var progressDialog: SweetAlertDialog? = null
     var urlArray = arrayOfNulls<String>(1)
     var rssReader: RssReader = RssReader(this)
     //var count = 0
@@ -61,8 +62,10 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         //url = "https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss"
 
         if(internetAvailable()) {
-            progressDialog = ProgressDialog(this)
-            progressDialog?.setMessage("Please wait ..")
+            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            progressDialog?.progressHelper!!.barColor = R.color.colorAccent
+            progressDialog?.titleText = "Please wait .."
+            progressDialog?.setCancelable(false)
             progressDialog?.show()
             rssReader.loadFeeds(*urlArray)
         } else {

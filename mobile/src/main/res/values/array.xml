@@ -19,25 +19,27 @@
     <!--item>http://freakonomics.com/blog/</item>
     <item>http://whynationsfail.com/</item>
     <item>http://economixcomix.com/</item-->
-    <item>http://johnhcochrane.blogspot.com/feeds/posts/default</item>
+    <!--item>http://johnhcochrane.blogspot.com/feeds/posts/default</item-->
     <!--item>http://investing.curiouscatblog.net/</item-->
-    <item>http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml</item>
-    <item>http://feeds2.feedburner.com/EconomistsView?fmt=xml</item>
-    <item>http://feeds2.feedburner.com/Themoneyillusion?fmt=xml</item>
+    <!--item>http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml</item-->
+    <item>http://feeds2.feedburner.com/EconomistsView</item>
+    <item>http://feeds2.feedburner.com/Themoneyillusion</item>
   </string-array>
 
   <string-array name="Leadership">
     <!--item>http://guykawasaki.com/</item-->
-    <item>http://feeds2.feedburner.com/allthingsworkplace?fmt=xml</item>
+    <item>http://feeds2.feedburner.com/allthingsworkplace</item>
     <!--item>http://sethgodin.typepad.com/</item-->
     <!--item>http://leanin.org/</item-->
     <!--item>http://switchandshift.com/blog</item-->
-    <item>http://feeds2.feedburner.com/bigthink/main?fmt=xml</item>
+    <!--item>http://feeds2.feedburner.com/bigthink/main</item-->
   </string-array>
 
   <string-array name="Others">
     <!--item>http://bobsutton.typepad.com/my_webl/</item-->
-    <item>http://feeds2.hbr.org/harvardbusiness</item>
+    <!--item>http://feeds2.hbr.org/harvardbusiness</item-->
+    <item>http://feeds2.feedburner.com/mitsloannews</item>
+    <item>http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx</item>
   </string-array>
 
 </resources>
