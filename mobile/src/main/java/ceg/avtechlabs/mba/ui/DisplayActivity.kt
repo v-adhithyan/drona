@@ -13,6 +13,8 @@ import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
 import ceg.avtechlabs.mba.models.AdapterObject
 import ceg.avtechlabs.mba.util.Logger
+import ceg.avtechlabs.mba.util.internetAvailable
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.wang.avi.AVLoadingIndicatorView
@@ -57,11 +59,19 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
         //count = urlArray.size
         //url = "https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss"
-        progressDialog = ProgressDialog(this)
-        progressDialog?.setMessage("Please wait ..")
-        progressDialog?.show()
 
-        rssReader.loadFeeds(*urlArray)
+        if(internetAvailable()) {
+            progressDialog = ProgressDialog(this)
+            progressDialog?.setMessage("Please wait ..")
+            progressDialog?.show()
+            rssReader.loadFeeds(*urlArray)
+        } else {
+            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            alert.setTitle("Oops")
+            alert.setContentText(getString(R.string.alert_no_internet))
+            alert.show()
+        }
+
     }
 
     companion object {
