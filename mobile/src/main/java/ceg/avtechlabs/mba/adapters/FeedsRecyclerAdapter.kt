@@ -69,7 +69,7 @@ class FeedsRecyclerViewAdapter(private val context: Context, private val rssList
         fun onItemClick(position: Int, v: View)
     }
 
-    class DataObjectHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class DataObjectHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var title: TextView
         internal var description: TextView
         internal var feedIcon: SimpleDraweeView
@@ -79,12 +79,9 @@ class FeedsRecyclerViewAdapter(private val context: Context, private val rssList
             description = itemView.findViewById(R.id.card_description) as TextView
             feedIcon = itemView.findViewById(R.id.feed_icon) as SimpleDraweeView
             //Log.i(LOG_TAG, "Adding Listener")
-            itemView.setOnClickListener(this)
+            //itemView.setOnClickListener(this)
         }
 
-        override fun onClick(v: View) {
-            myClickListener!!.onItemClick(getAdapterPosition(), v)
-        }
     }
 
     companion object {
