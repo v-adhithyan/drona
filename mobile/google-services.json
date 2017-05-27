@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "1095265322703",
+    "firebase_url": "https://admob-app-id-3069532823.firebaseio.com",
+    "project_id": "admob-app-id-3069532823",
+    "storage_bucket": "admob-app-id-3069532823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095265322703:android:f0aa4b516b716e05",
+        "android_client_info": {
+          "package_name": "ceg.avtechlabs.sbm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095265322703-13o2r30neenuq7j76uhfotgb3ksm9fks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsc4Cz2vnbZ8Aw0pv3ZR9LO-YO8cKvAY0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095265322703:android:e4f9856b684926ea",
+        "android_client_info": {
+          "package_name": "ceg.avtechlabs.surpriseme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095265322703-13o2r30neenuq7j76uhfotgb3ksm9fks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsc4Cz2vnbZ8Aw0pv3ZR9LO-YO8cKvAY0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095265322703:android:321f076e92b9d859",
+        "android_client_info": {
+          "package_name": "ceg.avtechlabs.mba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095265322703-13o2r30neenuq7j76uhfotgb3ksm9fks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsc4Cz2vnbZ8Aw0pv3ZR9LO-YO8cKvAY0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

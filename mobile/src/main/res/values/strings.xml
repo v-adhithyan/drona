@@ -8,4 +8,8 @@
   <string name="topic_others">Others</string>
 
   <string name="alert_no_internet">Your phone is not connected to internet or the speed is poor. Check your network connection and try again.</string>
+
+  <string name="menu_share">Share</string>
+  <string name="intent_share">Share using</string>
+  <string name="text_share">%1$s , Shared via Drona app. Get it on Google play.</string>
 </resources>

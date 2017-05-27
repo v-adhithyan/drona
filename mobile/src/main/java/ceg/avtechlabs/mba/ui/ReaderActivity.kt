@@ -1,8 +1,11 @@
 package ceg.avtechlabs.mba.ui
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -13,13 +16,13 @@ import android.widget.Toast
 
 class ReaderActivity : AppCompatActivity() {
     var webview: WebView? = null
-
+    var url = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
 
-        val url = intent.getStringExtra(DisplayActivity.URL)
+        url = intent.getStringExtra(DisplayActivity.URL)
 
         val webview = findViewById(R.id.webview) as WebView
         webview.showContextMenu()
@@ -32,5 +35,25 @@ class ReaderActivity : AppCompatActivity() {
             }
         })
         webview.loadUrl(url)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_reader, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_reader_share -> { shareLink() }
+            else -> { }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun shareLink() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.text_share, url))
+        startActivity(Intent.createChooser(intent, resources.getString(R.string.intent_share)))
     }
 }
