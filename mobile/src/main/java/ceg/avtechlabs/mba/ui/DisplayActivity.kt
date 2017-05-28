@@ -2,6 +2,7 @@ package ceg.avtechlabs.mba.ui
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -85,6 +86,12 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
     override fun unableToReadRssFeeds(errorMessage: String?) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        progressDialog?.dismiss()
+
+        //When unable to load rss feeds, go back to main activity
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun rssFeedsLoaded(rssList: List<RSS>) {

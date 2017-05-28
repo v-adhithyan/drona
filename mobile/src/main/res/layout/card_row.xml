@@ -24,8 +24,8 @@
 
       <com.facebook.drawee.view.SimpleDraweeView
           android:id="@+id/feed_icon"
-          android:layout_width="130dp"
-          android:layout_height="130dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
           fresco:placeholderImage="@drawable/ic_launcher" />
 
       <RelativeLayout
@@ -41,7 +41,7 @@
           fontPath="fonts/proximanova.ttf"
           android:text="Title"/>
 
-      <TextView
+      <!--TextView
           android:id="@+id/card_description"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
           android:textAlignment="gravity"
           android:text="No description"
           fontPath="fonts/proximanova.ttf"
-          android:layout_marginTop="10dp"/>
+          android:layout_marginTop="10dp"/-->
 
       </RelativeLayout>
 

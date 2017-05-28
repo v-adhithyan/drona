@@ -52,9 +52,9 @@ class FeedsRecyclerViewAdapter(private val context: Context, private val rssList
     override fun onBindViewHolder(holder: DataObjectHolder, position: Int) {
         holder.title.setText(items.get(position).title)
         var description = items.get(position).description
-        description?.let { holder.description.setText(Html.fromHtml(description)) }
+        //description?.let { holder.description.setText(Html.fromHtml(description)) }
         holder.feedIcon.setImageURI(Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png"))
-        holder.description.setOnClickListener {
+        holder.title.setOnClickListener {
             val intent = Intent(context, ReaderActivity::class.java)
             intent.putExtra(DisplayActivity.URL, items.get(position).link)
             context.startActivity(intent)
@@ -71,12 +71,12 @@ class FeedsRecyclerViewAdapter(private val context: Context, private val rssList
 
     class DataObjectHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var title: TextView
-        internal var description: TextView
+        //internal var description: TextView
         internal var feedIcon: SimpleDraweeView
 
         init {
             title = itemView.findViewById(R.id.card_title) as TextView
-            description = itemView.findViewById(R.id.card_description) as TextView
+            //description = itemView.findViewById(R.id.card_description) as TextView
             feedIcon = itemView.findViewById(R.id.feed_icon) as SimpleDraweeView
             //Log.i(LOG_TAG, "Adding Listener")
             //itemView.setOnClickListener(this)

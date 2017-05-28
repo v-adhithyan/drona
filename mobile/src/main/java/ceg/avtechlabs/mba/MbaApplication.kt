@@ -1,8 +1,10 @@
 package ceg.avtechlabs.mba
 
 import android.app.Application
+import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MbaApplication : Application() {
 
@@ -16,5 +18,9 @@ class MbaApplication : Application() {
         CalligraphyConfig.initDefault(font)
 
         Fresco.initialize(this)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(base))
     }
 }
