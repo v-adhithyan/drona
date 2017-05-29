@@ -20,7 +20,7 @@ class MbaApplication : Application() {
         Fresco.initialize(this)
     }
 
-    override fun attachBaseContext(base: Context?) {
+    /*override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(base))
-    }
+    }*/
 }
