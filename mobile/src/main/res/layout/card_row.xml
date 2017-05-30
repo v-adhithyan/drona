@@ -14,19 +14,22 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="5dp"
+      android:background="#ffffff"
+      android:foreground="?android:attr/selectableItemBackground"
       card_view:cardCornerRadius="2dp"
       card_view:contentPadding="10dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
-      <com.facebook.drawee.view.SimpleDraweeView
+      <!--com.facebook.drawee.view.SimpleDraweeView
           android:id="@+id/feed_icon"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          fresco:placeholderImage="@drawable/ic_launcher" />
+          android:layout_width="130dp"
+          android:layout_height="130dp"
+          fresco:placeholderImage="@drawable/ic_launcher" /-->
 
       <RelativeLayout
           android:layout_width="match_parent"
@@ -37,19 +40,22 @@
           android:layout_height="wrap_content"
           android:layout_alignParentTop="true"
           android:textStyle="bold"
-          android:textAlignment="center"
+          android:textAlignment="gravity"
           fontPath="fonts/proximanova.ttf"
-          android:text="Title"/>
+          android:text="Title"
+          android:background="@drawable/bubble1"/>
 
-      <!--TextView
+      <TextView
           android:id="@+id/card_description"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:layout_below="@+id/card_title"
           android:textAlignment="gravity"
           android:text="No description"
+          android:maxLines="5"
           fontPath="fonts/proximanova.ttf"
-          android:layout_marginTop="10dp"/-->
+          android:layout_marginTop="10dp"
+          android:background="@drawable/bubble2"/>
 
       </RelativeLayout>
 

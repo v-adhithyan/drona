@@ -23,6 +23,7 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal">
 
 
@@ -47,7 +48,7 @@
               android:gravity="center"
               android:padding="2dp"
               android:text="@string/topic_marketing"
-              android:textColor="#ffffff"
+              android:textColor="#000000"
               android:textSize="20sp"
               android:textStyle="bold" />
 
@@ -68,7 +69,9 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
 
 
           <com.facebook.drawee.view.SimpleDraweeView
@@ -92,7 +95,7 @@
               android:gravity="center"
               android:padding="2dp"
               android:text="@string/topic_finance"
-              android:textColor="#ffffff"
+              android:textColor="#000000"
               android:textSize="20sp"
               android:textStyle="bold" />
 
@@ -114,7 +117,9 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
 
 
           <com.facebook.drawee.view.SimpleDraweeView
@@ -137,7 +142,7 @@
               android:gravity="center"
               android:padding="2dp"
               android:text="@string/topic_economics"
-              android:textColor="#ffffff"
+              android:textColor="#000000"
               android:textSize="20sp"
               android:textStyle="bold" />
 
@@ -181,7 +186,7 @@
               android:gravity="center"
               android:padding="2dp"
               android:text="@string/topic_leadership"
-              android:textColor="#ffffff"
+              android:textColor="#000000"
               android:textSize="20sp"
               android:textStyle="bold" />
 
@@ -203,7 +208,9 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
 
 
           <com.facebook.drawee.view.SimpleDraweeView
@@ -227,7 +234,7 @@
               android:gravity="center"
               android:padding="2dp"
               android:text="@string/topic_others"
-              android:textColor="#ffffff"
+              android:textColor="#000000"
               android:textSize="20sp"
               android:textStyle="bold" />
 

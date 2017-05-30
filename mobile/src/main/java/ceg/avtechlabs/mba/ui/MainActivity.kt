@@ -1,14 +1,22 @@
 package ceg.avtechlabs.mba.ui
 
+import android.annotation.TargetApi
+import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Explode
 import android.view.View
 
 import ceg.avtechlabs.mba.R
 import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+
+
 
 class MainActivity : AppCompatActivity() {
     val res = "res:/"
@@ -16,12 +24,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        @TargetApi(21)
+            window.exitTransition = Explode()
 
         imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
         imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))
         imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
         //imageview_leadership.setImageURI(Uri.parse("$res${R.drawable.leadership_menu}"))
         imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     fun loadMarketingFeeds(v: View) {
@@ -52,6 +66,10 @@ class MainActivity : AppCompatActivity() {
     private fun startReader(topic: String) {
         val intent = Intent(this, DisplayActivity::class.java)
         intent.putExtra(DisplayActivity.TOPIC, topic)
-        startActivity(intent)
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+        } else { startActivity(intent) }
     }
+
 }

@@ -1,5 +1,6 @@
 package ceg.avtechlabs.mba.ui
 
+import android.annotation.TargetApi
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.transition.Explode
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
@@ -22,6 +24,7 @@ import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.wang.avi.AVLoadingIndicatorView
 import kotlinx.android.synthetic.main.activity_display.*
 import okhttp3.*
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.io.IOException
 import java.util.*
 
@@ -37,6 +40,8 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
+        @TargetApi(21)
+        window.exitTransition = Explode()
 
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = LinearLayoutManager(this)
@@ -65,7 +70,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         if(internetAvailable()) {
             progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             progressDialog?.progressHelper!!.barColor = R.color.colorAccent
-            progressDialog?.titleText = "Please wait .."
+            progressDialog?.titleText = "Loading .."
             progressDialog?.setCancelable(false)
             progressDialog?.show()
             rssReader.loadFeeds(*urlArray)
@@ -83,6 +88,9 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         val URL = "url"
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+    }
 
     override fun unableToReadRssFeeds(errorMessage: String?) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
@@ -100,4 +108,5 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
         }
     }
+
 }
