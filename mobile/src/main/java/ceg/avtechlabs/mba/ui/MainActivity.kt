@@ -12,6 +12,7 @@ import android.transition.Explode
 import android.view.View
 
 import ceg.avtechlabs.mba.R
+import ceg.avtechlabs.mba.models.MbaDbHelper
 import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         @TargetApi(21)
-            window.exitTransition = Explode()
+        window.exitTransition = Explode()
 
         imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
         imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))

@@ -12,4 +12,6 @@
   <string name="menu_share">Share</string>
   <string name="intent_share">Share using</string>
   <string name="text_share">%1$s , Shared via Drona app. Get it on Google play.</string>
+
+  <string name="snackbar_no_new_feeds">No new feeds.</string>
 </resources>

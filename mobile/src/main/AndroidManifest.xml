@@ -16,15 +16,18 @@
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.DisplayActivity" />
-        <activity android:name=".ui.ReaderActivity" />
+        <activity android:name=".ui.DisplayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ReaderActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".services.MessagingService">

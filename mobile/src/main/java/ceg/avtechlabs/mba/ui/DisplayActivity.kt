@@ -7,15 +7,18 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.Explode
+import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
 import ceg.avtechlabs.mba.models.AdapterObject
+import ceg.avtechlabs.mba.models.MbaDbHelper
 import ceg.avtechlabs.mba.util.Logger
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_display.*
 import okhttp3.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.io.IOException
+import java.nio.channels.Channel
 import java.util.*
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
@@ -34,6 +38,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     var progressDialog: SweetAlertDialog? = null
     var urlArray = arrayOfNulls<String>(1)
     var rssReader: RssReader = RssReader(this)
+    var topic = ""
     //var count = 0
     //var rss = ArrayList<RSS>()
 
@@ -46,7 +51,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = LinearLayoutManager(this)
 
-        val topic = intent.getStringExtra(TOPIC)
+        topic = intent.getStringExtra(TOPIC)
         title = topic + " feeds"
 
         if(topic.equals("Marketing")) {
@@ -106,6 +111,12 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         runOnUiThread {
             progressDialog?.dismiss()
             recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
+        }
+
+        val db = MbaDbHelper(this)
+        val insert = db.insert(rssList[0].channel.items[0].title, topic)
+        if(!insert) {
+            Snackbar.make(activity_display as View, getString(R.string.snackbar_no_new_feeds), Snackbar.LENGTH_LONG).show()
         }
     }
 

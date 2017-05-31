@@ -34,6 +34,7 @@ import java.util.*
 class FeedsRecyclerViewAdapter(val activity: Activity, private val rssList: List<RSS>) : RecyclerView
 .Adapter<FeedsRecyclerViewAdapter.DataObjectHolder>() {
     private var items = ArrayList<Channel.Item>()
+    private var titles = emptyArray<String>()
 
     init {
         for (rss in rssList) {
