@@ -65,5 +65,4 @@ class ReaderActivity : AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.text_share, url))
         startActivity(Intent.createChooser(intent, resources.getString(R.string.intent_share)))
     }
-
 }

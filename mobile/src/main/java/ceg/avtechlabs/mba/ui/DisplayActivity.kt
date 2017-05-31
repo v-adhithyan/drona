@@ -5,8 +5,10 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -91,6 +93,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     companion object {
         val TOPIC = "topic"
         val URL = "url"
+
     }
 
     override fun attachBaseContext(newBase: Context) {

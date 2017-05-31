@@ -2,10 +2,12 @@ package ceg.avtechlabs.mba.adapters
 
 import android.app.Activity
 import android.app.ActivityOptions
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
@@ -19,6 +21,7 @@ import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.AdapterObject
 import ceg.avtechlabs.mba.ui.DisplayActivity
 import ceg.avtechlabs.mba.ui.ReaderActivity
+import ceg.avtechlabs.mba.util.getShareLinkIntent
 import com.crazyhitty.chdev.ks.rssmanager.Channel
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.facebook.drawee.view.SimpleDraweeView
@@ -78,12 +81,14 @@ class FeedsRecyclerViewAdapter(val activity: Activity, private val rssList: List
             //feedIcon = itemView.findViewById(R.id.feed_icon) as SimpleDraweeView
             //Log.i(LOG_TAG, "Adding Listener")
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, ReaderActivity::class.java)
-                intent.putExtra(DisplayActivity.URL, title.tag.toString())
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    itemView.context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FeedsRecyclerViewAdapter.ACTIVITY).toBundle())
-                } else { itemView.context.startActivity(intent) }
-                itemView.context.startActivity(intent)
+                val builder = CustomTabsIntent.Builder()
+                builder.setToolbarColor(itemView.context.resources.getColor(R.color.colorPrimary))
+
+                //val pendingIntent =  PendingIntent.getActivity(itemView.context, 0, getShareLinkIntent(itemView.context, title.tag.toString()), 0)
+                //builder.addMenuItem(itemView.context.getString(R.string.menu_share), pendingIntent)
+                builder.addDefaultShareMenuItem()
+                val intent = builder.build()
+                intent.launchUrl(itemView.context, Uri.parse(title.tag.toString()))
             }
         }
 
