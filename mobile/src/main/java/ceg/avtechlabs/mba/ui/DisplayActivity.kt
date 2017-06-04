@@ -1,38 +1,24 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.transition.Explode
 import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
-import ceg.avtechlabs.mba.models.AdapterObject
 import ceg.avtechlabs.mba.models.MbaDbHelper
-import ceg.avtechlabs.mba.util.Logger
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.crazyhitty.chdev.ks.rssmanager.RssReader
-import com.wang.avi.AVLoadingIndicatorView
 import kotlinx.android.synthetic.main.activity_display.*
-import okhttp3.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.io.IOException
-import java.nio.channels.Channel
-import java.util.*
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 

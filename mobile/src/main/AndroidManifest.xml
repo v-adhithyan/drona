@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
-
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,24 +24,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.DisplayActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ReaderActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.DisplayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ReaderActivity"
+            android:screenOrientation="portrait" />
 
-        <service
-            android:name=".services.MessagingService">
+        <service android:name=".services.MessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".services.InstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <service
-            android:name=".services.InstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
+        <activity android:name=".ui.AboutActivity"></activity>
     </application>
 
 </manifest>

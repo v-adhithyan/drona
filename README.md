@@ -3,7 +3,7 @@
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
 
 ## TODO
-- [ ] Progress bar for reader activity
+- [x] Progress bar for reader activity
 - [ ] Add about section
 - [x] Add share option in reader activity
 - [ ] Integrate ads

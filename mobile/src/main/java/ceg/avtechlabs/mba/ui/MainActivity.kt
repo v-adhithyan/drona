@@ -9,6 +9,8 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Explode
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 
 import ceg.avtechlabs.mba.R
@@ -33,6 +35,20 @@ class MainActivity : AppCompatActivity() {
         imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
         //imageview_leadership.setImageURI(Uri.parse("$res${R.drawable.leadership_menu}"))
         imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_main_about -> { showAbout() }
+            else -> {}
+        }
+
+        return true
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -73,4 +89,5 @@ class MainActivity : AppCompatActivity() {
         } else { startActivity(intent) }
     }
 
+    private fun showAbout() { startActivity(Intent(this, AboutActivity::class.java)) }
 }
