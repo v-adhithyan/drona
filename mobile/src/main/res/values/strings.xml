@@ -16,4 +16,7 @@
   <string name="snackbar_no_new_feeds">No new feeds.</string>
 
   <string name="menu_about">About</string>
+
+  <string name="ad_id"> ca-app-pub-1272425295572154~3496618828</string>
+  <string name="ad_unit">ca-app-pub-1272425295572154/</string>
 </resources>

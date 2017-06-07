@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -242,7 +243,16 @@
         </FrameLayout>
       </LinearLayout>
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adview_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/ad_unit"/>
 
     </LinearLayout>
+
   </ScrollView>
 

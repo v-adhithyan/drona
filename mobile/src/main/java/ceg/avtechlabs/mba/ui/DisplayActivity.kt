@@ -17,6 +17,7 @@ import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.crazyhitty.chdev.ks.rssmanager.RssReader
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -74,6 +75,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             alert.show()
         }
 
+        adview_display.loadAd(AdRequest.Builder().build())
     }
 
     companion object {

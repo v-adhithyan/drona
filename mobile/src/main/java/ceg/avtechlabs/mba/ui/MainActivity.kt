@@ -16,8 +16,12 @@ import android.view.View
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.MbaDbHelper
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import com.google.android.gms.ads.AdView
+
+
 
 
 
@@ -35,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
         //imageview_leadership.setImageURI(Uri.parse("$res${R.drawable.leadership_menu}"))
         imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
+
+        adview_main.loadAd(AdRequest.Builder().build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
