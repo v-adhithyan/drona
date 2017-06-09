@@ -1,9 +1,11 @@
-# Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)
+# Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)[![](play_badge.svg)](https://play.google.com/store/apps/details?id=ceg.avtechlabs.mba)
 
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
 
-<!--img src="screenshots/intro.png" /> <img src="screenshots/feeds.png"/>
-<img src="screenshots/view.png"/-->
+
+| Topics screen                  | Feeds screen                      | View url screen                  |
+|:------------------------------:|:---------------------------------:|:--------------------------------:|
+|![](screenshots/intro.png) | ![](screenshots/feeds.png) | ![](screenshots/view.png)|
 
 ## What the app does?
   Simply put the app aggregates rss feeds of management topics from various sites listed below. If you want to add a site or category, open a pull request.

@@ -46,3 +46,5 @@ captures/
 *.jks
 .DS_Store
 .idea
+
+app-screenshots/
