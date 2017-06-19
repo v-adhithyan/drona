@@ -243,12 +243,23 @@
         </FrameLayout>
       </LinearLayout>
 
+  <LinearLayout
+      android:id="@+id/adlayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_weight="0.5"
+      android:backgroundTint="#ff000000"
+      android:gravity="center_horizontal"
+      >
         <com.google.android.gms.ads.AdView
             android:id="@+id/adview_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
             ads:adUnitId="@string/ad_unit"/>
+
+  </LinearLayout>
 
     </LinearLayout>
 
