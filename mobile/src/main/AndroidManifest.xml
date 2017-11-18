@@ -42,7 +42,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.AboutActivity"></activity>
+        <activity android:name=".ui.AboutActivity" />
+        <activity android:name=".ui.TempActivity"></activity>
     </application>
 
 </manifest>

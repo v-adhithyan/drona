@@ -8,11 +8,14 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Explode
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
 import ceg.avtechlabs.mba.models.MbaDbHelper
+import ceg.avtechlabs.mba.util.Extractor
+import ceg.avtechlabs.mba.util.Logger
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
@@ -20,6 +23,7 @@ import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.io.Reader
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
@@ -99,10 +103,30 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     }
 
     override fun rssFeedsLoaded(rssList: List<RSS>) {
-        runOnUiThread {
-            progressDialog?.dismiss()
-            recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
-        }
+
+
+        /*Thread {
+            Logger.out(rssList[0].channel.items[0].title)
+            val link = rssList[0].channel.items[0].link
+
+            val article = Extractor(link).extract()
+            Logger.out(article.title)
+            Logger.out(article.imageUrl)
+            Logger.out(article.document.text())*/
+
+            runOnUiThread {
+
+
+                //recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
+                val intent = Intent(this, ReaderActivity::class.java)
+                for (rss in rssList) {
+                    ReaderActivity.ITEMS.addAll(rss.channel.items)
+                }
+                progressDialog?.dismiss()
+                startActivity(intent)
+            }
+        /*}.start()*/
+
 
         val db = MbaDbHelper(this)
         val insert = db.insert(rssList[0].channel.items[0].title, topic)

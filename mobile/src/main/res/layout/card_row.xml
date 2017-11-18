@@ -41,9 +41,30 @@
           android:layout_alignParentTop="true"
           android:textStyle="bold"
           android:textAlignment="gravity"
-          fontPath="fonts/proximanova.ttf"
           android:text="Title"
-          android:background="@drawable/bubble1"/>
+          />
+
+        <!--TextView
+            android:id="@+id/card_date"
+            android:layout_below="@+id/card_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textAlignment="textStart"
+            android:text="Date"
+            />
+
+
+        <TextView
+            android:id="@+id/card_source"
+            android:layout_below="@id/card_title"
+            android:layout_alignRight="@+id/card_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textAlignment="textEnd"
+            android:text="Source"
+            /-->
 
       <TextView
           android:id="@+id/card_description"
@@ -55,7 +76,7 @@
           android:maxLines="5"
           fontPath="fonts/proximanova.ttf"
           android:layout_marginTop="10dp"
-          android:background="@drawable/bubble2"/>
+          />
 
       </RelativeLayout>
 

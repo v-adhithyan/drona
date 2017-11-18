@@ -21,3 +21,4 @@ fun getShareLinkIntent(context: Context, url: String): Intent? {
     intent.putExtra(Intent.EXTRA_TEXT, context.resources.getString(R.string.text_share, url))
     return Intent.createChooser(intent,context.resources.getString(R.string.intent_share))
 }
+

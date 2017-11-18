@@ -10,7 +10,7 @@ class Logger() {
 
     companion object {
         fun out(text: String) {
-            Log.d("adhithyan", text)
+            Log.d("dronad", text)
         }
     }
 }

@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
 
         adview_main.loadAd(AdRequest.Builder().build())
+
+        //startActivity(Intent(this, TempActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

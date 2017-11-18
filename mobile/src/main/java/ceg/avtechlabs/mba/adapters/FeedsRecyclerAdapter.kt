@@ -81,14 +81,15 @@ class FeedsRecyclerViewAdapter(val activity: Activity, private val rssList: List
             //feedIcon = itemView.findViewById(R.id.feed_icon) as SimpleDraweeView
             //Log.i(LOG_TAG, "Adding Listener")
             itemView.setOnClickListener {
-                val builder = CustomTabsIntent.Builder()
+                /*val builder = CustomTabsIntent.Builder()
                 builder.setToolbarColor(itemView.context.resources.getColor(R.color.colorPrimary))
 
                 //val pendingIntent =  PendingIntent.getActivity(itemView.context, 0, getShareLinkIntent(itemView.context, title.tag.toString()), 0)
                 //builder.addMenuItem(itemView.context.getString(R.string.menu_share), pendingIntent)
                 builder.addDefaultShareMenuItem()
                 val intent = builder.build()
-                intent.launchUrl(itemView.context, Uri.parse(title.tag.toString()))
+                intent.launchUrl(itemView.context, Uri.parse(title.tag.toString()))*/
+
             }
         }
 
