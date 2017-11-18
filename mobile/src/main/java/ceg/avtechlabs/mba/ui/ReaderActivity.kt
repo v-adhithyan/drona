@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.transition.Explode
 import android.view.Menu
 import android.view.MenuItem
@@ -92,8 +93,8 @@ class ReaderActivity : AppCompatActivity() {
         if(i == ITEMS!!.size) {
             Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
         } else {
-            textviewTitle.text = ITEMS[i].title
-            textviewDescription.text = ITEMS[i].description
+            //textviewTitle.text = ITEMS[i].title
+            //textviewDescription.text = ITEMS[i].description
             //Toast.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
             //i = i+1
 
@@ -108,10 +109,12 @@ class ReaderActivity : AppCompatActivity() {
 
                 runOnUiThread {
 
-                    textviewTitle.text = article.document.title()
-                    textviewDescription.text = article.document.text()
+                    textviewTitle.text = article.title
+                    textviewDescription.text = Html.fromHtml(article.document.text())
                     Picasso.with(this).load(article.imageUrl).into(image)
                     progressDialog.dismiss()
+                    Toast.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
+                    i = i + 1
                 }
             }.start()
         }
