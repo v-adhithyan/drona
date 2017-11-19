@@ -7,6 +7,7 @@
   </string-array>
 
   <string-array name="Finance">
+    <item>http://www.thehindubusinessline.com/markets/stock-markets/?service=rss</item>
     <item>https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss</item>
     <item>http://rss.nytimes.com/services/xml/rss/nyt/Business.xml</item>
     <!--item>http://www.mergersandinquisitions.com/</item-->
