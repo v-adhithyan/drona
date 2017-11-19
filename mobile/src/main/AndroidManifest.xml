@@ -17,6 +17,7 @@
         tools:replace="icon, label">
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +30,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ReaderActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
         <service android:name=".services.MessagingService">
@@ -43,7 +45,9 @@
         </service>
 
         <activity android:name=".ui.AboutActivity" />
-        <activity android:name=".ui.TempActivity"></activity>
+        <activity android:name=".ui.TempActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

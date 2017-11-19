@@ -12,7 +12,8 @@ class TempActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_temp)
 
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //collapsing_toolbar.title = "Drona"
 
     }
 }

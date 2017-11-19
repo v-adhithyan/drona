@@ -20,6 +20,9 @@ import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import com.google.android.gms.ads.AdView
+import android.view.WindowManager
+
+
 
 
 
@@ -42,6 +45,11 @@ class MainActivity : AppCompatActivity() {
 
         adview_main.loadAd(AdRequest.Builder().build())
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = resources.getColor(R.color.colorPrimary)
+        }
         //startActivity(Intent(this, TempActivity::class.java))
     }
 
