@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".MbaApplication"
+        android:name="ceg.avtechlabs.mba.MbaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="ceg.avtechlabs.mba.ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -26,26 +26,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.DisplayActivity"
+            android:name="ceg.avtechlabs.mba.ui.DisplayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.ReaderActivity"
+            android:name="ceg.avtechlabs.mba.ui.ReaderActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
-        <service android:name=".services.MessagingService">
+        <service android:name="ceg.avtechlabs.mba.services.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".services.InstanceIDService">
+        <service android:name="ceg.avtechlabs.mba.services.InstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.AboutActivity" />
-        <activity android:name=".ui.TempActivity"
+        <activity android:name="ceg.avtechlabs.mba.ui.AboutActivity" />
+        <activity android:name="ceg.avtechlabs.mba.ui.TempActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>

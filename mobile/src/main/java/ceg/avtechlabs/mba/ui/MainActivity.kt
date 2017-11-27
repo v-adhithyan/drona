@@ -14,12 +14,9 @@ import android.view.MenuItem
 import android.view.View
 
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.models.MbaDbHelper
-import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import com.google.android.gms.ads.AdView
 import android.view.WindowManager
 
 

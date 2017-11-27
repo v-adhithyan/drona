@@ -8,14 +8,10 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Explode
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.adapters.FeedsRecyclerViewAdapter
 import ceg.avtechlabs.mba.models.MbaDbHelper
-import ceg.avtechlabs.mba.util.Extractor
-import ceg.avtechlabs.mba.util.Logger
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
@@ -23,7 +19,6 @@ import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.io.Reader
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
@@ -124,6 +119,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                 }
                 progressDialog?.dismiss()
                 startActivity(intent)
+                finish()
             }
         /*}.start()*/
 

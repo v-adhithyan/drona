@@ -1,46 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--WebView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/webview"
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent"
-  /-->
-<!--RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent"
-    android:id="@+id/reader_layout">
-
-  <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="200dp"
-      android:scaleType="centerCrop"
-      android:id="@+id/image"/>
-  <TextView
-      android:text="Adhithyan Vijayakumar"
-
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textStyle="bold"
-      android:textSize="12pt"
-      android:layout_below="@+id/image"
-      android:id="@+id/textviewTitle"/>
-    <android.support.v4.widget.NestedScrollView
-        android:layout_below="@+id/textviewTitle"
-        android:layout_width="match_parent"
-        android:id="@+id/scroll"
-        android:layout_height="wrap_content">
-  <TextView
-      android:text=""
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:textSize="10pt"
-      android:id="@+id/textviewDescription"/>
-    </android.support.v4.widget.NestedScrollView>
-</RelativeLayout-->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:id="@+id/coordinatorLayoutReader"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -70,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
-
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax" />
 
@@ -95,26 +56,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView android:text=""
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="11pt"
+
+            <!--TextView android:text="df"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="11pt"
                 android:gravity="center_horizontal"
-            android:layout_below="@+id/image"
-            android:id="@+id/textviewTitle"/>
+                android:layout_below="@+id/image"
+                android:fontFamily="sans-serif"
+                android:id="@+id/textviewTitle"/-->
+            <TextView
+                android:id="@+id/textviewTitle"
+                fontPath="fonts/proximanova-bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:maxLines="10"
+                android:textSize="30sp"
+                android:text="gdgfsaf"
+                android:textIsSelectable="false"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
 
             <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-                android:gravity="center_horizontal"
-            android:layout_alignParentTop="true"
-            android:textSize="10pt"
+                android:id="@+id/textviewDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textIsSelectable="false"/>
 
-            android:id="@+id/textviewDescription"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="?android:attr/listDivider" />
+
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.5"
+                android:textSize="18sp"
+                android:textIsSelectable="false"
+                android:id="@+id/textviewDescription"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider" />
+
+            <include layout="@layout/reader_options"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

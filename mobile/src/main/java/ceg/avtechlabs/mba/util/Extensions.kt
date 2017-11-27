@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import ceg.avtechlabs.mba.R
-import org.simpleframework.xml.Attribute
 
 /**
  * Created by Adhithyan V on 23-05-2017.

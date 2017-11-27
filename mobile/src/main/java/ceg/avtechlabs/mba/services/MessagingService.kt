@@ -1,20 +1,6 @@
 package ceg.avtechlabs.mba.services
 
-import android.app.Service
-import android.content.Intent
-import android.os.IBinder
-
 import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
-import android.content.Context.NOTIFICATION_SERVICE
-import android.app.NotificationManager
-import android.media.RingtoneManager
-import android.app.PendingIntent
-import android.content.Context
-import android.support.v7.app.NotificationCompat
-import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.ui.MainActivity
-import ceg.avtechlabs.mba.util.Logger
 
 
 class MessagingService : FirebaseMessagingService() {

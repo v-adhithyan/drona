@@ -4,34 +4,41 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import java.util.logging.Logger
 
 /**
  * Created by Adhithyan V on 18-11-2017.
  */
 
 open class SwypeListener(context: Context) : View.OnTouchListener {
-    var gestureDetecor: GestureDetector? = null
-
-    companion object {
+   companion object {
         val SWIPE_THRESHOLD = 100
         val SWIPE_VELOCITY_THRESHOLD = 100
+        var gestureDetecor: GestureDetector? = null
     }
 
     init {
         gestureDetecor = GestureDetector(context, GestureListener())
     }
 
-    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        return gestureDetecor!!.onTouchEvent(event)
+    override fun onTouch(v: View, event: MotionEvent): Boolean {
+        if(gestureDetecor != null)
+            return gestureDetecor!!.onTouchEvent(event)
+
+        return false
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        protected var mLastOnDownEvent: MotionEvent? = null
+
         override fun onDown(e: MotionEvent): Boolean {
+            mLastOnDownEvent = e
             return true
         }
 
         override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
             var result = false
+
             try {
                 val diffY = e2.y - e1.y
                 val diffX = e2.x - e1.x
@@ -53,7 +60,9 @@ open class SwypeListener(context: Context) : View.OnTouchListener {
                     result = true
                 }
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                //exception.printStackTrace()
+                //ceg.avtechlabs.mba.util.Logger.out("hello ${exception.message!!}")
+                //ceg.avtechlabs.mba.util.Logger.out(exception.message!!)
             }
 
             return result

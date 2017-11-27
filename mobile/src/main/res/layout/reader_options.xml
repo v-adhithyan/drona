@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Action buttons (Read more..., Share, Go back) -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="8dp"
+    android:gravity="center">
+
+    <!-- Read more... -->
+    <ImageButton
+        android:id="@+id/button_continue"
+        android:background="@android:color/white"
+        android:layout_width="96sp"
+        android:layout_height="96sp"
+        android:layout_weight="2"
+        android:contentDescription="Open in browser"
+        android:src="@drawable/web"
+        android:onClick="open"/>
+
+    <!-- Share -->
+    <ImageButton
+        android:id="@+id/button_share"
+        android:background="@android:color/white"
+        android:layout_width="96sp"
+        android:layout_height="96sp"
+        android:layout_weight="2"
+        android:contentDescription="Share"
+        android:src="@drawable/share"
+        android:onClick="share"/>
+
+    <!-- Back button -->
+    <ImageButton
+        android:id="@+id/button_back"
+        android:background="@android:color/white"
+        android:layout_width="96sp"
+        android:layout_height="96sp"
+        android:layout_weight="2"
+        android:contentDescription="Next"
+        android:src="@drawable/next"
+        android:onClick="nextArticle"/>
+
+
+</LinearLayout>

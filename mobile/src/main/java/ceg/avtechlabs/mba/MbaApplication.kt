@@ -1,10 +1,8 @@
 package ceg.avtechlabs.mba
 
 import android.app.Application
-import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MbaApplication : Application() {
 

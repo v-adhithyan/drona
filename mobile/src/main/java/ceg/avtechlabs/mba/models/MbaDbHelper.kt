@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import ceg.avtechlabs.mba.util.Logger
 
 /**
  * Created by Adhithyan V on 30-05-2017.

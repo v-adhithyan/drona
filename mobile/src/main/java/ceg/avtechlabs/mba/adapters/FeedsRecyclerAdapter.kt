@@ -1,32 +1,15 @@
 package ceg.avtechlabs.mba.adapters
 
 import android.app.Activity
-import android.app.ActivityOptions
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.models.AdapterObject
-import ceg.avtechlabs.mba.ui.DisplayActivity
-import ceg.avtechlabs.mba.ui.ReaderActivity
-import ceg.avtechlabs.mba.util.getShareLinkIntent
 import com.crazyhitty.chdev.ks.rssmanager.Channel
 import com.crazyhitty.chdev.ks.rssmanager.RSS
-import com.facebook.drawee.view.SimpleDraweeView
-import kotlinx.android.synthetic.main.card_row.*
-import java.net.URI
 import java.util.*
 
 

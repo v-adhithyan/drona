@@ -1,28 +1,20 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat.setBackgroundTintList
 import android.support.v7.graphics.Palette
 import android.text.Html
 import android.transition.Explode
-import android.view.Menu
-import android.view.MenuItem
-import android.webkit.WebChromeClient
+import android.view.*
+import android.view.animation.AnimationUtils
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import ceg.avtechlabs.mba.R
 import android.widget.Toast
 import ceg.avtechlabs.mba.listeners.SwypeListener
@@ -30,16 +22,14 @@ import ceg.avtechlabs.mba.util.Extractor
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.crazyhitty.chdev.ks.rssmanager.Channel
-import com.crazyhitty.chdev.ks.rssmanager.RSS
-import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.io.Reader
 import java.util.*
 
 
 class ReaderActivity : AppCompatActivity() {
+
     var webview: WebView? = null
     var url = ""
     var i = 0
@@ -55,15 +45,16 @@ class ReaderActivity : AppCompatActivity() {
         window.exitTransition = Explode()
 
 
-        val context = this
 
-        scroll
+        val context = this as Context
+
+        /*scroll
                 .setOnTouchListener(object:SwypeListener(context) {
             override fun onSwipeRight() { change() }
             override fun onSwipeLeft() { change() }
             override fun onSwipeTop() { }
             override fun onSwipeBottom() { }
-        });
+        });*/
         change()
         /*url = intent.getStringExtra(DisplayActivity.URL)
 
@@ -78,10 +69,10 @@ class ReaderActivity : AppCompatActivity() {
             }
         })
         webview.loadUrl(url)*/
-        collapsing_toolbar.title = "Drona"
+        //collapsing_toolbar.title = "Drona"
 
-        textviewDescription.setLineSpacing(1.2F, 1.0F)
-        textviewTitle.setLineSpacing(1.2F, 1.0F)
+        //textviewDescription.setLineSpacing(1.1F, 1.0F)
+        //textviewTitle.setLineSpacing(1.2F, 1.0F)
 
     }
 
@@ -112,9 +103,12 @@ class ReaderActivity : AppCompatActivity() {
     private fun change() = if(i == ITEMS!!.size) {
         Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
     } else {
+        collapsing_toolbar.title = "Drona"
+        //collapsing_toolbar.title = ITEMS[i].title
         textviewTitle.text = ITEMS[i].title
         textviewDescription.text = ITEMS[i].description
-        //Toast.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
+        textviewDate.text = ITEMS[i].pubDate
+        //Toast/.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
         //i = i+1
 
         val progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
@@ -137,7 +131,9 @@ class ReaderActivity : AppCompatActivity() {
             val minutes = ((article!!.document.text().split(" ").size).toFloat() / 275F).toFloat()
             runOnUiThread {
 
-                textviewTitle.text = article!!.title
+                //collapsing_toolbar.title = article!!.title
+                textviewTitle.text = (article!!.title).toUpperCase()
+                textviewTitle.setAllCaps(true)
                 textviewDescription.text = Html.fromHtml(article.document.text())
                 Picasso.with(this).load(article.imageUrl).into(object: com.squareup.picasso.Target {
                     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -154,10 +150,13 @@ class ReaderActivity : AppCompatActivity() {
                             override fun onGenerated(palette: Palette) {
                                 val mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
                                 val mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
-                                //val vibrantColor = palette.getVibrantColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
 
                                 collapsing_toolbar.setContentScrimColor(mutedColor);
                                 collapsing_toolbar.setStatusBarScrimColor(mutedDarkColor);
+                                @TargetApi(21)
+                                    window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+
+
                                 //setBackgroundTintList(ColorStateList.valueOf(vibrantColor));
 
                             }
@@ -167,14 +166,27 @@ class ReaderActivity : AppCompatActivity() {
 
 
                 progressDialog.dismiss()
+                AnimationUtils.loadAnimation(this, R.anim.slide_right)
                 Snackbar.make(coordinatorLayoutReader, "$minutes minutes to read this story.", Snackbar.LENGTH_LONG).show()
-                Toast.makeText(this, "${ITEMS!!.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
                 i = i + 1
             }
             //prefetch next articlea
             currentArticle = Extractor(ITEMS[i+1].link).extract()
 
         }.start()
+    }
+
+    fun open(v: View) {
+        Toast.makeText(this, "open", Toast.LENGTH_LONG).show()
+    }
+
+    fun nextArticle(v: View) {
+        change()
+    }
+
+    fun share(v: View) {
+        Toast.makeText(this, "share", Toast.LENGTH_LONG).show()
     }
 
     companion object {
