@@ -27,6 +27,7 @@
         </activity>
         <activity
             android:name="ceg.avtechlabs.mba.ui.DisplayActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name="ceg.avtechlabs.mba.ui.ReaderActivity"

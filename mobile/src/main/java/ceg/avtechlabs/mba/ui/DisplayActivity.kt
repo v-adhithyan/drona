@@ -36,11 +36,11 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         @TargetApi(21)
         window.exitTransition = Explode()
 
-        recycler_view.setHasFixedSize(true)
-        recycler_view.layoutManager = LinearLayoutManager(this)
+        /*recycler_view.setHasFixedSize(true)
+        recycler_view.layoutManager = LinearLayoutManager(this)*/
 
         topic = intent.getStringExtra(TOPIC)
-        title = topic + " feeds"
+        //title = topic + " feeds"
 
         if(topic.equals("Marketing")) {
             urlArray = resources.getStringArray(R.array.Marketing)
@@ -61,11 +61,11 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         //url = "https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss"
 
         if(internetAvailable()) {
-            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            /*progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             progressDialog?.progressHelper!!.barColor = R.color.colorAccent
             progressDialog?.titleText = "Loading .."
             progressDialog?.setCancelable(false)
-            progressDialog?.show()
+            progressDialog?.show()*/
             rssReader.loadFeeds(*urlArray)
         } else {
             val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)

@@ -1,6 +1,7 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -15,6 +16,7 @@ import android.transition.Explode
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.webkit.WebView
+import android.widget.ProgressBar
 import ceg.avtechlabs.mba.R
 import android.widget.Toast
 import ceg.avtechlabs.mba.listeners.SwypeListener
@@ -22,6 +24,7 @@ import ceg.avtechlabs.mba.util.Extractor
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.crazyhitty.chdev.ks.rssmanager.Channel
+import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -112,11 +115,18 @@ class ReaderActivity : AppCompatActivity() {
         //i = i+1
 
         val progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        //val progressDialog = ProgressDialog(this)
         progressDialog.progressHelper!!.barColor = R.color.colorAccent
         progressDialog.titleText = "Loading .."
         progressDialog.setCancelable(false)
-        //progressDialog.setIndeterminateDrawable(DoubleBounce())
         progressDialog.show()
+       // progressDialog.isIndeterminate = true
+        //progressDialog.setProgressStyle(DoubleBounce())
+        /*val progressBar = ProgressBar(this)
+        val doubleBounce = DoubleBounce()
+        progressBar.indeterminateDrawable = doubleBounce
+        progressBar.visibility = ProgressBar.VISIBLE*/
+
         Thread{
 
             if(i == 0) {
@@ -165,6 +175,7 @@ class ReaderActivity : AppCompatActivity() {
                 })
 
 
+                //progressBar.visibility = ProgressBar.INVISIBLE
                 progressDialog.dismiss()
                 AnimationUtils.loadAnimation(this, R.anim.slide_right)
                 Snackbar.make(coordinatorLayoutReader, "$minutes minutes to read this story.", Snackbar.LENGTH_LONG).show()
