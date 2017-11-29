@@ -65,6 +65,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.uncopt:android.justified:1.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    compile 'com.evernote:android-job:1.2.1'
 
 }
 repositories {
