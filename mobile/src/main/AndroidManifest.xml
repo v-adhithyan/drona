@@ -34,12 +34,15 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
-        <service android:name="ceg.avtechlabs.mba.services.MessagingService">
+        <service android:name="ceg.avtechlabs.mba.notification.MessagingService">
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/stat_notify" />
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="ceg.avtechlabs.mba.services.InstanceIDService">
+        <service android:name="ceg.avtechlabs.mba.notification.InstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

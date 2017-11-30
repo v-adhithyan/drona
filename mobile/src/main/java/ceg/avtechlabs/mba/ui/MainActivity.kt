@@ -2,12 +2,14 @@ package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
 import android.app.ActivityOptions
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.NotificationCompat
 import android.transition.Explode
 import android.view.Menu
 import android.view.MenuItem
@@ -18,11 +20,9 @@ import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.view.WindowManager
-
-
-
-
-
+import android.widget.Toast
+import ceg.avtechlabs.mba.jobs.DronaJobPool
+import ceg.avtechlabs.mba.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,6 +48,14 @@ class MainActivity : AppCompatActivity() {
             window.statusBarColor = resources.getColor(R.color.colorPrimary)
         }
         //startActivity(Intent(this, TempActivity::class.java))
+
+        DronaJobPool.addJobsToSystem()
+        if(!(getPreference(Globals.FIRST_RUN) as Boolean)) {
+            showFeedPreferenceChooser()
+            storePreference(Globals.FIRST_RUN, true)
+            //Logger.out(getPreference(Globals.FEED_PREFERENCES) as String)
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,4 +111,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAbout() { startActivity(Intent(this, AboutActivity::class.java)) }
+
+
 }

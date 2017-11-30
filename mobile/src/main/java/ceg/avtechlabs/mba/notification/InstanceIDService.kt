@@ -1,7 +1,6 @@
-package ceg.avtechlabs.mba.services
+package ceg.avtechlabs.mba.notification
 
 import android.content.Intent
-import ceg.avtechlabs.mba.util.Logger
 import com.google.firebase.iid.FirebaseInstanceId
 
 import com.google.firebase.iid.FirebaseInstanceIdService

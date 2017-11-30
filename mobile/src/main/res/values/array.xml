@@ -43,4 +43,11 @@
     <item>http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx</item>
   </string-array>
 
+  <string-array name="Categories">
+    <item>Marketing</item>
+    <item>Finance</item>
+    <item>Economics</item>
+    <item>Leadership</item>
+    <item>Others</item>
+  </string-array>
 </resources>

@@ -1,6 +1,8 @@
 package ceg.avtechlabs.mba
 
 import android.app.Application
+import ceg.avtechlabs.mba.jobs.DronaJobCreator
+import com.evernote.android.job.JobManager
 import com.facebook.drawee.backends.pipeline.Fresco
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
@@ -16,9 +18,8 @@ class MbaApplication : Application() {
         CalligraphyConfig.initDefault(font)
 
         Fresco.initialize(this)
+
+        JobManager.create(this).addJobCreator(DronaJobCreator())
     }
 
-    /*override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(base))
-    }*/
 }

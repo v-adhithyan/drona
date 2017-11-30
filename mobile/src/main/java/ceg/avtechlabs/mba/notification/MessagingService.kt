@@ -1,4 +1,4 @@
-package ceg.avtechlabs.mba.services
+package ceg.avtechlabs.mba.notification
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -15,7 +15,15 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MessagingService : FirebaseMessagingService() {
 
+    override fun handleIntent(p0: Intent?) {
+        Logger.out("hello")
+        //super.handleIntent(p0)
+
+        //val title = bundle
+    }
+
     override fun onMessageReceived(message: RemoteMessage?) {
+        Logger.out("notfification recvd")
         message?.notification!!.body?.let {
             sendNotification(it)
             Logger.out(it)
