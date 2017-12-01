@@ -44,24 +44,27 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
     }
 
     override fun onRunJob(params: Params): Result {
-        val urlArray = emptyArray<String>()
-
+        var array = ArrayList<String>();
+        
         if(context.internetAvailable()) {
-            val categories = (context.getPreference(Globals.FEED_PREFERENCES) as String).split(",")
+            val categories = (context.getPreference(Globals.FEED_PREFERENCES).toString()).split(",")
 
             for (cat in categories) {
-                if(cat == context.getString(R.string.topic_finance)) {
-                    urlArray.plus(context.resources.getStringArray(R.array.Finance))
-                } else if(cat == context.getString(R.string.topic_economics)) {
-                    urlArray.plus(context.resources.getStringArray(R.array.Economics))
-                } else if(cat == context.getString(R.string.topic_leadership)) {
-                    urlArray.plus(context.resources.getStringArray(R.array.Leadership))
-                } else if(cat == context.getString(R.string.topic_marketing)) {
-                    urlArray.plus(context.resources.getStringArray(R.array.Marketing))
-                } else if(cat == context.getString(R.string.topic_others)) {
-                    urlArray.plus(context.resources.getStringArray(R.array.Others))
+                if(cat.equals(context.getString(R.string.topic_finance))) {
+                    array.addAll(context.resources.getStringArray(R.array.Finance))
+                } else if(cat.equals(context.getString(R.string.topic_economics))) {
+                    array.addAll(context.resources.getStringArray(R.array.Economics))
+                } else if(cat.equals(context.getString(R.string.topic_leadership))) {
+                    array.addAll(context.resources.getStringArray(R.array.Leadership))
+                } else if(cat.equals(context.getString(R.string.topic_marketing))) {
+                    array.addAll(context.resources.getStringArray(R.array.Marketing))
+                } else if(cat.equals(context.getString(R.string.topic_others))) {
+                    array.addAll(context.resources.getStringArray(R.array.Others))
                 }
             }
+
+            var urlArray = arrayOfNulls<String>(array.size)
+            array.toArray(urlArray)
             RssReader(this).loadFeeds(*urlArray)
         }
 

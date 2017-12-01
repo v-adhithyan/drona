@@ -17,6 +17,6 @@ class InstanceIDService : FirebaseInstanceIdService() {
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_SUBJECT, "token")
         intent.putExtra(Intent.EXTRA_TEXT, token)
-        startActivity(Intent.createChooser(intent, "Share using"))
+        //startActivity(Intent.createChooser(intent, "Share using"))
     }
 }

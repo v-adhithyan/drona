@@ -33,9 +33,11 @@ fun Context.showFeedPreferenceChooser() {
             .setMessage(R.string.input_choose_feed_preferences_message)
             .setItemsMultiChoice(items) { positions, items ->
                 val choice = TextUtils.join(",", items)
+                //Toast.makeText(this, choice, Toast.LENGTH_LONG).show()
                 storePreference(Globals.FEED_PREFERENCES, choice)
+                Toast.makeText(this, getPreference(Globals.FEED_PREFERENCES) as String, Toast.LENGTH_LONG).show()
             }
-            .setConfirmButtonText("Confirm")
+            .setConfirmButtonText(getString(R.string.alert_confirm))
             .setCancelable(false)
             .show()
 }
@@ -46,10 +48,8 @@ fun Context.storePreference(key: String, message: Any) {
 
     if(message is Boolean) {
         editor.putBoolean(key, message)
-    }
-
-    if(message is String) {
-        editor.putString(key, message)
+    } else{
+        editor.putString(key, message.toString())
     }
 
     editor.commit()

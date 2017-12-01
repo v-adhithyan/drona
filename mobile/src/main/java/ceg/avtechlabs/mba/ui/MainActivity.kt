@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         if(!(getPreference(Globals.FIRST_RUN) as Boolean)) {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
-            //Logger.out(getPreference(Globals.FEED_PREFERENCES) as String)
         }
 
     }

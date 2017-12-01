@@ -12,19 +12,24 @@ import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.MbaDbHelper
+import ceg.avtechlabs.mba.util.Globals
+import ceg.avtechlabs.mba.util.getPreference
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.google.android.gms.ads.AdRequest
+import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.util.*
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
     //var url:String? = null
     var progressDialog: SweetAlertDialog? = null
     var urlArray = arrayOfNulls<String>(1)
+    //var urlArray = emptyArray<String>(1)
     var rssReader: RssReader = RssReader(this)
     var topic = ""
     //var count = 0
@@ -68,10 +73,13 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             progressDialog?.show()*/
             rssReader.loadFeeds(*urlArray)
         } else {
-            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            alert.setTitle("Oops")
-            alert.setContentText(getString(R.string.alert_no_internet))
-            alert.show()
+            LovelyInfoDialog(this)
+                    .setTopColorRes(android.R.color.holo_blue_dark)
+                    //This will add Don't show again checkbox to the dialog. You can pass any ID as argument
+                    .setTitle(R.string.alert_no_internet_title)
+                    .setMessage(R.string.alert_no_internet_message)
+                    .show();
+            finish()
         }
 
         adview_display.loadAd(AdRequest.Builder().build())
