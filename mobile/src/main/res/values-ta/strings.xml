@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Drona</string>
+
+    <string name="topic_marketing">சந்தைப்படுத்துதல்</string>
+    <string name="topic_finance">நிதி</string>
+    <string name="topic_economics">பொருளாதாரம்</string>
+    <string name="topic_leadership">தலைமை</string>
+    <string name="topic_others">மற்றவை</string>
+
+    <string name="alert_no_internet">இன்டர்நெட் இணைப்பு இல்லை. செயலியை தொடர்ந்து உபயோகப்படுத்த இன்டர்நெட்டுடன் இணைக்கவும்.</string>
+
+    <string name="menu_share">பகிர்ந்து கொள்</string>
+    <string name="intent_share">Share using</string>
+    <string name="text_share">%1$s , துரோணா செயலியின் மூலம் பகிரப்பட்டது. Play store- இல் இருந்து தரவிறக்கம் செய்யவும்.</string>
+
+    <string name="snackbar_no_new_feeds">புது செய்திகள் இல்லை.</string>
+
+    <string name="menu_about">About</string>
+
+    <string name="ad_id"> ca-app-pub-1272425295572154~3496618828</string>
+    <string name="ad_unit"> ca-app-pub-1272425295572154/4973352020</string>
+
+    <string name="dummy_placeholder">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</string>
+
+    <string name="input_choose_feed_preferences_title">விருப்பமான துறைகளை தேர்வு செய்க.</string>
+    <string name="input_choose_feed_preferences_message">துறை சார்ந்த செய்திகளை உடனுக்குடன் காட்ட, இது எங்களுக்கு உதவும்.</string>
+
+</resources>
