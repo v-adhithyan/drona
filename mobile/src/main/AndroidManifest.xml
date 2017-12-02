@@ -52,6 +52,10 @@
         <activity android:name="ceg.avtechlabs.mba.ui.TempActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
     </application>
 
 </manifest>

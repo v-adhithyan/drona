@@ -25,6 +25,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.crazyhitty.chdev.ks.rssmanager.Channel
 import com.github.ybq.android.spinkit.style.DoubleBounce
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -37,7 +40,7 @@ class ReaderActivity : AppCompatActivity() {
     var url = ""
     var i = 0
     var array = arrayOf("one", "two", "three")
-
+    var adLoadCount = 0
     var currentArticle: Article? = null
     var nextArticle: Article? = null
 
@@ -193,11 +196,32 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     fun nextArticle(v: View) {
+        adLoadCount++
+        if(adLoadCount == 3) {
+            loadInterstitialAd()
+            adLoadCount = 0
+        }
         change()
     }
 
     fun share(v: View) {
         Toast.makeText(this, "share", Toast.LENGTH_LONG).show()
+    }
+
+    fun loadInterstitialAd() {
+            val interstitial = InterstitialAd(this)
+            interstitial.adUnitId = getString(R.string.ad_unit_interstitial)
+            val adRequest = AdRequest.Builder()
+            interstitial.loadAd(adRequest.build())
+            interstitial.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                // Call displayInterstitial() function
+                if(interstitial.isLoaded) {
+                    interstitial.show()
+                }
+
+            }
+        }
     }
 
     companion object {
