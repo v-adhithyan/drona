@@ -7,6 +7,8 @@ import android.text.TextUtils
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
+import java.util.*
+import javax.microedition.khronos.opengles.GL
 
 /**
  * Created by Adhithyan V on 23-05-2017.
@@ -64,3 +66,25 @@ fun Context.getPreference(key: String): Any {
 
     return preference.getString(key, "")
 }
+
+/*fun Context.isEnglishLocale(): Boolean {
+    val en = resources.configuration.locale.toString()
+    Toast.makeText(this, en, Toast.LENGTH_LONG).show()
+    return resources.configuration.locale.toString().matches(Regex("en*"))
+}
+
+fun Context.changeToEnglishLocale() {
+    //if(!isEnglishLocale()) {
+        val systemlocale = resources.configuration.locale
+        storePreference(Globals.LOCALE, systemlocale.toString())
+    val locale = Locale("en_In")
+    Locale.setDefault(locale)
+        resources.configuration.locale = locale
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+    //}
+}
+
+fun Context.resetLocale() {
+    resources.configuration.locale = Locale(getPreference(Globals.LOCALE).toString())
+    resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+}*/

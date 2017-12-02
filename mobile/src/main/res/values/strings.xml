@@ -28,4 +28,6 @@
     <string name="input_choose_feed_preferences_message">We use this to show some exciting news as and when it arrives.</string>
 
     <string name="alert_confirm">Confirm</string>
+    <string name="read_more">To read more, tap on the globe.</string>
+
 </resources>

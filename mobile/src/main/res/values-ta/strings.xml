@@ -28,4 +28,6 @@
     <string name="input_choose_feed_preferences_message">துறை சார்ந்த செய்திகளை உடனுக்குடன் காட்ட, இது எங்களுக்கு உதவும்.</string>
 
     <string name="alert_confirm">உறுதி செய்</string>
+
+    <string name="read_more">மேலும் வாசிக்க, பூமி உருண்டை பொத்தானை தட்டவும்.</string>
 </resources>

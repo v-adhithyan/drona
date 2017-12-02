@@ -10,5 +10,7 @@ class Globals {
         val FEED_PREFERENCES = "feed_preferences"
 
         val DRONA_PREFERENCES = "drona_preference"
+
+        val LOCALE = "locale"
     }
 }

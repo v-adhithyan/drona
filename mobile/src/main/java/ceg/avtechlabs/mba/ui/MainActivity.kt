@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
         }
+        //isEnglishLocale()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,27 +77,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadMarketingFeeds(v: View) {
-        val topic = getString(R.string.topic_marketing)
+        val topic = "Marketing"
         startReader(topic)
     }
 
     fun loadFinanceFeeds(v: View) {
-        val topic = getString(R.string.topic_finance)
+        val topic ="Finance"
         startReader(topic)
     }
 
     fun loadEconomicsFeeds(v: View) {
-        val topic = getString(R.string.topic_economics)
+        val topic = "Economics"
         startReader(topic)
     }
 
     fun loadLeadershipFeeds(v: View) {
-        val topic = getString(R.string.topic_leadership)
+        val topic = "Leadership"
         startReader(topic)
     }
 
     fun loadOtherFeeds(v: View) {
-        val topic = getString(R.string.topic_others)
+        val topic = "Others"
         startReader(topic)
     }
     
