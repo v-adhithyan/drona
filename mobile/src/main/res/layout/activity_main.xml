@@ -28,15 +28,16 @@
             android:orientation="horizontal">
 
 
-          <com.facebook.drawee.view.SimpleDraweeView
+          <ImageView
               android:id="@+id/imageview_marketing"
+              android:src="@drawable/marketing_menu"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_height="wrap_content"
               android:layout_weight="4"
               android:alpha="0.6"
               android:contentDescription="@string/topic_marketing"
               android:padding="10dp"
-              android:scaleType="centerCrop" />
+               />
 
 
           <TextView
@@ -75,15 +76,16 @@
             >
 
 
-          <com.facebook.drawee.view.SimpleDraweeView
+          <ImageView
               android:id="@+id/imageview_finance"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_height="wrap_content"
               android:layout_weight="4"
               android:alpha="0.6"
               android:contentDescription="@string/topic_finance"
               android:padding="10dp"
-              android:scaleType="centerCrop" />
+              android:src="@drawable/finance_menu"
+               />
 
 
           <TextView
@@ -123,15 +125,16 @@
             >
 
 
-          <com.facebook.drawee.view.SimpleDraweeView
+          <ImageView
               android:id="@+id/imageview_economics"
+              android:src="@drawable/economics_menu"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_height="wrap_content"
               android:layout_weight="4"
               android:alpha="0.6"
               android:contentDescription="@string/topic_economics"
               android:padding="10dp"
-              android:scaleType="centerCrop" />
+               />
 
 
           <TextView
@@ -214,15 +217,16 @@
             >
 
 
-          <com.facebook.drawee.view.SimpleDraweeView
+          <ImageView
               android:id="@+id/imageview_others"
+              android:src="@drawable/others_menu"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_height="wrap_content"
               android:layout_weight="4"
               android:alpha="0.6"
               android:contentDescription="@string/topic_others"
               android:padding="10dp"
-              android:scaleType="centerCrop" />
+              />
 
 
           <TextView

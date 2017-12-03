@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         @TargetApi(21)
         window.exitTransition = Explode()
 
-        imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
-        imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))
-        imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
+        //imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
+        //imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))
+        //imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
         //imageview_leadership.setImageURI(Uri.parse("$res${R.drawable.leadership_menu}"))
-        imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
+        //imageview_others.setImageURI(Uri.parse("$res${R.drawable.others_menu}"))
 
         adview_main.loadAd(AdRequest.Builder().build())
 
