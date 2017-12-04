@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
     override fun unableToReadRssFeeds(errorMessage: String?) {
-        NotificationUtil(context).showNotification("Failed", errorMessage!! + "msg")
+        //NotificationUtil(context).showNotification("Failed", errorMessage!! + "msg")
     }
 
     override fun rssFeedsLoaded(rssList: MutableList<RSS>) {
@@ -27,8 +27,9 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
         for(rss in rssList) {
             items.addAll(rss.channel.items)
        }
-        NotificationUtil(context).showNotification("New note", "af")
-        NotificationUtil(context).showNotification(items[0].title, items[0].description)
+        //NotificationUtil(context).showNotification("New note", "af")
+        //NotificationUtil(context).showNotification(items[0].title, items[0].description)
+        NotificationUtil(context).showNotificationWithURL(items[0].title, items[0].description, items[0].link, items[0].pubDate)
     }
 
     companion object {

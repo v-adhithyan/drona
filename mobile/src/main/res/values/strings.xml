@@ -30,4 +30,7 @@
     <string name="alert_confirm">Confirm</string>
     <string name="read_more">To read more, tap on the globe.</string>
 
+    <string name="loading">Loading ..</string>
+
+    <string name="notification_action_read">Read</string>
 </resources>

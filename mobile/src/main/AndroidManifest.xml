@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name="ceg.avtechlabs.mba.MbaApplication"
+        android:name=".MbaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,9 +16,9 @@
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
         <activity
-            android:name="ceg.avtechlabs.mba.ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,36 +26,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ceg.avtechlabs.mba.ui.DisplayActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:name=".ui.DisplayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="ceg.avtechlabs.mba.ui.ReaderActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:name=".ui.ReaderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name="ceg.avtechlabs.mba.notification.MessagingService">
+        <service android:name=".notification.MessagingService">
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
                 android:resource="@drawable/stat_notify" />
+
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="ceg.avtechlabs.mba.notification.InstanceIDService">
+        <service android:name=".notification.InstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name="ceg.avtechlabs.mba.ui.AboutActivity" />
-        <activity android:name="ceg.avtechlabs.mba.ui.TempActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity android:name=".ui.AboutActivity" />
+        <activity
+            android:name=".ui.TempActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-
+        <activity android:name=".ui.ReaderFromNotificationActivity"></activity>
     </application>
 
 </manifest>

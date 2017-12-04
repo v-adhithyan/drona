@@ -30,4 +30,7 @@
     <string name="alert_confirm">உறுதி செய்</string>
 
     <string name="read_more">மேலும் வாசிக்க, பூமி உருண்டை பொத்தானை தட்டவும்.</string>
+    <string name="loading">செய்தி பெறப்படுகிறது ..</string>
+    <string name="notification_action_read">வாசி</string>
+
 </resources>

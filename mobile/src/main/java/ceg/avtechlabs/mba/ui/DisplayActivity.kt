@@ -6,14 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.transition.Explode
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.models.MbaDbHelper
-import ceg.avtechlabs.mba.util.Globals
-import ceg.avtechlabs.mba.util.getPreference
+import ceg.avtechlabs.mba.util.FeedUtil
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.crazyhitty.chdev.ks.rssmanager.RSS
@@ -22,7 +19,6 @@ import com.google.android.gms.ads.AdRequest
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.util.*
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
@@ -131,10 +127,8 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             }
         /*}.start()*/
 
-
-        val db = MbaDbHelper(this)
-        val insert = db.insert(rssList[0].channel.items[0].title, topic)
-        if(!insert) {
+        val title = rssList[0].channel.items[0].title
+        if(!FeedUtil(this).isNewFeed(title, topic)) {
             Snackbar.make(activity_display as View, getString(R.string.snackbar_no_new_feeds), Snackbar.LENGTH_LONG).show()
         }
     }

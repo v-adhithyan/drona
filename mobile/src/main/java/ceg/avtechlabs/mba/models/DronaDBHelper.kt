@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
  * Created by Adhithyan V on 30-05-2017.
  */
 
-class MbaDbHelper(context: Context): SQLiteOpenHelper(context, MbaDbHelper.DB_NAME, null, 1) {
+class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.DB_NAME, null, 1) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table $TABLE_NAME ($COL_TITLE text, $COL_CATEGORY varchar(30))")
