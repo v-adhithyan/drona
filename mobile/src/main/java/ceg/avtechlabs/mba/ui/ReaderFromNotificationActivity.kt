@@ -44,6 +44,10 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
     var currentArticle: Article? = null
     var nextArticle: Article? = null
     var englishLocale = true //assume default is english
+    var title = ""
+    var link = ""
+    var desc = ""
+    var date = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +55,26 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         @TargetApi(21)
         window.exitTransition = Explode()
 
+        //
+
+        title = intent.getStringExtra(INTENT_READ_TITLE)
+        desc = intent.getStringExtra(INTENT_READ_DESC)
+        date = intent.getStringExtra(INTENT_PUB_DATA)
+        link = intent.getStringExtra(INTENT_READ_URl)
+        Toast.makeText(this, "$title $desc $date $link", Toast.LENGTH_LONG).show()
         notify_adView.loadAd(AdRequest.Builder().build())
+        change()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_reader, menu)
         return true
     }
+
+    /*override fun onNewIntent(intent: Intent?) {
+        Toast.makeText(this, intent!!.extras.toString(), Toast.LENGTH_LONG).show()
+        this.intent = intent
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
@@ -82,10 +99,9 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
 
     private fun change() {
         notify_collapsing_toolbar.title = getString(R.string.app_name)
-        notify_textviewTitle.text = intent!!.getStringExtra(INTENT_READ_TITLE)
-        notify_textviewDescription.text = intent!!.getStringExtra(INTENT_READ_DESC)
-        notify_textviewDate.text = intent!!.getStringExtra(INTENT_PUB_DATA)
-
+        notify_textviewTitle.text = title
+        notify_textviewDescription.text = desc
+        notify_textviewDate.text = date
 
         val progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
         progressDialog.progressHelper!!.barColor = R.color.colorAccent
@@ -95,7 +111,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
 
         Thread{
 
-            val article = Extractor(intent.getStringExtra(INTENT_READ_URl)).extract()
+            val article = Extractor(link).extract()
             //val minutes = ((article!!.document.text().split(" ").size).toFloat() / 275F).toFloat()
             runOnUiThread {
 
@@ -104,12 +120,12 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
                 notify_textviewTitle.text = (article!!.title).toUpperCase()
                 notify_textviewTitle.setAllCaps(true)
                 if(article!!.document.text().length == 0) {
-                    notify_textviewDescription.text = intent.getStringExtra(INTENT_READ_DESC)
+                    notify_textviewDescription.text = desc
                     Toast.makeText(this, getString(R.string.read_more), Toast.LENGTH_LONG).show()
                 } else {
-                    textviewDescription.text = Html.fromHtml(article.document.text())
+                    notify_textviewDescription.text = Html.fromHtml(article!!.document.text())
                 }
-                Picasso.with(this).load(article.imageUrl).into(object: com.squareup.picasso.Target {
+                Picasso.with(this).load(article!!.imageUrl).into(object: com.squareup.picasso.Target {
                     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
                     }
@@ -119,7 +135,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
                     }
 
                     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                        image.setImageBitmap(bitmap)
+                        notify_image.setImageBitmap(bitmap)
                         Palette.from(bitmap).generate(object: Palette.PaletteAsyncListener {
                             override fun onGenerated(palette: Palette) {
                                 val mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));

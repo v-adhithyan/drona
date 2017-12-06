@@ -33,8 +33,9 @@ class NotificationUtil(internal var context: Context) {
         intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_DESC, message)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_PUB_DATA, date)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_URl, url)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), intent, 0)
+        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val mBuilder = NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.stat_notify)
@@ -42,6 +43,7 @@ class NotificationUtil(internal var context: Context) {
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .addAction(R.drawable.next, context.getString(R.string.notification_action_read), pendingIntent)
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
