@@ -13,11 +13,13 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table $TABLE_NAME ($COL_TITLE text, $COL_CATEGORY varchar(30))")
+        db?.execSQL("create table $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("drop table if exists $TABLE_NAME")
-        onCreate(db)
+        db?.execSQL("create table $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
+        //onCreate(db)
     }
 
     /*fun insertAll(titles: Array<String>) {
@@ -62,9 +64,73 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         val current = getTop(category)
         return (current != null && current.toLowerCase().equals(title.toLowerCase()))
     }
+
     private fun truncate(category: String) {
         val db = this.writableDatabase
         db.execSQL("DELETE FROM $TABLE_NAME where $COL_CATEGORY='${category.toLowerCase()}'")
+    }
+
+    fun insertToFeeds(title: String, description: String, category: String, read: Int): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(FEED_TITLE, title.toLowerCase().trim())
+        cv.put(FEED_DESC, description.toLowerCase().trim())
+        cv.put(FEED_CATEGORY, category.toLowerCase().trim())
+        cv.put(FEED_READ, read.toInt())
+        db.insert(FEED_TABLE, null, cv)
+        db.close()
+        return true
+    }
+
+    private fun markReadStatus(title: String, description: String,  category: String, read: Int) {
+        val db = this.writableDatabase
+
+        val whereClauseArguments = arrayOf(title, description, category)
+        val cv = ContentValues()
+        cv.put(FEED_READ, read)
+
+        db.update(FEED_TABLE, cv, "$FEED_TITLE = ? AND $FEED_DESC = ? AND $FEED_CATEGORY = ?", whereClauseArguments)
+        db.close()
+        //return true
+    }
+
+    fun markFeedAsRead(title: String, description: String,  category: String) {
+        markReadStatus(title.toLowerCase().trim(), description.toLowerCase().trim(), category.toLowerCase().trim(), 1);
+    }
+
+    fun isFeedRead(title: String, description: String, category: String): Boolean {
+        val db = this.readableDatabase
+        val query = "select $FEED_READ from $FEED_TABLE where " +
+                "$FEED_CATEGORY = '${category.toLowerCase().trim()}' and" +
+                "$FEED_TITLE = '${title.toLowerCase().trim()}' and" +
+                "$FEED_DESC = '${description.toLowerCase().trim()}'"
+
+        val cursor = db.rawQuery(query, null)
+        db.close()
+
+        if(cursor != null && cursor.moveToFirst()) {
+            return cursor.getString(0).toBoolean()
+        } else {
+            return false
+        }
+    }
+
+    fun cleanAllReadFeeds(category: String) {
+        val db = this.writableDatabase
+        val query = "select *from $FEED_TABLE where $FEED_CATEGORY" +
+                "= '${category.toLowerCase()}' and $FEED_READ = 1"
+        val cursor = db.rawQuery(query, null)
+        val where = "$FEED_TITLE = ?  AND $FEED_DESC = ? AND $FEED_CATEGORY = ?"
+
+        if(cursor.moveToFirst()) {
+            do {
+                val args = arrayOf(cursor.getString(0), cursor.getString(1), category)
+                db.delete(FEED_TABLE, where, args)
+            } while(cursor.moveToNext())
+        }
+
+        db.close()
     }
 
     companion object {
@@ -72,5 +138,11 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         val TABLE_NAME = "feeds"
         val COL_TITLE = "title"
         val COL_CATEGORY = "category"
+
+        val FEED_TABLE = "feeds"
+        val FEED_TITLE = "title"
+        val FEED_DESC = "description"
+        val FEED_CATEGORY = "category"
+        val FEED_READ = "read"
     }
 }
