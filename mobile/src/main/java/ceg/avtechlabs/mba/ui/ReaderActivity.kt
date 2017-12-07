@@ -21,6 +21,7 @@ import android.widget.ProgressBar
 import ceg.avtechlabs.mba.R
 import android.widget.Toast
 import ceg.avtechlabs.mba.listeners.SwypeListener
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.util.*
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
@@ -45,7 +46,8 @@ class ReaderActivity : AppCompatActivity() {
     var currentArticle: Article? = null
     var nextArticle: Article? = null
     var englishLocale = true //assume default is english
-
+    var db: DronaDBHelper? = null
+    var category = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
@@ -64,14 +66,14 @@ class ReaderActivity : AppCompatActivity() {
             override fun onSwipeBottom() { }
         });*/
         //changeToEnglishLocale()
+        db = DronaDBHelper(this)
+        category = intent.getStringExtra(DisplayActivity.TOPIC)
         change()
         /*url = intent.getStringExtra(DisplayActivity.URL)
-
         val webview = findViewById(R.id.webview) as WebView
         webview.showContextMenu()
         webview.settings.javaScriptEnabled = true
         webview.setWebViewClient(object : WebViewClient() {
-
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 //progressDialog?.dismiss()
@@ -122,14 +124,14 @@ class ReaderActivity : AppCompatActivity() {
         textviewDate.text = ITEMS[i].pubDate
         //Toast/.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
         //i = i+1
-
+        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description, category)
         val progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
         //val progressDialog = ProgressDialog(this)
         progressDialog.progressHelper!!.barColor = R.color.colorAccent
         progressDialog.titleText = "Loading .."
         progressDialog.setCancelable(false)
         progressDialog.show()
-       // progressDialog.isIndeterminate = true
+        // progressDialog.isIndeterminate = true
         //progressDialog.setProgressStyle(DoubleBounce())
         /*val progressBar = ProgressBar(this)
         val doubleBounce = DoubleBounce()
@@ -225,11 +227,11 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     fun loadInterstitialAd() {
-            val interstitial = InterstitialAd(this)
-            interstitial.adUnitId = getString(R.string.ad_unit_interstitial)
-            val adRequest = AdRequest.Builder()
-            interstitial.loadAd(adRequest.build())
-            interstitial.adListener = object : AdListener() {
+        val interstitial = InterstitialAd(this)
+        interstitial.adUnitId = getString(R.string.ad_unit_interstitial)
+        val adRequest = AdRequest.Builder()
+        interstitial.loadAd(adRequest.build())
+        interstitial.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 // Call displayInterstitial() function
                 if(interstitial.isLoaded) {
@@ -243,12 +245,12 @@ class ReaderActivity : AppCompatActivity() {
     override fun onBackPressed() {
         ITEMS = ArrayList<Channel.Item>()
         //if(!englishLocale) {
-                //resetLocale()
-           // }
+        //resetLocale()
+        // }
         finish()
     }
     companion object {
         //var rss: List<RSS>? = null
-         var ITEMS = ArrayList<Channel.Item>()
+        var ITEMS = ArrayList<Channel.Item>()
     }
 }

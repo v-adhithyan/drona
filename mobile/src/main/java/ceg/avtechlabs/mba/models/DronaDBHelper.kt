@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import java.util.*
 import java.util.logging.Logger
 
 /**
@@ -76,9 +77,9 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         val db = this.writableDatabase
 
         val cv = ContentValues()
-        cv.put(FEED_TITLE, title.toLowerCase().trim())
-        cv.put(FEED_DESC, description.toLowerCase().trim())
-        cv.put(FEED_CATEGORY, category.toLowerCase().trim())
+        cv.put(FEED_TITLE, title.toLowerCase().trim().replace("'", ""))
+        cv.put(FEED_DESC, description.toLowerCase().trim().replace("'", ""))
+        cv.put(FEED_CATEGORY, category.toLowerCase().trim().replace("'", ""))
         cv.put(FEED_READ, read.toInt())
         db.insert(FEED_TABLE, null, cv)
         db.close()
@@ -98,15 +99,17 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
     }
 
     fun markFeedAsRead(title: String, description: String,  category: String) {
-        markReadStatus(title.toLowerCase().trim(), description.toLowerCase().trim(), category.toLowerCase().trim(), 1);
+        markReadStatus(title.toLowerCase().trim().replace("'", ""),
+                description.toLowerCase().trim().replace("'", ""),
+                category.toLowerCase().trim().replace("'", ""), 1);
     }
 
     fun isFeedRead(title: String, description: String, category: String): Boolean {
         val db = this.readableDatabase
         val query = "select $FEED_READ from $FEED_TABLE where " +
-                "$FEED_CATEGORY = '${category.toLowerCase().trim()}' and " +
-                "$FEED_TITLE = '${title.toLowerCase().trim()}' and " +
-                "$FEED_DESC = '${description.toLowerCase().trim()}'"
+                "$FEED_CATEGORY = '${category.toLowerCase().trim().replace("'", "")}' and " +
+                "$FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' and " +
+                "$FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}'"
 
         val cursor = db.rawQuery(query, null)
 
@@ -121,7 +124,7 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
     fun cleanAllReadFeeds(category: String) {
         val db = this.writableDatabase
         val query = "delete from $FEED_TABLE where $FEED_CATEGORY" +
-                "= '${category.toLowerCase().trim()}' and $FEED_READ = 1"
+                "= '${category.toLowerCase().trim().replace("'", "")}' and $FEED_READ = 1"
         //val cursor = db.rawQuery(query, null)
         db.execSQL(query)
         //val where = "$FEED_TITLE = ?  AND $FEED_DESC = ? AND $FEED_CATEGORY = ?"
@@ -135,6 +138,19 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         }*/
 
         db.close()
+    }
+
+    fun feedExists(title: String, description: String, category: String):Boolean {
+        val db = this.readableDatabase
+        val query = "select *from $FEED_TABLE where $FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' " +
+                "AND $FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}' " +
+                "AND $FEED_CATEGORY = '${category.toLowerCase().trim().replace("'", "")}'"
+        val cursor = db.rawQuery(query, null)
+        if(cursor != null && cursor.moveToFirst()) {
+            return true
+        }
+
+        return false
     }
 
     fun getAllFeeds() {
@@ -151,6 +167,25 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         }
 
         db.close()
+    }
+
+    fun getAllUnreadFeeds(): ArrayList<FeedObject> {
+        val db = this.readableDatabase
+        val query = "select *from $FEED_TABLE where $FEED_READ = 0"
+        val cursor = db.rawQuery(query, null)
+
+        val array = ArrayList<FeedObject>()
+        if(cursor.moveToFirst()) {
+            do {
+                //Log.d(TAG, "${cursor.getString(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getString(3)}")
+                array.add(FeedObject(cursor.getString(0), cursor.getString(1)))
+            } while(cursor.moveToNext())
+        } else {
+            Log.d(TAG, "none db found")
+        }
+
+        db.close()
+        return array
     }
 
     companion object {

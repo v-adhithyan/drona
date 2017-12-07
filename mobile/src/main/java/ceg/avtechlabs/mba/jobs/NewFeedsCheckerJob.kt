@@ -29,6 +29,7 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
        }
         //NotificationUtil(context).showNotification("New note", "af")
         //NotificationUtil(context).showNotification(items[0].title, items[0].description)
+
         NotificationUtil(context).showNotificationWithURL(items[0].title, items[0].description, items[0].link, items[0].pubDate)
     }
 

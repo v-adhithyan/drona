@@ -10,15 +10,18 @@ import android.transition.Explode
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.util.FeedUtil
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.crazyhitty.chdev.ks.rssmanager.Channel
 import com.crazyhitty.chdev.ks.rssmanager.RSS
 import com.crazyhitty.chdev.ks.rssmanager.RssReader
 import com.google.android.gms.ads.AdRequest
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import kotlinx.android.synthetic.main.activity_display.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.util.*
 
 class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
@@ -30,7 +33,6 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     var topic = ""
     //var count = 0
     //var rss = ArrayList<RSS>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
@@ -115,13 +117,40 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
 
             runOnUiThread {
 
-
+                val db = DronaDBHelper(this)
                 //recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
                 val intent = Intent(this, ReaderActivity::class.java)
+                val items = ArrayList<Channel.Item>()
                 for (rss in rssList) {
-                    ReaderActivity.ITEMS.addAll(rss.channel.items)
+                    items.addAll(rss.channel.items)
                 }
+
+                for(item in items) {
+                    var title = item.title
+                    var description = item.description
+                    if(title == null) {
+                        title = ""
+                    }
+                    if(description == null) {
+                        description = ""
+                    }
+                    if(db.feedExists(title, description, topic)) {
+                        if(!db.isFeedRead(title, description, topic)) {
+                            ReaderActivity.ITEMS.add(item)
+                        }
+                    } else{
+                        db.insertToFeeds(title, description, topic, 0)
+                        ReaderActivity.ITEMS.add(item)
+                    }
+                }
+
+
                 progressDialog?.dismiss()
+                if(ReaderActivity.ITEMS.size == 0) {
+                    Toast.makeText(this, "No new feeds", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+                intent.putExtra(TOPIC, topic)
                 startActivity(intent)
                 finish()
             }

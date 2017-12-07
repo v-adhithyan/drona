@@ -6,6 +6,9 @@ import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
 import java.util.*
 import javax.microedition.khronos.opengles.GL
@@ -67,24 +70,18 @@ fun Context.getPreference(key: String): Any {
     return preference.getString(key, "")
 }
 
-/*fun Context.isEnglishLocale(): Boolean {
-    val en = resources.configuration.locale.toString()
-    Toast.makeText(this, en, Toast.LENGTH_LONG).show()
-    return resources.configuration.locale.toString().matches(Regex("en*"))
-}
+fun Context.loadInterstitialAd() {
+    val interstitial = InterstitialAd(this)
+    interstitial.adUnitId = getString(R.string.ad_unit_interstitial)
+    val adRequest = AdRequest.Builder()
+    interstitial.loadAd(adRequest.build())
+    interstitial.adListener = object : AdListener() {
+        override fun onAdLoaded() {
+            // Call displayInterstitial() function
+            if(interstitial.isLoaded) {
+                interstitial.show()
+            }
 
-fun Context.changeToEnglishLocale() {
-    //if(!isEnglishLocale()) {
-        val systemlocale = resources.configuration.locale
-        storePreference(Globals.LOCALE, systemlocale.toString())
-    val locale = Locale("en_In")
-    Locale.setDefault(locale)
-        resources.configuration.locale = locale
-        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-    //}
+        }
+    }
 }
-
-fun Context.resetLocale() {
-    resources.configuration.locale = Locale(getPreference(Globals.LOCALE).toString())
-    resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-}*/

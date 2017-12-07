@@ -20,6 +20,7 @@ import android.webkit.WebView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.util.Extractor
+import ceg.avtechlabs.mba.util.loadInterstitialAd
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.crazyhitty.chdev.ks.rssmanager.Channel
@@ -61,7 +62,6 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
         link = intent.getStringExtra(INTENT_READ_URl)
-        Toast.makeText(this, "$title $desc $date $link", Toast.LENGTH_LONG).show()
         notify_adView.loadAd(AdRequest.Builder().build())
         change()
     }
@@ -177,6 +177,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
+        loadInterstitialAd()
         finish()
     }
 

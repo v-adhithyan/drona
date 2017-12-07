@@ -58,9 +58,6 @@ class MainActivity : AppCompatActivity() {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
         }
-        //isEnglishLocale()
-
-        val db = DronaDBHelper(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

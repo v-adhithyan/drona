@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingPrefix"
+    tools:context=".ui.ReaderActivity"
     android:id="@+id/coordinatorLayoutReader"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
