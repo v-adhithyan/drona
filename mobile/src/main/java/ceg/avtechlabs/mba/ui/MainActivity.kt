@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.NotificationCompat
 import android.transition.Explode
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,6 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.view.WindowManager
 import android.widget.Toast
 import ceg.avtechlabs.mba.jobs.DronaJobPool
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.*
 import java.util.*
@@ -57,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             storePreference(Globals.FIRST_RUN, true)
         }
         //isEnglishLocale()
+
+        val db = DronaDBHelper(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
