@@ -1,6 +1,7 @@
 package ceg.avtechlabs.mba.jobs
 
 import ceg.avtechlabs.mba.R
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.Globals
 import ceg.avtechlabs.mba.util.getPreference
@@ -23,14 +24,35 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
     }
 
     override fun rssFeedsLoaded(rssList: MutableList<RSS>) {
-       val items = ArrayList<Channel.Item>()
+        val items = ArrayList<Channel.Item>()
         for(rss in rssList) {
             items.addAll(rss.channel.items)
-       }
+        }
         //NotificationUtil(context).showNotification("New note", "af")
         //NotificationUtil(context).showNotification(items[0].title, items[0].description)
+        val unread = ArrayList<Channel.Item>()
+        val db = DronaDBHelper(context)
+        for(item in items) {
+            if(item.title == null) { continue }
+            if(item.description == null) { continue }
+            if(!db.feedExists(item.title, item.description)) {
+                unread.add(item)
+                db.insertToFeeds(item.title, item.description, 0)
+            }
+        }
 
-        NotificationUtil(context).showNotificationWithURL(items[0].title, items[0].description, items[0].link, items[0].pubDate)
+        var n = 5
+        if(unread.size >= 5) {
+            n = 5
+        } else {
+            n = unread.size
+        }
+
+        for( i in 0..n-1) {
+            if(unread[i].title == null) { continue }
+            if(unread[i].description == null) { continue }
+            NotificationUtil(context).showNotificationWithURL(unread[i].title, unread[i].description, unread[i].link, unread[i].pubDate)
+        }
     }
 
     companion object {

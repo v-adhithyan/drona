@@ -23,6 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.view.WindowManager
 import android.widget.Toast
 import ceg.avtechlabs.mba.jobs.DronaJobPool
+import ceg.avtechlabs.mba.jobs.NewFeedsCheckerJob
 import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.*
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

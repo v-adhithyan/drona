@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
+import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.FeedUtil
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -129,13 +130,13 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                     var title = item.title
                     var description = item.description
                     if(title == null) {
-                        title = ""
+                        continue
                     }
                     if(description == null) {
-                        description = ""
+                        continue
                     }
-                    if(db.feedExists(title, description, topic)) {
-                        if(!db.isFeedRead(title, description, topic)) {
+                    if(db.feedExists(title, description)) {
+                        if(!db.isFeedRead(title, description)) {
                             ReaderActivity.ITEMS.add(item)
                         }
                     } else{
@@ -148,11 +149,15 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                 progressDialog?.dismiss()
                 if(ReaderActivity.ITEMS.size == 0) {
                     Toast.makeText(this, "No new feeds", Toast.LENGTH_LONG).show()
+                    onBackPressed()
                     finish()
+                } else {
+                    intent.putExtra(TOPIC, topic)
+                    startActivity(intent)
+                    finish()
+
                 }
-                intent.putExtra(TOPIC, topic)
-                startActivity(intent)
-                finish()
+
             }
         /*}.start()*/
 

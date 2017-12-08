@@ -86,6 +86,10 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         return true
     }
 
+    fun insertToFeeds(title: String, description: String, read: Int): Boolean {
+        return insertToFeeds(title, description, "", read)
+    }
+
     private fun markReadStatus(title: String, description: String,  category: String, read: Int) {
         val db = this.writableDatabase
 
@@ -104,10 +108,31 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
                 category.toLowerCase().trim().replace("'", ""), 1);
     }
 
+    fun markFeedAsRead(title: String, description: String) {
+        markReadStatus(title.toLowerCase().trim().replace("'", ""),
+                description.toLowerCase().trim().replace("'", ""), "",1)
+    }
+
     fun isFeedRead(title: String, description: String, category: String): Boolean {
         val db = this.readableDatabase
         val query = "select $FEED_READ from $FEED_TABLE where " +
                 "$FEED_CATEGORY = '${category.toLowerCase().trim().replace("'", "")}' and " +
+                "$FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' and " +
+                "$FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}'"
+
+        val cursor = db.rawQuery(query, null)
+
+        if(cursor != null && cursor.moveToFirst()) {
+            return cursor.getString(0).toInt() == 1
+        } else {
+            return false
+        }
+        db.close()
+    }
+
+    fun isFeedRead(title: String, description: String): Boolean {
+        val db = this.readableDatabase
+        val query = "select $FEED_READ from $FEED_TABLE where " +
                 "$FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' and " +
                 "$FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}'"
 
@@ -145,6 +170,18 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         val query = "select *from $FEED_TABLE where $FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' " +
                 "AND $FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}' " +
                 "AND $FEED_CATEGORY = '${category.toLowerCase().trim().replace("'", "")}'"
+        val cursor = db.rawQuery(query, null)
+        if(cursor != null && cursor.moveToFirst()) {
+            return true
+        }
+
+        return false
+    }
+
+    fun feedExists(title: String, description: String):Boolean {
+        val db = this.readableDatabase
+        val query = "select *from $FEED_TABLE where $FEED_TITLE = '${title.toLowerCase().trim().replace("'", "")}' " +
+                "AND $FEED_DESC = '${description.toLowerCase().trim().replace("'", "")}'"
         val cursor = db.rawQuery(query, null)
         if(cursor != null && cursor.moveToFirst()) {
             return true

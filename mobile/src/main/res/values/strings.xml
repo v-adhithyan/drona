@@ -33,4 +33,6 @@
     <string name="loading">Loading ..</string>
 
     <string name="notification_action_read">Read</string>
+    <string name="toast_new_stories_notification_1">New stories from </string>
+    <string name="toast_new_stories_notification_2"> will be notified.</string>
 </resources>

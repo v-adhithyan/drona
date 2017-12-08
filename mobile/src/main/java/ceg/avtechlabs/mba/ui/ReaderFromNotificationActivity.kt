@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils
 import android.webkit.WebView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.util.Extractor
 import ceg.avtechlabs.mba.util.loadInterstitialAd
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -62,6 +63,8 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
         link = intent.getStringExtra(INTENT_READ_URl)
+
+        DronaDBHelper(this).markFeedAsRead(title, desc)
         notify_adView.loadAd(AdRequest.Builder().build())
         change()
     }

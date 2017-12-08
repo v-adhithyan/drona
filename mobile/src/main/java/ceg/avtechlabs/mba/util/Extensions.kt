@@ -40,7 +40,9 @@ fun Context.showFeedPreferenceChooser() {
                 val choice = TextUtils.join(",", items)
                 //Toast.makeText(this, choice, Toast.LENGTH_LONG).show()
                 storePreference(Globals.FEED_PREFERENCES, choice)
-                Toast.makeText(this, getPreference(Globals.FEED_PREFERENCES) as String, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "${getString(R.string.toast_new_stories_notification_1)}" +
+                        "${getPreference(Globals.FEED_PREFERENCES) as String} " +
+                        "${getString(R.string.toast_new_stories_notification_2)}" , Toast.LENGTH_LONG).show()
             }
             .setConfirmButtonText(getString(R.string.alert_confirm))
             .setCancelable(false)
