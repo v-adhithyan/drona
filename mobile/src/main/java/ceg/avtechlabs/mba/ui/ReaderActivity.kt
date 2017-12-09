@@ -48,6 +48,7 @@ class ReaderActivity : AppCompatActivity() {
     var englishLocale = true //assume default is english
     var db: DronaDBHelper? = null
     var category = ""
+    //var title = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
@@ -68,6 +69,7 @@ class ReaderActivity : AppCompatActivity() {
         //changeToEnglishLocale()
         db = DronaDBHelper(this)
         category = intent.getStringExtra(DisplayActivity.TOPIC)
+        //title = intent.getStringExtra(DisplayActivity.TITLE)
         change()
         /*url = intent.getStringExtra(DisplayActivity.URL)
         val webview = findViewById(R.id.webview) as WebView
@@ -117,7 +119,7 @@ class ReaderActivity : AppCompatActivity() {
     private fun change() = if(i == ITEMS!!.size) {
         Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
     } else {
-        collapsing_toolbar.title = getString(R.string.app_name)
+        collapsing_toolbar.title = TITLE[i]
         //collapsing_toolbar.title = ITEMS[i].title
         textviewTitle.text = ITEMS[i].title
         textviewDescription.text = ITEMS[i].description
@@ -244,6 +246,7 @@ class ReaderActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         ITEMS = ArrayList<Channel.Item>()
+        TITLE = ArrayList<String>()
         //if(!englishLocale) {
         //resetLocale()
         // }
@@ -252,5 +255,6 @@ class ReaderActivity : AppCompatActivity() {
     companion object {
         //var rss: List<RSS>? = null
         var ITEMS = ArrayList<Channel.Item>()
+        var TITLE = ArrayList<String>()
     }
 }

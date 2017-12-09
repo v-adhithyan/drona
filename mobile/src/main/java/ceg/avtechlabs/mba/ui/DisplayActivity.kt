@@ -87,7 +87,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
     companion object {
         val TOPIC = "topic"
         val URL = "url"
-
+        val TITLE = "title"
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -122,11 +122,20 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                 //recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
                 val intent = Intent(this, ReaderActivity::class.java)
                 val items = ArrayList<Channel.Item>()
-                for (rss in rssList) {
+                val title = rssList[0].channel.title
+                val itemsTitle = ArrayList<String>();
+
+                for (rss in rssList){
                     items.addAll(rss.channel.items)
+
+                    for ( i in 0 .. rss.channel.items.size) {
+                        itemsTitle.add(rss.channel.title)
+                    }
                 }
 
+                var i = -1
                 for(item in items) {
+                    i++
                     var title = item.title
                     var description = item.description
                     if(title == null) {
@@ -138,6 +147,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                     if(db.feedExists(title, description)) {
                         if(!db.isFeedRead(title, description)) {
                             ReaderActivity.ITEMS.add(item)
+                            ReaderActivity.TITLE.add(itemsTitle[i])
                         }
                     } else{
                         db.insertToFeeds(title, description, topic, 0)
@@ -153,6 +163,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                     finish()
                 } else {
                     intent.putExtra(TOPIC, topic)
+                    //intent.putExtra(TITLE, title)
                     startActivity(intent)
                     finish()
 
