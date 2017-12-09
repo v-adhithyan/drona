@@ -1,9 +1,11 @@
 package ceg.avtechlabs.mba.notification
 
+import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.NotificationCompat
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.ui.ReaderFromNotificationActivity
@@ -23,6 +25,7 @@ class NotificationUtil(internal var context: Context) {
 
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        //notificationManager.notify(Random().nextInt(), buildSummary())
         notificationManager.notify(Random().nextInt(), mBuilder.build())
     }
 
@@ -44,10 +47,27 @@ class NotificationUtil(internal var context: Context) {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
+                .setGroup(GROUP_NAME)
                 .addAction(R.drawable.next, context.getString(R.string.notification_action_read), pendingIntent)
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        //notificationManager.notify(GROUP_ID, buildSummary())
         notificationManager.notify(Random().nextInt(), mBuilder.build())
     }
 
+    private fun buildSummary(): Notification {
+        return NotificationCompat.Builder(context)
+                .setColor(Color.RED)
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(context.getString(R.string.notification_summary_text))
+                .setSmallIcon(R.drawable.stat_notify)
+                .setGroup(GROUP_NAME)
+                .setGroupSummary(true)
+                .build()
+    }
+
+    companion object {
+        val GROUP_ID = 3592
+        val GROUP_NAME = "DRONA"
+    }
 }

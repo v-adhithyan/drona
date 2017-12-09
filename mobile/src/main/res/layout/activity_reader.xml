@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.5"
                 android:textSize="18sp"
-                android:textIsSelectable="false"
+                android:textIsSelectable="true"
                 android:id="@+id/textviewDescription"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>

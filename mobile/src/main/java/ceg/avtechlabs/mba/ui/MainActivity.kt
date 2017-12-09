@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

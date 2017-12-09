@@ -43,7 +43,9 @@ An android app that helps an MBA student/grad or any other management guy to kee
 - [ ] Option to add new feeds.
 - [ ] Crashlytics
 - [x] cache implementation
-- [ ] background check for new feeds and notify user
+- [x] background check for new feeds and notify user
+- [ ] bundle notifications for pre nougat
+- [ ] add app shortcuts, actions from main activity can be launched directly from shortcuts
 
 ## License
   MIT.

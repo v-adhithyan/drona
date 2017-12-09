@@ -34,5 +34,5 @@
     <string name="notification_action_read">வாசி</string>
     <string name="toast_new_stories_notification_1">புதிய செய்திகள் </string>
     <string name="toast_new_stories_notification_2"> இல் இருந்து  தெரிவிக்கப்படும்.</string>
-
+    <string name="notification_summary_text">புதிய செய்திகள் உள்ளன. மேலும் அறிந்து கொள்ள இதை கீழே இழுக்கவும்.</string>
 </resources>
