@@ -25,18 +25,24 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
 
     override fun rssFeedsLoaded(rssList: MutableList<RSS>) {
         val items = ArrayList<Channel.Item>()
+        val titles = ArrayList<String>()
         for(rss in rssList) {
             items.addAll(rss.channel.items)
+            titles.add(rss.channel.title)
         }
         //NotificationUtil(context).showNotification("New note", "af")
         //NotificationUtil(context).showNotification(items[0].title, items[0].description)
         val unread = ArrayList<Channel.Item>()
         val db = DronaDBHelper(context)
+        var i = -1
+        var unreadTitles = ArrayList<String>()
         for(item in items) {
+            i++
             if(item.title == null) { continue }
             if(item.description == null) { continue }
             if(!db.feedExists(item.title, item.description)) {
                 unread.add(item)
+                unreadTitles.add(titles[i])
                 db.insertToFeeds(item.title, item.description, 0)
             }
         }
@@ -51,7 +57,7 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
         for( i in 0..n-1) {
             if(unread[i].title == null) { continue }
             if(unread[i].description == null) { continue }
-            NotificationUtil(context).showNotificationWithURL(unread[i].title, unread[i].description, unread[i].link, unread[i].pubDate)
+            NotificationUtil(context).showNotificationWithURL(unread[i].title, unread[i].description, unread[i].link, unread[i].pubDate, unreadTitles[i])
         }
     }
 

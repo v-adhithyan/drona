@@ -50,6 +50,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
     var link = ""
     var desc = ""
     var date = ""
+    var source = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
         link = intent.getStringExtra(INTENT_READ_URl)
-
+        source = intent.getStringExtra(INTENT_SOURCE)
         DronaDBHelper(this).markFeedAsRead(title, desc)
         notify_adView.loadAd(AdRequest.Builder().build())
         change()
@@ -101,7 +102,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
     }
 
     private fun change() {
-        notify_collapsing_toolbar.title = getString(R.string.app_name)
+        notify_collapsing_toolbar.title = source
         notify_textviewTitle.text = title
         notify_textviewDescription.text = desc
         notify_textviewDate.text = date
@@ -189,5 +190,6 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         val INTENT_READ_DESC = "description"
         val INTENT_READ_URl = "url"
         val INTENT_PUB_DATA = "date"
+        val INTENT_SOURCE = "source"
     }
 }
