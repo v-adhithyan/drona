@@ -28,7 +28,7 @@
         android:layout_width="96sp"
         android:layout_height="96sp"
         android:layout_weight="2"
-        android:contentDescription="Share"
+        android:contentDescription="Share this article"
         android:src="@drawable/share"
         android:onClick="share"/>
 
@@ -39,7 +39,7 @@
         android:layout_width="96sp"
         android:layout_height="96sp"
         android:layout_weight="2"
-        android:contentDescription="Next"
+        android:contentDescription="Read next article"
         android:src="@drawable/next"
         android:onClick="nextArticle"/>
 

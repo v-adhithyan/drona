@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -204,14 +205,17 @@ class ReaderActivity : AppCompatActivity() {
                 i = i + 1
             }
             //prefetch next articlea
-            currentArticle = Extractor(ITEMS[i + 1].link).extract()
-
+            if(i < ITEMS.size - 2) {currentArticle = Extractor(ITEMS[i + 1].link).extract()}
 
         }.start()
     }
 
     fun open(v: View) {
-        Toast.makeText(this, "open", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "open", Toast.LENGTH_LONG).show()
+        val url = ITEMS[i-1].link
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
     fun nextArticle(v: View) {

@@ -30,13 +30,13 @@ class NotificationUtil(internal var context: Context) {
     }
 
 
-    fun showNotificationWithURL(title: String, message: String, url: String, date: String, source: String) {
+    fun showNotificationWithURL(title: String, message: String, url: String, date: String) {
         val intent = Intent(context, ReaderFromNotificationActivity::class.java)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_TITLE, title)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_DESC, message)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_PUB_DATA, date)
         intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_URl, url)
-        intent.putExtra(ReaderFromNotificationActivity.INTENT_SOURCE, source)
+        //intent.putExtra(ReaderFromNotificationActivity.INTENT_SOURCE, source)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)

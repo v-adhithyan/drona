@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.transition.Explode
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
@@ -152,6 +153,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                     } else{
                         db.insertToFeeds(title, description, topic, 0)
                         ReaderActivity.ITEMS.add(item)
+                        ReaderActivity.TITLE.add(itemsTitle[i])
                     }
                 }
 
@@ -177,5 +179,4 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
             Snackbar.make(activity_display as View, getString(R.string.snackbar_no_new_feeds), Snackbar.LENGTH_LONG).show()
         }
     }
-
 }
