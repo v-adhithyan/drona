@@ -205,7 +205,10 @@ class ReaderActivity : AppCompatActivity() {
                 i = i + 1
             }
             //prefetch next articlea
-            if(i < ITEMS.size - 2) {currentArticle = Extractor(ITEMS[i + 1].link).extract()}
+            Thread {
+                if(i < ITEMS.size - 2) {currentArticle = Extractor(ITEMS[i + 1].link).extract()}
+            }.start()
+
 
         }.start()
     }

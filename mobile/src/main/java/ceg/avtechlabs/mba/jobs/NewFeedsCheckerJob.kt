@@ -1,5 +1,6 @@
 package ceg.avtechlabs.mba.jobs
 
+import android.text.Html
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.notification.NotificationUtil
@@ -51,7 +52,8 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
         for( i in 0..n-1) {
             if(unread[i].title == null) { continue }
             if(unread[i].description == null) { continue }
-            NotificationUtil(context).showNotificationWithURL(unread[i].title, unread[i].description, unread[i].link, unread[i].pubDate)
+            val description = Html.fromHtml(unread[i].description)
+            NotificationUtil(context).showNotificationWithURL(unread[i].title, description, unread[i].link, unread[i].pubDate)
         }
     }
 

@@ -48,7 +48,7 @@ class NotificationUtil(internal var context: Context) {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-                .setGroup(GROUP_NAME)
+                //.setGroup(GROUP_NAME)
                 .addAction(R.drawable.next, context.getString(R.string.notification_action_read), pendingIntent)
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
