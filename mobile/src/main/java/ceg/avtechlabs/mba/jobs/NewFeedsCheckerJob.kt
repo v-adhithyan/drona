@@ -53,7 +53,7 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
             if(unread[i].title == null) { continue }
             if(unread[i].description == null) { continue }
             val description = Html.fromHtml(unread[i].description)
-            NotificationUtil(context).showNotificationWithURL(unread[i].title, description, unread[i].link, unread[i].pubDate)
+            NotificationUtil(context).showNotificationWithURL(unread[i].title, description.toString(), unread[i].link, unread[i].pubDate)
         }
     }
 
