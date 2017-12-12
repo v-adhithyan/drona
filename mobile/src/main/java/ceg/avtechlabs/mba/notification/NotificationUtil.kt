@@ -8,7 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.NotificationCompat
 import ceg.avtechlabs.mba.R
-import ceg.avtechlabs.mba.ui.ReaderFromNotificationActivity
+import ceg.avtechlabs.mba.ui.NotificationReader
 import java.util.*
 
 /**
@@ -31,11 +31,11 @@ class NotificationUtil(internal var context: Context) {
 
 
     fun showNotificationWithURL(title: String, message: String, url: String, date: String) {
-        val intent = Intent(context, ReaderFromNotificationActivity::class.java)
-        intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_TITLE, title)
-        intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_DESC, message)
-        intent.putExtra(ReaderFromNotificationActivity.INTENT_PUB_DATA, date)
-        intent.putExtra(ReaderFromNotificationActivity.INTENT_READ_URl, url)
+        val intent = Intent(context, NotificationReader::class.java)
+        intent.putExtra(NotificationReader.INTENT_READ_TITLE, title)
+        intent.putExtra(NotificationReader.INTENT_READ_DESC, message)
+        intent.putExtra(NotificationReader.INTENT_PUB_DATA, date)
+        intent.putExtra(NotificationReader.INTENT_READ_URl, url)
         //intent.putExtra(ReaderFromNotificationActivity.INTENT_SOURCE, source)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 

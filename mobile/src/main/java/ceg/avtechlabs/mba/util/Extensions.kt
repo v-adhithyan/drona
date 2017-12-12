@@ -10,6 +10,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
+import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import java.util.*
 import javax.microedition.khronos.opengles.GL
 
@@ -86,4 +87,13 @@ fun Context.loadInterstitialAd() {
 
         }
     }
+}
+
+fun Context.showNoInternetDialog() {
+    LovelyInfoDialog(this)
+            .setTopColorRes(android.R.color.holo_blue_dark)
+            //This will add Don't show again checkbox to the dialog. You can pass any ID as argument
+            .setTitle(R.string.alert_no_internet_title)
+            .setMessage(R.string.alert_no_internet_message)
+            .show();
 }

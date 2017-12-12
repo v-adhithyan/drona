@@ -5,7 +5,7 @@
     <string name="topic_finance">நிதி</string>
     <string name="topic_economics">பொருளாதாரம்</string>
     <string name="topic_leadership">தலைமை</string>
-    <string name="topic_others">மற்றவை</string>
+    <string name="topic_hr">மற்றவை</string>
 
     <string name="alert_no_internet_title">இன்டர்நெட் இணைப்பு இல்லை !</string>
     <string name="alert_no_internet_message">செயலியை தொடர்ந்து உபயோகப்படுத்த இன்டர்நெட்டுடன் இணைக்கவும்.</string>
@@ -35,4 +35,7 @@
     <string name="toast_new_stories_notification_1">புதிய செய்திகள் </string>
     <string name="toast_new_stories_notification_2"> இல் இருந்து  தெரிவிக்கப்படும்.</string>
     <string name="notification_summary_text">புதிய செய்திகள் உள்ளன. மேலும் அறிந்து கொள்ள இதை கீழே இழுக்கவும்.</string>
+
+    <string name="toast_feeds_not_loaded">செய்திகளை பெற முடியவில்லை. சிறிது நேரத்திற்கு பிறகு முயற்சிக்கவும்.  </string>
+
 </resources>

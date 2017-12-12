@@ -100,6 +100,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         progressDialog?.dismiss()
 
         //When unable to load rss feeds, go back to main activity
+        Toast.makeText(this, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

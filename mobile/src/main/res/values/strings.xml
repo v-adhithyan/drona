@@ -5,7 +5,7 @@
     <string name="topic_finance">Finance</string>
     <string name="topic_economics">Economics</string>
     <string name="topic_leadership">Leadership</string>
-    <string name="topic_others">Others</string>
+    <string name="topic_others">Others (HR, Strategy, Technology etc)</string>
 
     <string name="alert_no_internet_title">No internet connection</string>
     <string name="alert_no_internet_message">Your phone is not connected to internet or the speed is poor. Check your network connection and try again.</string>
@@ -37,4 +37,5 @@
     <string name="toast_new_stories_notification_2"> will be notified.</string>
 
     <string name="notification_summary_text">You have unread stories. Pull down this notification to know more.</string>
+    <string name="toast_feeds_not_loaded">Unknown error occured. Please try again.</string>
 </resources>

@@ -42,13 +42,14 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
             }
         }
 
-        var n = 5
-        if(unread.size >= 5) {
-            n = 5
-        } else {
-            n = unread.size
+        var limit = 5
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
+            limit = 2
         }
-
+        var n = unread.size
+        if(unread.size >= limit) {
+            n = limit
+        }
         for( i in 0..n-1) {
             if(unread[i].title == null) { continue }
             if(unread[i].description == null) { continue }
@@ -76,15 +77,15 @@ class NewFeedsCheckerJob: Job(), RssReader.RssCallback {
             val categories = (context.getPreference(Globals.FEED_PREFERENCES).toString()).split(",")
 
             for (cat in categories) {
-                if(cat.equals(context.getString(R.string.topic_finance))) {
+                if(cat.equals("Finance")) {
                     array.addAll(context.resources.getStringArray(R.array.Finance))
-                } else if(cat.equals(context.getString(R.string.topic_economics))) {
+                } else if(cat.equals("Economics")) {
                     array.addAll(context.resources.getStringArray(R.array.Economics))
-                } else if(cat.equals(context.getString(R.string.topic_leadership))) {
+                } else if(cat.equals("Leadership")) {
                     array.addAll(context.resources.getStringArray(R.array.Leadership))
-                } else if(cat.equals(context.getString(R.string.topic_marketing))) {
+                } else if(cat.equals("Marketing")) {
                     array.addAll(context.resources.getStringArray(R.array.Marketing))
-                } else if(cat.equals(context.getString(R.string.topic_others))) {
+                } else if(cat.equals("Others")) {
                     array.addAll(context.resources.getStringArray(R.array.Others))
                 }
             }

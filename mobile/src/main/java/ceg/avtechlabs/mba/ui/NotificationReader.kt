@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.text.Html
@@ -21,21 +20,17 @@ import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.util.Extractor
+import ceg.avtechlabs.mba.util.internetAvailable
 import ceg.avtechlabs.mba.util.loadInterstitialAd
+import ceg.avtechlabs.mba.util.showNoInternetDialog
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
-import com.crazyhitty.chdev.ks.rssmanager.Channel
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_reader.*
-import kotlinx.android.synthetic.main.activity_reader_from_notification.*
+import kotlinx.android.synthetic.main.activity_notification_reader.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.util.*
 
-class ReaderFromNotificationActivity : AppCompatActivity() {
+class NotificationReader : AppCompatActivity() {
 
 
     var webview: WebView? = null
@@ -54,7 +49,7 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reader_from_notification)
+        setContentView(R.layout.activity_notification_reader)
         @TargetApi(21)
         window.exitTransition = Explode()
 
@@ -67,7 +62,11 @@ class ReaderFromNotificationActivity : AppCompatActivity() {
         //source = intent.getStringExtra(INTENT_SOURCE)
         DronaDBHelper(this).markFeedAsRead(title, desc)
         notify_adView.loadAd(AdRequest.Builder().build())
-        change()
+        if(internetAvailable()) {
+            change()
+        } else {
+            showNoInternetDialog()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
