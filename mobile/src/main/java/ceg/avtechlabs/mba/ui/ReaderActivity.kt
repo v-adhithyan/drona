@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -259,6 +260,7 @@ class ReaderActivity : AppCompatActivity() {
 
                         collapsing_toolbar.setContentScrimColor(mutedColor);
                         collapsing_toolbar.setStatusBarScrimColor(mutedDarkColor);
+                        //reader_option_card.cardBackgroundColor = ColorStateList.valueOf(mutedColor)
                         @TargetApi(21)
                         window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                     }

@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         @TargetApi(21)
         window.statusBarColor = R.color.colorPrimaryDark
         title = getString(R.string.app_name)
-        setAdapter()
+        //setAdapter(window.decorView.bottom)
         //imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
         //imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))
         //imageview_economics.setImageURI(Uri.parse("$res${R.drawable.economics_menu}"))
@@ -125,30 +125,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAbout() { startActivity(Intent(this, AboutActivity::class.java)) }
 
-    fun setAdapter() {
+    fun setAdapter(height: Int) {
         val adapter = ArrayList<HashMap<String, String>>()
         val map1 = HashMap<String, String>()
         map1.put(TITLE, "${getString(R.string.topic_marketing)},Marketing")
         map1.put(IMAGE, "${R.drawable.marketing_menu}")
+        //map1.put(COLOR, "${R.color.colorMarketing}")
         val map2 = HashMap<String, String>()
         map2.put(TITLE, "${getString(R.string.topic_finance)},Finance")
         map2.put(IMAGE, "${R.drawable.finance_menu}")
+        //map2.put(COLOR, "${R.color.colorFinance}")
         val map3 = HashMap<String, String>()
         map3.put(TITLE, "${getString(R.string.topic_economics)},Economics")
         map3.put(IMAGE, "${R.drawable.economics_menu}")
+        //map3.put(COLOR, "${R.color.colorEconomics}")
         val map4 = HashMap<String, String>()
         map4.put(TITLE, "${getString(R.string.topic_others)},Others")
         map4.put(IMAGE, "${R.drawable.others_menu}")
+        //map4.put(COLOR, "${R.color.colorOthers}")
 
         adapter.add(map1)
         adapter.add(map2)
         adapter.add(map3)
         adapter.add(map4)
-        list.adapter = MenuAdapter(this, adapter)
+        //list.adapter = MenuAdapter(this, adapter, height)
 
     }
     companion object {
         val IMAGE = "image"
         val TITLE = "title"
+        val COLOR = "color"
     }
 }
