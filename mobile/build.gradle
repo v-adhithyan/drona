@@ -23,6 +23,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -67,7 +70,8 @@ dependencies {
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'com.evernote:android-job:1.2.1'
     compile 'com.yarolegovich:lovely-dialog:1.0.7'
-
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'io.reactivex:rxjava:1.1.8'
 }
 repositories {
     mavenCentral()

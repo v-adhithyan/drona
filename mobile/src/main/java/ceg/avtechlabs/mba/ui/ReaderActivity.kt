@@ -33,6 +33,12 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
+import rx.functions.Action0
+import rx.functions.Action1
+import rx.functions.Func1
+import rx.schedulers.Schedulers
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.util.*
 
@@ -117,100 +123,14 @@ class ReaderActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(intent, resources.getString(R.string.intent_share)))
     }
 
-    private fun change() = if(i == ITEMS!!.size) {
-        Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
-    } else {
-        collapsing_toolbar.title = TITLE[i]
-        //collapsing_toolbar.title = ITEMS[i].title
-        textviewTitle.text = ITEMS[i].title
-        textviewDescription.text = ITEMS[i].description
-        textviewDate.text = ITEMS[i].pubDate
-        //Toast/.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
-        //i = i+1
-        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description, category)
-        val progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-        //val progressDialog = ProgressDialog(this)
-        progressDialog.progressHelper!!.barColor = R.color.colorAccent
-        progressDialog.titleText = "Loading .."
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-        // progressDialog.isIndeterminate = true
-        //progressDialog.setProgressStyle(DoubleBounce())
-        /*val progressBar = ProgressBar(this)
-        val doubleBounce = DoubleBounce()
-        progressBar.indeterminateDrawable = doubleBounce
-        progressBar.visibility = ProgressBar.VISIBLE*/
+    fun change() {
+        Observable.just<String>("")
+                .map { s -> doInBackground(s) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { preExecute() }
+                .subscribe { integer -> postExecute(integer!!) }
 
-        Thread{
-
-            if(i == 0) {
-                currentArticle = Extractor(ITEMS[i].link).extract()
-                nextArticle = Extractor(ITEMS[i+1].link).extract()
-                //Looper.prepare()
-
-            } else if(i < ITEMS.size-1){
-                //nextArticle = Extractor(ITEMS[i+1].link).extract()
-            }
-
-
-            var article = currentArticle
-            //val minutes = ((article!!.document.text().split(" ").size).toFloat() / 275F).toFloat()
-            runOnUiThread {
-
-                //Toast.makeText(this, currentArticle!!.document.text().toString() + "curre", Toast.LENGTH_LONG).show()
-                //collapsing_toolbar.title = article!!.title
-                textviewTitle.text = (article!!.title).toUpperCase()
-                textviewTitle.setAllCaps(true)
-                if(article!!.document.text().length == 0) {
-                    textviewDescription.text = ITEMS[i].description
-                    Toast.makeText(this, getString(R.string.read_more), Toast.LENGTH_LONG).show()
-                } else {
-                    textviewDescription.text = Html.fromHtml(article.document.text())
-                }
-                Picasso.with(this).load(article.imageUrl).into(object: com.squareup.picasso.Target {
-                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-                    }
-
-                    override fun onBitmapFailed(errorDrawable: Drawable?) {
-
-                    }
-
-                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                        image.setImageBitmap(bitmap)
-                        Palette.from(bitmap).generate(object: Palette.PaletteAsyncListener {
-                            override fun onGenerated(palette: Palette) {
-                                val mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
-                                val mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
-
-                                collapsing_toolbar.setContentScrimColor(mutedColor);
-                                collapsing_toolbar.setStatusBarScrimColor(mutedDarkColor);
-                                @TargetApi(21)
-                                window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
-
-
-                                //setBackgroundTintList(ColorStateList.valueOf(vibrantColor));
-
-                            }
-                        });
-                    }
-                })
-
-
-                //progressBar.visibility = ProgressBar.INVISIBLE
-                progressDialog.dismiss()
-                AnimationUtils.loadAnimation(this, R.anim.slide_right)
-                Snackbar.make(coordinatorLayoutReader, " minutes to read this story.", Snackbar.LENGTH_LONG).show()
-                Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
-                i = i + 1
-            }
-            //prefetch next articlea
-            Thread {
-                if(i < ITEMS.size - 2) {currentArticle = Extractor(ITEMS[i + 1].link).extract()}
-            }.start()
-
-
-        }.start()
     }
 
     fun open(v: View) {
@@ -259,9 +179,99 @@ class ReaderActivity : AppCompatActivity() {
         // }
         finish()
     }
+
     companion object {
         //var rss: List<RSS>? = null
         var ITEMS = ArrayList<Channel.Item>()
         var TITLE = ArrayList<String>()
+        var exed = false
+        var progressDialog:SweetAlertDialog? = null
+    }
+
+    fun preExecute() {
+        if(i == ITEMS!!.size) {
+            Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
+        } else {
+            collapsing_toolbar.title = TITLE[i]
+            //collapsing_toolbar.title = ITEMS[i].title
+            textviewTitle.text = ITEMS[i].title
+            textviewDescription.text = ITEMS[i].description
+            textviewDate.text = ITEMS[i].pubDate
+            //Toast/.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
+            //i = i+1
+            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            //val progressDialog = ProgressDialog(this)
+            progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
+            progressDialog!!.titleText = getString(R.string.loading)
+            progressDialog!!.setCancelable(false)
+            progressDialog!!.show()
+        }
+    }
+
+    fun doInBackground(temp: String): Int {
+        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description)
+
+        if(i < ITEMS.size) {
+            try {
+                currentArticle = Extractor(ITEMS[i].link).extract()
+                //nextArticle = Extractor(ITEMS[i+1].link).extract()
+            } catch(ex: Exception) {
+                runOnUiThread {
+
+                    Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+
+            //Looper.prepare()
+
+        }
+        return 0
+
+    }
+
+    fun postExecute(temp: Int) {
+        textviewTitle.text = (currentArticle!!.title).toUpperCase()
+        textviewTitle.setAllCaps(true)
+        var readingTime = ""
+        if(currentArticle!!.document.text().length == 0) {
+            textviewDescription.text = ITEMS[i].description
+            Toast.makeText(this, getString(R.string.read_more), Toast.LENGTH_LONG).show()
+        } else {
+            readingTime = getReadingTime(currentArticle!!.document.text())
+            textviewDescription.text = Html.fromHtml(currentArticle!!.document.text())
+        }
+        Picasso.with(this).load(currentArticle!!.imageUrl).into(object: com.squareup.picasso.Target {
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+
+            }
+
+            override fun onBitmapFailed(errorDrawable: Drawable?) {
+
+            }
+
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                image.setImageBitmap(bitmap)
+                Palette.from(bitmap).generate(object: Palette.PaletteAsyncListener {
+                    override fun onGenerated(palette: Palette) {
+                        val mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
+                        val mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+
+                        collapsing_toolbar.setContentScrimColor(mutedColor);
+                        collapsing_toolbar.setStatusBarScrimColor(mutedDarkColor);
+                        @TargetApi(21)
+                        window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+                    }
+                });
+            }
+        })
+
+
+        //progressBar.visibility = ProgressBar.INVISIBLE
+        progressDialog!!.dismissWithAnimation()
+        AnimationUtils.loadAnimation(this, R.anim.slide_right)
+        Snackbar.make(coordinatorLayoutReader, readingTime, Snackbar.LENGTH_LONG).show()
+        Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
+        i = i + 1
     }
 }

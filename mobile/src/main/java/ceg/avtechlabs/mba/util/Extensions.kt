@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import com.google.android.gms.ads.AdListener
@@ -12,6 +13,7 @@ import com.google.android.gms.ads.InterstitialAd
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.microedition.khronos.opengles.GL
 
 /**
@@ -96,4 +98,24 @@ fun Context.showNoInternetDialog() {
             .setTitle(R.string.alert_no_internet_title)
             .setMessage(R.string.alert_no_internet_message)
             .show();
+}
+
+fun Context.getReadingTime(content: String): String {
+    val totalWords = content.trim().split(" ").size
+    val wordsPerMinute = 275.toDouble()
+    val wordsPerSecond = (wordsPerMinute / 60)
+    val totalReadingTimeSeconds = totalWords / wordsPerSecond
+    Log.d("READING TIME", "$totalReadingTimeSeconds totalReadingTimeSeconds")
+    Log.d("READING TIME", "$wordsPerSecond wordsPerSecond")
+    val readingTimeMinutes = Math.round(totalReadingTimeSeconds / 60.toDouble())
+
+    // calculate remaining reading time
+    val readingTimeSeconds = Math.round(totalReadingTimeSeconds - readingTimeMinutes * 60)
+
+    if(readingTimeMinutes > 0) {
+        return "$readingTimeMinutes ${getString(R.string.snack_rt)}"
+    } else {
+        return getString(R.string.snack_rt_less_than_one_min)
+    }
+
 }

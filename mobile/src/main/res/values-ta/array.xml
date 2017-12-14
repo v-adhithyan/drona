@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Marketing">
+        <!--item>http://madovermarketing.com/</item-->
+        <item>http://feeds2.feedburner.com/ducttapemarketing/nRUD</item>
+        <item>http://feeds.feedburner.com/StrategyBusiness-MarketingAndSales</item>
+    </string-array>
+
+    <string-array name="Finance">
+        <item>http://www.thehindubusinessline.com/markets/stock-markets/?service=rss</item>
+        <item>https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss</item>
+        <item>http://rss.nytimes.com/services/xml/rss/nyt/Business.xml</item>
+
+        <!--item>http://www.mergersandinquisitions.com/</item-->
+        <!--item>https://www.wallstreetprep.com/wsp-blog/</item-->
+        <!--item>http://www.wallstreetoasis.com/</item-->
+        <!--item>http://ftalphaville.ft.com/</item-->
+    </string-array>
+
+    <string-array name="Economics">
+        <!--item>http://freakonomics.com/blog/</item>
+        <item>http://whynationsfail.com/</item>
+        <item>http://economixcomix.com/</item-->
+        <!--item>http://johnhcochrane.blogspot.com/feeds/posts/default</item-->
+        <!--item>http://investing.curiouscatblog.net/</item-->
+        <!--item>http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml</item-->
+        <item>http://feeds2.feedburner.com/EconomistsView</item>
+        <item>http://feeds2.feedburner.com/Themoneyillusion</item>
+    </string-array>
+
+    <string-array name="Leadership">
+        <!--item>http://guykawasaki.com/</item-->
+        <item>http://feeds2.feedburner.com/allthingsworkplace</item>
+        <!--item>http://sethgodin.typepad.com/</item-->
+        <!--item>http://leanin.org/</item-->
+        <!--item>http://switchandshift.com/blog</item-->
+        <!--item>http://feeds2.feedburner.com/bigthink/main</item-->
+    </string-array>
+
+    <string-array name="Others">
+        <!--item>http://bobsutton.typepad.com/my_webl/</item-->
+        <!--item>http://feeds2.hbr.org/harvardbusiness</item-->
+        <!--item>http://feeds.feedburner.com/StrategyBusiness-Innovation</item>
+        <item>http://feeds.feedburner.com/StrategyBusiness-Technology</item-->
+        <item>http://feeds2.feedburner.com/mitsloannews</item>
+        <item>http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx</item>
+    </string-array>
+
+    <string-array name="Technology">
+        <item>http://feeds.feedburner.com/StrategyBusiness-Technology</item>
+    </string-array>
+
+    <string-array name="Categories">
+        <item>Marketing</item>
+        <item>Finance</item>
+        <item>Economics</item>
+        <item>Others</item>
+    </string-array>
+</resources>

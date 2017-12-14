@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.NotificationCompat
 import android.transition.Explode
-import android.transition.Transition
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -43,8 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         @TargetApi(21)
         window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
-
-        //title = getString(R.string.app_name)
+        title = getString(R.string.app_name)
         setAdapter()
         //imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
         //imageview_finance.setImageURI(Uri.parse("$res${R.drawable.finance_menu}"))
@@ -86,6 +84,44 @@ class MainActivity : AppCompatActivity() {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
+    fun loadMarketingFeeds(v: View) {
+        val topic = "Marketing"
+        startReader(topic)
+    }
+
+    fun loadFinanceFeeds(v: View) {
+        val topic ="Finance"
+        startReader(topic)
+    }
+
+    fun loadEconomicsFeeds(v: View) {
+        val topic = "Economics"
+        startReader(topic)
+    }
+
+    fun loadLeadershipFeeds(v: View) {
+        val topic = "Leadership"
+        startReader(topic)
+    }
+
+    fun loadOtherFeeds(v: View) {
+        val topic = "Others"
+        startReader(topic)
+    }
+
+    private fun startReader(topic: String) {
+        if(internetAvailable()) {
+            val intent = Intent(this, DisplayActivity::class.java)
+            intent.putExtra(DisplayActivity.TOPIC, topic)
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            } else { startActivity(intent) }
+        } else {
+            showNoInternetDialog()
+        }
+
+    }
 
     private fun showAbout() { startActivity(Intent(this, AboutActivity::class.java)) }
 
@@ -103,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         val map4 = HashMap<String, String>()
         map4.put(TITLE, "${getString(R.string.topic_others)},Others")
         map4.put(IMAGE, "${R.drawable.others_menu}")
+
         adapter.add(map1)
         adapter.add(map2)
         adapter.add(map3)

@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingPrefix"
     tools:context=".ui.ReaderActivity"
     android:id="@+id/coordinatorLayoutReader"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -59,6 +61,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="?android:attr/listDivider" />
 
             <!--TextView android:text="df"
 
@@ -70,34 +77,48 @@
                 android:layout_below="@+id/image"
                 android:fontFamily="sans-serif"
                 android:id="@+id/textviewTitle"/-->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:contentPadding="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="#ffffff">
+
             <TextView
                 android:id="@+id/textviewTitle"
-                fontPath="fonts/proximanova-bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:maxLines="10"
                 android:textSize="30sp"
-                android:text="gdgfsaf"
                 android:textIsSelectable="false"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
 
             <TextView
+                android:layout_gravity="bottom"
                 android:id="@+id/textviewDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:textIsSelectable="false"/>
-
+            </android.support.v7.widget.CardView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="16dp"
                 android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:contentPadding="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="#ffffff">
 
             <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:layout_width="match_parent"
@@ -109,13 +130,24 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
 
+            </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="?android:attr/listDivider" />
 
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:contentPadding="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="#ffffff">
+
             <include layout="@layout/reader_options"/>
+            </android.support.v7.widget.CardView>
             <!--com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="wrap_content"
