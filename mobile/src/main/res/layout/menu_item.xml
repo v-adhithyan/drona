@@ -1,46 +1,75 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:padding="5dip" >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:orientation="vertical"
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <!--  ListRow Left sied Thumbnail image -->
-    <LinearLayout android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="3dip"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dip">
+        card_view:contentPadding="10dp"
+        card_view:cardElevation="4dp"
+        card_view:cardBackgroundColor="#ffffff">
 
-        <ImageView
-            android:id="@+id/menu_image"
-            android:layout_width="100dip"
-            android:layout_height="100dip"
-            android:src="@drawable/marketing_menu"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="5dip" >
 
-    </LinearLayout>
+            <!--  ListRow Left sied Thumbnail image -->
+            <LinearLayout android:id="@+id/thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="5dip">
 
-    <!-- Title Of Song-->
-    <TextView
-        android:id="@+id/menu_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:layout_centerVertical="true"
-        android:textColor="#040404"
-        android:typeface="sans"
-        android:textSize="15dip"
-        android:textStyle="bold"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/menu_image"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:src="@drawable/marketing_menu"
+                    android:layout_gravity="center_horizontal"
+                    app:border_color="@android:color/black"
+                    app:border_width="3dp"
+                    />
 
-    <!-- Artist Name -->
+            </LinearLayout>
 
-    <!-- Rightend Arrow -->
-    <ImageView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/next"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+            <!-- Title Of Song-->
+            <TextView
+                android:id="@+id/menu_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/thumbnail"
+                android:layout_toRightOf="@+id/thumbnail"
+                android:layout_centerVertical="true"
+                android:textColor="#040404"
+                android:typeface="sans"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
-</RelativeLayout>
+            <!-- Artist Name -->
+
+            <!-- Rightend Arrow -->
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider" />
+</LinearLayout>

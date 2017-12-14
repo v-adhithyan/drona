@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         window.exitTransition = Explode()
 
         @TargetApi(21)
-        window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
+        window.statusBarColor = R.color.colorPrimaryDark
         title = getString(R.string.app_name)
         setAdapter()
         //imageview_marketing.setImageURI(Uri.parse("$res${R.drawable.marketing_menu}"))
