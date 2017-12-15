@@ -13,7 +13,7 @@
           android:layout_height="wrap_content"
           android:layout_centerInParent="true"
           android:text="@string/app_name"
-          android:textSize="25sp"
+          android:textSize="16sp"
           android:letterSpacing="2.4"
           android:textAllCaps="true"
           android:textColor="@android:color/black"
@@ -48,8 +48,8 @@ android:layout_width="match_parent">
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/app_name"
-            android:textSize="25sp"
-            android:letterSpacing="1.02"
+            android:textSize="16sp"
+            android:letterSpacing="1.01"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
@@ -80,9 +80,9 @@ android:layout_width="match_parent">
             android:layout_below="@+id/image_marketing"
             android:layout_alignParentBottom="true"
             android:text="@string/topic_marketing"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:textAllCaps="true"
-            android:letterSpacing="1.05"
+            android:letterSpacing="1.01"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
@@ -111,12 +111,12 @@ android:layout_width="match_parent">
             android:layout_below="@+id/image_finance"
             android:layout_alignParentBottom="true"
             android:text="@string/topic_finance"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:letterSpacing="1.05"
+            android:letterSpacing="1.01"
             />
 
     </RelativeLayout>
@@ -143,12 +143,12 @@ android:layout_width="match_parent">
             android:layout_below="@+id/image_economics"
             android:layout_alignParentBottom="true"
             android:text="@string/topic_economics"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:letterSpacing="1.05"
+            android:letterSpacing="1.01"
             />
 
     </RelativeLayout>
@@ -175,12 +175,12 @@ android:layout_width="match_parent">
             android:layout_below="@+id/image_others"
             android:layout_alignParentBottom="true"
             android:text="@string/topic_others"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:letterSpacing="1.05"
+            android:letterSpacing="1.01"
             />
 
     </RelativeLayout>

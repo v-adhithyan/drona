@@ -89,7 +89,7 @@
                 android:id="@+id/textviewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/penBlue"
+                android:textColor="@android:color/black"
                 android:layout_marginBottom="16dp"
                 android:maxLines="10"
                 android:textSize="30sp"

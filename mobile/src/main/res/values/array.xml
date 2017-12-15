@@ -3,8 +3,9 @@
 
   <string-array name="Marketing">
     <!--item>http://madovermarketing.com/</item-->
-    <item>http://feeds2.feedburner.com/ducttapemarketing/nRUD</item>
-    <item>http://feeds.feedburner.com/StrategyBusiness-MarketingAndSales</item>
+    <!--item>http://feeds2.feedburner.com/ducttapemarketing/nRUD</item-->
+    <item>http://www.adweek.com/feed/</item>
+    <item>http://rss.marketingprofs.com/marketingprofs</item>
   </string-array>
 
   <string-array name="Finance">
@@ -43,8 +44,9 @@
     <!--item>http://feeds2.hbr.org/harvardbusiness</item-->
     <!--item>http://feeds.feedburner.com/StrategyBusiness-Innovation</item>
     <item>http://feeds.feedburner.com/StrategyBusiness-Technology</item-->
-    <item>http://feeds2.feedburner.com/mitsloannews</item>
-  <item>http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx</item>
+    <!--item>http://feeds2.feedburner.com/mitsloannews</item>
+    <item>http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx</item-->
+    <item>https://www.engadget.com/rss.xml</item>
   </string-array>
 
   <string-array name="Technology">

@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -42,6 +43,7 @@ import rx.functions.Func1
 import rx.schedulers.Schedulers
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.util.*
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 class ReaderActivity : AppCompatActivity() {
@@ -125,12 +127,21 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     fun change() {
-        Observable.just<String>("")
-                .map { s -> doInBackground(s) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { preExecute() }
-                .subscribe { integer -> postExecute(integer!!) }
+        if(i == 0) {
+            Observable.just<String>("")
+                    .map { s -> doInBackground(s) }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { preExecute() }
+                    .subscribe { integer -> postExecute(integer!!) }
+        } else {
+            Observable.just<Unit>(Unit)
+                    .map { checkPrefetcher() }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { populateArticle() }
+        }
+
 
     }
 
@@ -185,7 +196,7 @@ class ReaderActivity : AppCompatActivity() {
         //var rss: List<RSS>? = null
         var ITEMS = ArrayList<Channel.Item>()
         var TITLE = ArrayList<String>()
-        var exed = false
+        var fetched = AtomicBoolean()
         var progressDialog:SweetAlertDialog? = null
     }
 
@@ -198,14 +209,7 @@ class ReaderActivity : AppCompatActivity() {
             textviewTitle.text = ITEMS[i].title
             textviewDescription.text = ITEMS[i].description
             textviewDate.text = ITEMS[i].pubDate
-            //Toast/.makeText(this, "${ITEMS!!.size - i - 1} items left", Toast.LENGTH_SHORT).show()
-            //i = i+1
-            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-            //val progressDialog = ProgressDialog(this)
-            progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
-            progressDialog!!.titleText = getString(R.string.loading)
-            progressDialog!!.setCancelable(false)
-            progressDialog!!.show()
+           showProgressDialog()
         }
     }
 
@@ -232,6 +236,7 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     fun postExecute(temp: Int) {
+        //progressDialog!!.dismissWithAnimation()
         textviewTitle.text = (currentArticle!!.title).toUpperCase()
         textviewTitle.setAllCaps(true)
         var readingTime = ""
@@ -268,12 +273,81 @@ class ReaderActivity : AppCompatActivity() {
             }
         })
 
-
+        hideProgressDialog()
         //progressBar.visibility = ProgressBar.INVISIBLE
-        progressDialog!!.dismissWithAnimation()
         AnimationUtils.loadAnimation(this, R.anim.slide_right)
         Snackbar.make(coordinatorLayoutReader, readingTime, Snackbar.LENGTH_LONG).show()
         Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
         i = i + 1
+
+        executePrefetcher()
     }
+
+    fun fetchNextArticle(value: String) {
+        fetched.set(false)
+        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description)
+
+        if(i < ITEMS.size) {
+            try {
+                currentArticle = Extractor(ITEMS[i].link).extract()
+                //nextArticle = Extractor(ITEMS[i+1].link).extract()
+            } catch(ex: Exception) {
+                runOnUiThread {
+
+                    Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+
+            //Looper.prepare()
+
+        }
+    }
+
+    fun fetchedNextArticle() {
+        fetched.set(true)
+    }
+
+    fun checkPrefetcher() {
+        //showProgressDialog()
+        while(true) {
+            if(!fetched.get()){
+                Thread.sleep(500)
+            } else {
+                break
+            }
+        }
+        try {
+            Thread.sleep(100)
+        } catch (ex: Exception) {
+
+        }
+    }
+
+    fun populateArticle() {
+        postExecute(0)
+        scroll.scrollTo(0,0)
+    }
+
+    fun executePrefetcher() {
+        Observable.just<String>("")
+                .map { s -> fetchNextArticle(s) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe { fetchedNextArticle() }
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        //val progressDialog = ProgressDialog(this)
+        progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
+        progressDialog!!.titleText = getString(R.string.loading)
+        progressDialog!!.setCancelable(false)
+        progressDialog!!.show()
+    }
+
+    private fun hideProgressDialog() {
+        progressDialog!!.hide()
+    }
+
 }

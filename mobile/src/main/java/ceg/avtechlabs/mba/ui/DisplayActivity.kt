@@ -124,7 +124,7 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
                 //recycler_view.adapter = FeedsRecyclerViewAdapter(this, rssList)
                 val intent = Intent(this, ReaderActivity::class.java)
                 val items = ArrayList<Channel.Item>()
-                val title = rssList[0].channel.title
+                //val title = rssList[0].channel.title
                 val itemsTitle = ArrayList<String>();
 
                 for (rss in rssList){
