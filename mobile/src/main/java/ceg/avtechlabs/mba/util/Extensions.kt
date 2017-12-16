@@ -40,12 +40,22 @@ fun Context.showFeedPreferenceChooser() {
             .setTitle(R.string.input_choose_feed_preferences_title)
             .setMessage(R.string.input_choose_feed_preferences_message)
             .setItemsMultiChoice(items) { positions, items ->
-                val choice = TextUtils.join(",", items)
-                //Toast.makeText(this, choice, Toast.LENGTH_LONG).show()
-                storePreference(Globals.FEED_PREFERENCES, choice)
-                Toast.makeText(this, "${getString(R.string.toast_new_stories_notification_1)} " +
-                        "${getPreference(Globals.FEED_PREFERENCES) as String} " +
-                        "${getString(R.string.toast_new_stories_notification_2)}" , Toast.LENGTH_LONG).show()
+                if(items.size == 0) {
+                    val choice = TextUtils.join(",", items)
+                    //Toast.makeText(this, choice, Toast.LENGTH_LONG).show()
+                    storePreference(Globals.FEED_PREFERENCES, choice)
+                    Toast.makeText(this,
+                            "${getString(R.string.toast_notificatoon_opt)}" , Toast.LENGTH_LONG).show()
+                    showFeedPreferenceChooser()
+                } else {
+                    val choice = TextUtils.join(",", items)
+                    //Toast.makeText(this, choice, Toast.LENGTH_LONG).show()
+                    storePreference(Globals.FEED_PREFERENCES, choice)
+                    Toast.makeText(this, "${getString(R.string.toast_new_stories_notification_1)} " +
+                            "${getPreference(Globals.FEED_PREFERENCES) as String} " +
+                            "${getString(R.string.toast_new_stories_notification_2)}" , Toast.LENGTH_LONG).show()
+                }
+
             }
             .setConfirmButtonText(getString(R.string.alert_confirm))
             .setCancelable(false)

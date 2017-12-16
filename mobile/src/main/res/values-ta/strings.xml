@@ -34,10 +34,14 @@
     <string name="notification_action_read">வாசி</string>
     <string name="toast_new_stories_notification_1">புதிய செய்திகள் </string>
     <string name="toast_new_stories_notification_2"> இல் இருந்து  தெரிவிக்கப்படும்.</string>
+    <string name="toast_notificatoon_opt">ஏதேனும் ஒரு பிரிவையாவது தேர்ந்தெடுக்கவும்.</string>
     <string name="notification_summary_text">புதிய செய்திகள் உள்ளன. மேலும் அறிந்து கொள்ள இதை கீழே இழுக்கவும்.</string>
 
     <string name="toast_feeds_not_loaded">செய்திகளை பெற முடியவில்லை. சிறிது நேரத்திற்கு பிறகு முயற்சிக்கவும்.  </string>
 
     <string name="snack_rt">நிமிடங்கள் இந்த செய்தியை வாசிக்க செலவாகும்.</string>
     <string name="snack_rt_less_than_one_min">ஒரு நிமிடத்திற்குள் இந்த செய்தியை வாசித்து விடலாம்.</string>
+
+    <string name="toast_no_stories_left">இந்த பிரிவில் உள்ள அணைத்து செய்திகளையும் வாசித்து முடித்து விட்டீர்கள்.</string>
+
 </resources>

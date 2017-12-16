@@ -3,8 +3,8 @@
 
     <string-array name="Marketing">
         <!--item>http://madovermarketing.com/</item-->
+        <item>http://www.adweek.com/feed/</item>
         <item>http://feeds2.feedburner.com/ducttapemarketing/nRUD</item>
-        <!--item>http://www.adweek.com/feed/</item-->
         <item>http://rss.marketingprofs.com/marketingprofs</item>
     </string-array>
 

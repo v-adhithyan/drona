@@ -35,10 +35,13 @@
     <string name="notification_action_read">Read</string>
     <string name="toast_new_stories_notification_1">New stories from </string>
     <string name="toast_new_stories_notification_2"> will be notified.</string>
+    <string name="toast_notificatoon_opt">Select atleast one category.</string>
 
     <string name="notification_summary_text">You have unread stories. Pull down this notification to know more.</string>
     <string name="toast_feeds_not_loaded">Unknown error occured. Please try again.</string>
 
     <string name="snack_rt">minutes to read this story.</string>
     <string name="snack_rt_less_than_one_min">It will take less than a minute to read this story.</string>
+
+    <string name="toast_no_stories_left">You have read all stories in this category.</string>
 </resources>

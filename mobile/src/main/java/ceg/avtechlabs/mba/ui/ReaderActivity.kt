@@ -1,18 +1,24 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.transition.Explode
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -51,6 +57,14 @@ class ReaderActivity : AppCompatActivity() {
     var db: DronaDBHelper? = null
     var category = ""
     //var title = ""
+
+    private val handler = object : Handler() {
+
+        override fun handleMessage(msg: Message) {
+           textviewDescription.text = CONTENT
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
@@ -63,6 +77,9 @@ class ReaderActivity : AppCompatActivity() {
 
         if(savedInstanceState == null) {
             change()
+        } else {
+            Log.d("SHOWPROGRESS", "Esle")
+            showProgressDialog()
         }
 
     }
@@ -83,8 +100,15 @@ class ReaderActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         outState!!.putString(Globals.SAVE_TITLE, textviewTitle.text.toString())
         outState!!.putString(Globals.SAVE_CONTENT, textviewDescription.text.toString())
-        outState!!.putString(Globals.SAVE_IMAGE_URL, textviewDescription.tag.toString())
+        var url = textviewDescription.tag
+        var image: String? = null
+        if(url != null) {
+            image = url.toString()
+        }
+        outState!!.putString(Globals.SAVE_IMAGE_URL, image)
         super.onSaveInstanceState(outState)
+
+        hideProgressDialog()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -118,11 +142,11 @@ class ReaderActivity : AppCompatActivity() {
                         .subscribe { integer -> postExecute(integer!!) }
             } catch (ex: Exception) {
                 Toast.makeText(this@ReaderActivity, "Unknown error occured. Please try again", Toast.LENGTH_LONG).show()
-                finish()
+                onBackPressed()
 
             }
 
-        } else {
+        } else if( i < ITEMS!!.size){
             try {
                 Observable.just<Unit>(Unit)
                         .map { checkPrefetcher() }
@@ -132,9 +156,12 @@ class ReaderActivity : AppCompatActivity() {
                         .subscribe { a-> populateArticle(a) }
             } catch (ex: Exception) {
                 Toast.makeText(this@ReaderActivity, "Unknown error occured. Please try again", Toast.LENGTH_LONG).show()
-                finish()
+                onBackPressed()
             }
 
+        } else {
+            Toast.makeText(this, getString(R.string.toast_no_stories_left), Toast.LENGTH_LONG).show()
+            onBackPressed()
         }
 
 
@@ -181,12 +208,14 @@ class ReaderActivity : AppCompatActivity() {
         ITEMS = ArrayList<Channel.Item>()
         TITLE = ArrayList<String>()
         finish()
+        //onBackPressed()
     }
 
     companion object {
         var ITEMS = ArrayList<Channel.Item>()
         var TITLE = ArrayList<String>()
         var fetched = AtomicBoolean()
+        var CONTENT = ""
         var progressDialog:SweetAlertDialog? = null
     }
 
@@ -210,12 +239,16 @@ class ReaderActivity : AppCompatActivity() {
             try {
                 currentArticle = Extractor(ITEMS[i].link).extract()
                 content = Html.fromHtml(currentArticle!!.document.text()).toString()
+                CONTENT = content
+                //Looper.prepare()
+                handler.sendMessage(handler.obtainMessage())
+                //Looper.loop()
                 title = currentArticle!!.title
             } catch(ex: Exception) {
                 runOnUiThread {
 
                     Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
-                    finish()
+                    onBackPressed()
                 }
             }
         }
@@ -235,15 +268,21 @@ class ReaderActivity : AppCompatActivity() {
         }
 
         textviewTitle.text = array[0]
-        textviewDescription.text = array[1]
-        textviewDescription.tag = currentArticle!!.imageUrl
+        //textviewDescription.text = array[1]
+        //textviewDescription.movementMethod = ScrollingMovementMethod
+        if(currentArticle!!.imageUrl != null) {
+            textviewDescription.tag = currentArticle!!.imageUrl
+        } else {
+            textviewDescription.tag = ""
+        }
+
 
         loadImage(currentArticle!!.imageUrl)
-
+        scroll.scrollTo(0,0)
         hideProgressDialog()
 
         AnimationUtils.loadAnimation(this, R.anim.slide_right)
-        Snackbar.make(coordinatorLayoutReader, getReadingTime(array[1]), Snackbar.LENGTH_LONG).show()
+        Snackbar.make(coordinatorLayoutReader, getReadingTime(CONTENT), Snackbar.LENGTH_LONG).show()
 
         Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
         i = i + 1
@@ -261,7 +300,7 @@ class ReaderActivity : AppCompatActivity() {
                 runOnUiThread {
 
                     Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
-                    finish()
+                    onBackPressed()
                 }
             }
         }
@@ -291,7 +330,7 @@ class ReaderActivity : AppCompatActivity() {
 
     fun populateArticle(array: Array<String>) {
         postExecute(array)
-        scroll.scrollTo(0,0)
+        //scroll.scrollTo(0,0)
     }
 
     fun executePrefetcher() {
@@ -302,7 +341,14 @@ class ReaderActivity : AppCompatActivity() {
                 .subscribe { fetchedNextArticle() }
     }
 
-    fun loadImage(imageUrl: String) {
+    fun loadImage(imageUrl: String?) {
+
+        if(imageUrl == null) {
+            return;
+        } else if(imageUrl.equals("")){
+            return;
+        }
+
         Picasso.with(this).load(imageUrl).into(object: com.squareup.picasso.Target {
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
@@ -331,15 +377,20 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     private fun showProgressDialog() {
-        progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-        progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
-        progressDialog!!.titleText = getString(R.string.loading)
-        progressDialog!!.setCancelable(false)
-        progressDialog!!.show()
+        try{
+            progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
+            progressDialog!!.titleText = getString(R.string.loading)
+            progressDialog!!.setCancelable(false)
+            progressDialog!!.show()
+        } catch (ex: Exception) {
+
+        }
+
     }
 
     private fun hideProgressDialog() {
-        progressDialog!!.hide()
+        if(progressDialog!!.isShowing) { progressDialog!!.dismissWithAnimation() }
     }
 
 }
