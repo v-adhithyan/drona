@@ -108,13 +108,14 @@ class ReaderActivity : AppCompatActivity() {
         outState!!.putString(Globals.SAVE_IMAGE_URL, image)
         super.onSaveInstanceState(outState)
 
-        hideProgressDialog()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         textviewTitle.text = savedInstanceState!!.getString(Globals.SAVE_TITLE)
         textviewDescription.text = savedInstanceState!!.getString(Globals.SAVE_IMAGE_URL)
         loadImage(savedInstanceState!!.getString(Globals.SAVE_IMAGE_URL))
+        hideProgressDialog()
+
         super.onRestoreInstanceState(savedInstanceState)
     }
 
@@ -323,9 +324,10 @@ class ReaderActivity : AppCompatActivity() {
         } catch (ex: Exception) {
 
         }
-        val content = Html.fromHtml(currentArticle!!.document.text()).toString()
+        CONTENT = Html.fromHtml(currentArticle!!.document.text()).toString()
+        handler.sendMessage(handler.obtainMessage())
         val title = currentArticle!!.title
-        return arrayOf(title, content)
+        return arrayOf(title, CONTENT)
     }
 
     fun populateArticle(array: Array<String>) {
