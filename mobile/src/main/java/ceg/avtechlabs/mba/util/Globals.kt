@@ -12,5 +12,9 @@ class Globals {
         val DRONA_PREFERENCES = "drona_preference"
 
         val LOCALE = "locale"
+
+        val SAVE_TITLE = "save_title"
+        val SAVE_CONTENT = "save_content"
+        val SAVE_IMAGE_URL = "image_url"
     }
 }

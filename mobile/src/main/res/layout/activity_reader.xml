@@ -94,6 +94,7 @@
                 android:maxLines="10"
                 android:textSize="30sp"
                 android:textIsSelectable="false"
+                android:textAllCaps="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
 

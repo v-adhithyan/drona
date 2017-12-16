@@ -1,35 +1,32 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import android.text.Html
 import android.transition.Explode
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.webkit.WebView
-import android.widget.ProgressBar
-import ceg.avtechlabs.mba.R
 import android.widget.Toast
-import ceg.avtechlabs.mba.listeners.SwypeListener
+import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.util.*
+import ceg.avtechlabs.mba.util.Extractor
+import ceg.avtechlabs.mba.util.Globals
+import ceg.avtechlabs.mba.util.getReadingTime
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.crazyhitty.chdev.ks.rssmanager.Channel
-import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -37,9 +34,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
-import rx.functions.Action0
-import rx.functions.Action1
-import rx.functions.Func1
 import rx.schedulers.Schedulers
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.util.*
@@ -54,49 +48,22 @@ class ReaderActivity : AppCompatActivity() {
     var array = arrayOf("one", "two", "three")
     var adLoadCount = 0
     var currentArticle: Article? = null
-    var nextArticle: Article? = null
-    var englishLocale = true //assume default is english
     var db: DronaDBHelper? = null
     var category = ""
     //var title = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
+
         @TargetApi(21)
         window.exitTransition = Explode()
 
-
-
-        val context = this as Context
-        //englishLocale = isEnglishLocale()
-        /*scroll
-                .setOnTouchListener(object:SwypeListener(context) {
-            override fun onSwipeRight() { change() }
-            override fun onSwipeLeft() { change() }
-            override fun onSwipeTop() { }
-            override fun onSwipeBottom() { }
-        });*/
-        //changeToEnglishLocale()
         db = DronaDBHelper(this)
         category = intent.getStringExtra(DisplayActivity.TOPIC)
-        //title = intent.getStringExtra(DisplayActivity.TITLE)
-        change()
-        /*url = intent.getStringExtra(DisplayActivity.URL)
-        val webview = findViewById(R.id.webview) as WebView
-        webview.showContextMenu()
-        webview.settings.javaScriptEnabled = true
-        webview.setWebViewClient(object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                //progressDialog?.dismiss()
-            }
-        })
-        webview.loadUrl(url)*/
-        //collapsing_toolbar.title = "Drona"
 
-        //textviewDescription.setLineSpacing(1.1F, 1.0F)
-        //textviewTitle.setLineSpacing(1.2F, 1.0F)
-
+        if(savedInstanceState == null) {
+            change()
+        }
 
     }
 
@@ -111,6 +78,20 @@ class ReaderActivity : AppCompatActivity() {
             else -> { }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState!!.putString(Globals.SAVE_TITLE, textviewTitle.text.toString())
+        outState!!.putString(Globals.SAVE_CONTENT, textviewDescription.text.toString())
+        outState!!.putString(Globals.SAVE_IMAGE_URL, textviewDescription.tag.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        textviewTitle.text = savedInstanceState!!.getString(Globals.SAVE_TITLE)
+        textviewDescription.text = savedInstanceState!!.getString(Globals.SAVE_IMAGE_URL)
+        loadImage(savedInstanceState!!.getString(Globals.SAVE_IMAGE_URL))
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -128,25 +109,39 @@ class ReaderActivity : AppCompatActivity() {
 
     fun change() {
         if(i == 0) {
-            Observable.just<String>("")
-                    .map { s -> doInBackground(s) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { preExecute() }
-                    .subscribe { integer -> postExecute(integer!!) }
+            try {
+                Observable.just<String>("")
+                        .map { s -> doInBackground(s) }
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe { preExecute() }
+                        .subscribe { integer -> postExecute(integer!!) }
+            } catch (ex: Exception) {
+                Toast.makeText(this@ReaderActivity, "Unknown error occured. Please try again", Toast.LENGTH_LONG).show()
+                finish()
+
+            }
+
         } else {
-            Observable.just<Unit>(Unit)
-                    .map { checkPrefetcher() }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { populateArticle() }
+            try {
+                Observable.just<Unit>(Unit)
+                        .map { checkPrefetcher() }
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe{showProgressDialog()}
+                        .subscribe { a-> populateArticle(a) }
+            } catch (ex: Exception) {
+                Toast.makeText(this@ReaderActivity, "Unknown error occured. Please try again", Toast.LENGTH_LONG).show()
+                finish()
+            }
+
         }
 
 
     }
 
     fun open(v: View) {
-        //Toast.makeText(this, "open", Toast.LENGTH_LONG).show()
+
         val url = ITEMS[i-1].link
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
@@ -163,7 +158,6 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     fun share(v: View) {
-        //Toast.makeText(this, "share", Toast.LENGTH_LONG).show()
         shareLink()
     }
 
@@ -186,14 +180,10 @@ class ReaderActivity : AppCompatActivity() {
     override fun onBackPressed() {
         ITEMS = ArrayList<Channel.Item>()
         TITLE = ArrayList<String>()
-        //if(!englishLocale) {
-        //resetLocale()
-        // }
         finish()
     }
 
     companion object {
-        //var rss: List<RSS>? = null
         var ITEMS = ArrayList<Channel.Item>()
         var TITLE = ArrayList<String>()
         var fetched = AtomicBoolean()
@@ -205,21 +195,22 @@ class ReaderActivity : AppCompatActivity() {
             Toast.makeText(this, "No more items", Toast.LENGTH_LONG).show()
         } else {
             collapsing_toolbar.title = TITLE[i]
-            //collapsing_toolbar.title = ITEMS[i].title
             textviewTitle.text = ITEMS[i].title
             textviewDescription.text = ITEMS[i].description
             textviewDate.text = ITEMS[i].pubDate
            showProgressDialog()
+
         }
     }
 
-    fun doInBackground(temp: String): Int {
-        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description)
-
+    fun runExtractor(): Array<String> {
+        var content = ""
+        var title = ""
         if(i < ITEMS.size) {
             try {
                 currentArticle = Extractor(ITEMS[i].link).extract()
-                //nextArticle = Extractor(ITEMS[i+1].link).extract()
+                content = Html.fromHtml(currentArticle!!.document.text()).toString()
+                title = currentArticle!!.title
             } catch(ex: Exception) {
                 runOnUiThread {
 
@@ -227,27 +218,92 @@ class ReaderActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
-            //Looper.prepare()
-
         }
-        return 0
-
+        return arrayOf(title, content)
     }
 
-    fun postExecute(temp: Int) {
-        //progressDialog!!.dismissWithAnimation()
-        textviewTitle.text = (currentArticle!!.title).toUpperCase()
-        textviewTitle.setAllCaps(true)
-        var readingTime = ""
-        if(currentArticle!!.document.text().length == 0) {
-            textviewDescription.text = ITEMS[i].description
-            Toast.makeText(this, getString(R.string.read_more), Toast.LENGTH_LONG).show()
-        } else {
-            readingTime = getReadingTime(currentArticle!!.document.text())
-            textviewDescription.text = Html.fromHtml(currentArticle!!.document.text())
+    fun doInBackground(temp: String): Array<String> {
+        return runExtractor()
+    }
+
+    fun postExecute(array: Array<String>) {
+        try{
+            db = DronaDBHelper(this@ReaderActivity)
+            db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description)
+        } catch (ex: Exception) {
+            db!!.close()
         }
-        Picasso.with(this).load(currentArticle!!.imageUrl).into(object: com.squareup.picasso.Target {
+
+        textviewTitle.text = array[0]
+        textviewDescription.text = array[1]
+        textviewDescription.tag = currentArticle!!.imageUrl
+
+        loadImage(currentArticle!!.imageUrl)
+
+        hideProgressDialog()
+
+        AnimationUtils.loadAnimation(this, R.anim.slide_right)
+        Snackbar.make(coordinatorLayoutReader, getReadingTime(array[1]), Snackbar.LENGTH_LONG).show()
+
+        Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
+        i = i + 1
+
+        executePrefetcher()
+    }
+
+    fun fetchNextArticle(value: String) {
+        fetched.set(false)
+
+        if(i < ITEMS.size) {
+            try {
+                currentArticle = Extractor(ITEMS[i].link).extract()
+            } catch(ex: Exception) {
+                runOnUiThread {
+
+                    Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+        }
+    }
+
+    fun fetchedNextArticle() {
+        fetched.set(true)
+    }
+
+    fun checkPrefetcher(): Array<String> {
+        while(true) {
+            if(!fetched.get()){
+                Thread.sleep(500)
+            } else {
+                break
+            }
+        }
+        try {
+            Thread.sleep(100)
+        } catch (ex: Exception) {
+
+        }
+        val content = Html.fromHtml(currentArticle!!.document.text()).toString()
+        val title = currentArticle!!.title
+        return arrayOf(title, content)
+    }
+
+    fun populateArticle(array: Array<String>) {
+        postExecute(array)
+        scroll.scrollTo(0,0)
+    }
+
+    fun executePrefetcher() {
+        Observable.just<String>("")
+                .map { s -> fetchNextArticle(s) }
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.newThread())
+                .subscribe { fetchedNextArticle() }
+    }
+
+    fun loadImage(imageUrl: String) {
+        Picasso.with(this).load(imageUrl).into(object: com.squareup.picasso.Target {
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
             }
@@ -265,81 +321,17 @@ class ReaderActivity : AppCompatActivity() {
 
                         collapsing_toolbar.setContentScrimColor(mutedColor);
                         collapsing_toolbar.setStatusBarScrimColor(mutedDarkColor);
-                        //reader_option_card.cardBackgroundColor = ColorStateList.valueOf(mutedColor)
+
                         @TargetApi(21)
                         window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                     }
                 });
             }
         })
-
-        hideProgressDialog()
-        //progressBar.visibility = ProgressBar.INVISIBLE
-        AnimationUtils.loadAnimation(this, R.anim.slide_right)
-        Snackbar.make(coordinatorLayoutReader, readingTime, Snackbar.LENGTH_LONG).show()
-        Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
-        i = i + 1
-
-        executePrefetcher()
-    }
-
-    fun fetchNextArticle(value: String) {
-        fetched.set(false)
-        db!!.markFeedAsRead(ITEMS[i].title, ITEMS[i].description)
-
-        if(i < ITEMS.size) {
-            try {
-                currentArticle = Extractor(ITEMS[i].link).extract()
-                //nextArticle = Extractor(ITEMS[i+1].link).extract()
-            } catch(ex: Exception) {
-                runOnUiThread {
-
-                    Toast.makeText(this@ReaderActivity, getString(R.string.toast_feeds_not_loaded), Toast.LENGTH_LONG).show()
-                    finish()
-                }
-            }
-
-            //Looper.prepare()
-
-        }
-    }
-
-    fun fetchedNextArticle() {
-        fetched.set(true)
-    }
-
-    fun checkPrefetcher() {
-        //showProgressDialog()
-        while(true) {
-            if(!fetched.get()){
-                Thread.sleep(500)
-            } else {
-                break
-            }
-        }
-        try {
-            Thread.sleep(100)
-        } catch (ex: Exception) {
-
-        }
-    }
-
-    fun populateArticle() {
-        postExecute(0)
-        scroll.scrollTo(0,0)
-    }
-
-    fun executePrefetcher() {
-        Observable.just<String>("")
-                .map { s -> fetchNextArticle(s) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe { fetchedNextArticle() }
     }
 
     private fun showProgressDialog() {
         progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-        //val progressDialog = ProgressDialog(this)
         progressDialog!!.progressHelper!!.barColor = R.color.colorAccent
         progressDialog!!.titleText = getString(R.string.loading)
         progressDialog!!.setCancelable(false)
