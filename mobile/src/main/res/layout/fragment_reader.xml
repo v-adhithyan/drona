@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -115,34 +114,24 @@
                 android:layout_marginBottom="16dp"
                 android:background="?android:attr/listDivider" />
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:contentPadding="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="#ffffff">
 
-                <android.support.v7.widget.CardView
+                <com.uncopt.android.widget.text.justify.JustifiedTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    card_view:contentPadding="10dp"
-                    card_view:cardElevation="4dp"
-                    card_view:cardBackgroundColor="#ffffff">
+                    android:lineSpacingMultiplier="1.5"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true"
+                    android:id="@+id/textviewDescription"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
 
-                    <ScrollView
-                        android:layout_height="wrap_content"
-                        android:id="@+id/descriptionScroll"
-                        android:layout_width="match_parent">
-
-                    <org.sufficientlysecure.htmltextview.HtmlTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.5"
-                        android:textSize="18sp"
-                        android:textIsSelectable="true"
-                        android:id="@+id/textviewDescription"
-                        android:gravity="fill"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
-
-                    </ScrollView>
-
-                </android.support.v7.widget.CardView>
-
+            </android.support.v7.widget.CardView>
 
             <View
                 android:layout_width="match_parent"

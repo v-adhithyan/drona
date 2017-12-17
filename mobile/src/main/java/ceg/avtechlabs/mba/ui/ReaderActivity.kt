@@ -61,7 +61,11 @@ class ReaderActivity : AppCompatActivity() {
     private val handler = object : Handler() {
 
         override fun handleMessage(msg: Message) {
-           textviewDescription.text = CONTENT
+            textviewDescription.setHtml(CONTENT)
+            descriptionScroll.requestDisallowInterceptTouchEvent(true)
+            textviewDescription.movementMethod = ScrollingMovementMethod()
+            hideProgressDialog()
+
         }
     }
 
@@ -228,7 +232,7 @@ class ReaderActivity : AppCompatActivity() {
             textviewTitle.text = ITEMS[i].title
             textviewDescription.text = ITEMS[i].description
             textviewDate.text = ITEMS[i].pubDate
-           showProgressDialog()
+            showProgressDialog()
 
         }
     }
@@ -239,7 +243,7 @@ class ReaderActivity : AppCompatActivity() {
         if(i < ITEMS.size) {
             try {
                 currentArticle = Extractor(ITEMS[i].link).extract()
-                content = Html.fromHtml(currentArticle!!.document.text()).toString()
+                content = currentArticle!!.document.text()
                 CONTENT = content
                 //Looper.prepare()
                 handler.sendMessage(handler.obtainMessage())
@@ -324,7 +328,7 @@ class ReaderActivity : AppCompatActivity() {
         } catch (ex: Exception) {
 
         }
-        CONTENT = Html.fromHtml(currentArticle!!.document.text()).toString()
+        CONTENT = currentArticle!!.document.text()
         handler.sendMessage(handler.obtainMessage())
         val title = currentArticle!!.title
         return arrayOf(title, CONTENT)
