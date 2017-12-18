@@ -1,7 +1,6 @@
 package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,13 +8,11 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
-import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import android.transition.Explode
 import android.util.Log
@@ -36,6 +33,8 @@ import com.crazyhitty.chdev.ks.rssmanager.Channel
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
+import com.like.LikeButton
+import com.like.OnLikeListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_reader.*
 import rx.Observable
@@ -86,6 +85,7 @@ class ReaderActivity : AppCompatActivity() {
             showProgressDialog()
         }
 
+        //setLikeListener()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -289,7 +289,8 @@ class ReaderActivity : AppCompatActivity() {
         AnimationUtils.loadAnimation(this, R.anim.slide_right)
         Snackbar.make(coordinatorLayoutReader, getReadingTime(CONTENT), Snackbar.LENGTH_LONG).show()
 
-        Toast.makeText(this, "${ITEMS.size - i - 1} unread stories remaining ..", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${ITEMS.size - i - 1}" +
+                "${getString(R.string.toast_remaining_stories)}", Toast.LENGTH_SHORT).show()
         i = i + 1
 
         executePrefetcher()
@@ -398,5 +399,6 @@ class ReaderActivity : AppCompatActivity() {
     private fun hideProgressDialog() {
         if(progressDialog!!.isShowing) { progressDialog!!.dismissWithAnimation() }
     }
+
 
 }

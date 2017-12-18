@@ -5,11 +5,13 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
+import com.squareup.picasso.Picasso
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
 import java.util.*
@@ -128,4 +130,12 @@ fun Context.getReadingTime(content: String): String {
         return getString(R.string.snack_rt_less_than_one_min)
     }
 
+}
+
+fun ImageView.loadImage(imageUrl: String) {
+    if(TextUtils.isEmpty(imageUrl)) {
+        Picasso.with(context).load(R.mipmap.ic_launcher).into(this)
+    } else {
+        Picasso.with(context).load(imageUrl).into(this)
+    }
 }

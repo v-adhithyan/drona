@@ -16,5 +16,8 @@ class Globals {
         val SAVE_TITLE = "save_title"
         val SAVE_CONTENT = "save_content"
         val SAVE_IMAGE_URL = "image_url"
+
+        val SOURCE_NOTIFICATION = "note"
+        val SOURCE_FAV = "fav"
     }
 }

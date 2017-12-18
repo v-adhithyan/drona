@@ -1,9 +1,8 @@
 package ceg.avtechlabs.mba.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import ceg.avtechlabs.mba.BuildConfig
-
 import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
 

@@ -5,12 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import android.text.Html
 import android.transition.Explode
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -19,15 +20,17 @@ import android.webkit.WebView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.util.Extractor
-import ceg.avtechlabs.mba.util.internetAvailable
-import ceg.avtechlabs.mba.util.loadInterstitialAd
-import ceg.avtechlabs.mba.util.showNoInternetDialog
+import ceg.avtechlabs.mba.util.*
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.google.android.gms.ads.AdRequest
+import com.like.LikeButton
+import com.like.OnLikeListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_notification_reader.*
+import kotlinx.android.synthetic.main.activity_reader.*
+import rx.Observable
+import rx.schedulers.Schedulers
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class NotificationReader : AppCompatActivity() {
@@ -59,14 +62,22 @@ class NotificationReader : AppCompatActivity() {
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
         link = intent.getStringExtra(INTENT_READ_URl)
-        //source = intent.getStringExtra(INTENT_SOURCE)
-        DronaDBHelper(this).markFeedAsRead(title, desc)
-        notify_adView.loadAd(AdRequest.Builder().build())
-        if(internetAvailable()) {
-            change()
+        source = intent.getStringExtra(INTENT_SOURCE)
+        if(source.equals(Globals.SOURCE_FAV)) {
+            notify_textviewTitle.text = title
+            notify_textviewDescription.text = desc
+            notify_textviewDate.text = date
+            notify_image.loadImage(link)
         } else {
-            showNoInternetDialog()
+            DronaDBHelper(this).markFeedAsRead(title, desc)
+            if(internetAvailable()) {
+                change()
+            } else {
+                showNoInternetDialog()
+            }
         }
+        notify_adView.loadAd(AdRequest.Builder().build())
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -182,6 +193,41 @@ class NotificationReader : AppCompatActivity() {
     override fun onBackPressed() {
         loadInterstitialAd()
         finish()
+    }
+
+    fun setLikeListener() {
+        star_button.setOnLikeListener(object: OnLikeListener {
+            override fun liked(p0: LikeButton?) {
+                star_button.isEnabled = false
+                Toast.makeText(this@NotificationReader, R.string.toast_added_to_favorites, Toast.LENGTH_LONG).show()
+                Log.d("HEART", "like")
+                addToFavorites(textviewTitle.text.toString(),
+                        textviewDescription.text.toString(),
+                        textviewDate.text.toString(),
+                        textviewDescription.tag.toString())
+            }
+
+            override fun unLiked(p0: LikeButton?) {
+                Log.d("HEART", "unlike")
+
+            }
+        })
+
+    }
+
+    fun addToFavorites(title: String, content: String, date: String, imageUrl: String) {
+        try {
+            val fav = DronaDBHelper(this@NotificationReader)
+
+            Observable.just<Unit>(Unit)
+                    .map { fav.addToFavorites(title, content, date, imageUrl) }
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(Schedulers.newThread())
+                    .subscribe { a -> {} }
+        } catch (ex: Exception) {
+            Toast.makeText(this@NotificationReader, ex.message, Toast.LENGTH_LONG).show()
+            onBackPressed()
+        }
     }
 
     companion object {

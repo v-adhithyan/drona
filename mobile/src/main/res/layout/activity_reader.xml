@@ -169,6 +169,5 @@
                 ads:adUnitId="@string/ad_unit" /-->
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
+    
 </android.support.design.widget.CoordinatorLayout>

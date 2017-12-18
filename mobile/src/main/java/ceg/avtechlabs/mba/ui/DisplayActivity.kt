@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.transition.Explode
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.FeedUtil
 import ceg.avtechlabs.mba.util.internetAvailable
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -57,7 +55,10 @@ class DisplayActivity : AppCompatActivity(), RssReader.RssCallback {
         } else if(topic.equals("Economics")) {
             urlArray = resources.getStringArray(R.array.Economics)
             //url = "http://freakonomics.com/blog/"
-        } else {
+        } else if(topic.equals("Favorites")) {
+
+            //finish()
+        } else{
             urlArray = resources.getStringArray(R.array.Others)
             //url = "http://bobsutton.typepad.com/my_webl/"
         }

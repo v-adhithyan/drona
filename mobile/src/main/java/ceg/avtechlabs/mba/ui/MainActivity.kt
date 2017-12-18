@@ -2,32 +2,20 @@ package ceg.avtechlabs.mba.ui
 
 import android.annotation.TargetApi
 import android.app.ActivityOptions
-import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.NotificationCompat
+import android.support.v7.app.AppCompatActivity
 import android.transition.Explode
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-
-import ceg.avtechlabs.mba.R
-import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.activity_main.*
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.view.WindowManager
-import android.widget.Toast
-import ceg.avtechlabs.mba.adapters.MenuAdapter
+import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.jobs.DronaJobPool
-import ceg.avtechlabs.mba.jobs.NewFeedsCheckerJob
-import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.*
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.util.*
 
 
@@ -99,9 +87,11 @@ class MainActivity : AppCompatActivity() {
         startReader(topic)
     }
 
-    fun loadLeadershipFeeds(v: View) {
-        val topic = "Leadership"
-        startReader(topic)
+    fun loadFavorites(v: View) {
+        /*val topic = "Favorites"
+        startReader(topic)*/
+        val intent = Intent(this, FavoritesActivity::class.java)
+        startActivity(intent)
     }
 
     fun loadOtherFeeds(v: View) {

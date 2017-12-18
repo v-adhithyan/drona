@@ -24,9 +24,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--meta-data
+            <!--
+                meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/-->
+                android:resource="@xml/shortcuts"/
+            -->
         </activity>
         <activity
             android:name=".ui.DisplayActivity"
@@ -54,18 +56,17 @@
 
         <activity android:name=".ui.AboutActivity" />
         <activity
-            android:name=".ui.TempActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name=".ui.NotificationReader"
-            android:launchMode="singleTask"
-            android:taskAffinity=""
+        <activity
+            android:name=".ui.NotificationReader"
             android:excludeFromRecents="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:taskAffinity=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.FavoritesActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

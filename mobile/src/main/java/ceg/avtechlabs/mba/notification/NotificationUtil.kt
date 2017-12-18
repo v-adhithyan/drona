@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.support.v7.app.NotificationCompat
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.ui.NotificationReader
+import ceg.avtechlabs.mba.util.Globals
 import java.util.*
 
 /**
@@ -36,7 +37,7 @@ class NotificationUtil(internal var context: Context) {
         intent.putExtra(NotificationReader.INTENT_READ_DESC, message)
         intent.putExtra(NotificationReader.INTENT_PUB_DATA, date)
         intent.putExtra(NotificationReader.INTENT_READ_URl, url)
-        //intent.putExtra(ReaderFromNotificationActivity.INTENT_SOURCE, source)
+        intent.putExtra(NotificationReader.INTENT_SOURCE, Globals.SOURCE_NOTIFICATION)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)

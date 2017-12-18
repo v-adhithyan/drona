@@ -184,5 +184,37 @@ android:layout_width="match_parent">
             />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorFav"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="loadFavorites">
+
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/favorite_menu"
+            android:id="@+id/image_fav"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_fav"
+            android:layout_alignParentBottom="true"
+            android:text="@string/topic_fav"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:letterSpacing="1.01"
+            />
+
+    </RelativeLayout>
 </LinearLayout>
 </ScrollView>

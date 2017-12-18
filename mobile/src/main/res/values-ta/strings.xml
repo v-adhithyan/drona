@@ -6,6 +6,7 @@
     <string name="topic_economics">பொருளாதாரம்</string>
     <string name="topic_leadership">தலைமை</string>
     <string name="topic_others">மற்றவை</string>
+    <string name="topic_fav">விருப்பமானவை</string>
 
     <string name="alert_no_internet_title">இன்டர்நெட் இணைப்பு இல்லை !</string>
     <string name="alert_no_internet_message">செயலியை தொடர்ந்து உபயோகப்படுத்த இன்டர்நெட்டுடன் இணைக்கவும்.</string>
@@ -43,5 +44,8 @@
     <string name="snack_rt_less_than_one_min">ஒரு நிமிடத்திற்குள் இந்த செய்தியை வாசித்து விடலாம்.</string>
 
     <string name="toast_no_stories_left">இந்த பிரிவில் உள்ள அணைத்து செய்திகளையும் வாசித்து முடித்து விட்டீர்கள்.</string>
+    <string name="toast_remaining_stories"> செய்திகள்,  மீதம் உள்ளன.</string>
+    <string name="toast_added_to_favorites">விருப்பமான பிரிவில் இந்த செய்தி சேர்க்கப்பட்டது.</string>
 
+    <string name="alert_no_favorites">எந்த செய்தியும் விருப்பமானவற்றில் இல்லை.</string>
 </resources>

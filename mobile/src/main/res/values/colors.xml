@@ -8,7 +8,8 @@
   <color name="colorMarketing">#885f7f</color>
   <color name="colorFinance">#d0c490</color>
   <color name="colorEconomics">#13b0a5</color>
-  <color name="colorOthers">#eb6460</color>
+  <color name="colorOthers">#FFA500</color>
+  <color name="colorFav">#eb7992</color>
   <!--#f1b136-->
 
 </resources>

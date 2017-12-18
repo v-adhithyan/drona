@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import ceg.avtechlabs.mba.R.id.description
 import java.util.*
 import java.util.logging.Logger
 
@@ -17,11 +18,14 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table $TABLE_NAME ($COL_TITLE text, $COL_CATEGORY varchar(30))")
         db?.execSQL("create table $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
+        db?.execSQL("create table $FAV_TABLE ($FAV_TITLE text, $FAV_CONTENT text, $FAV_DATE text, $FAV_IMAGE_URL text);")
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("drop table if exists $TABLE_NAME")
-        db?.execSQL("create table $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
+        db?.execSQL("create table if not exists $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
+        db?.execSQL("create table if not exists $FAV_TABLE ($FAV_TITLE text, $FAV_CONTENT text, $FAV_DATE text, $FAV_IMAGE_URL text);")
         //onCreate(db)
     }
 
@@ -225,6 +229,40 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         return array
     }
 
+    fun addToFavorites(title: String, content: String, date: String, imageUrl: String): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(FAV_TITLE, title.replace("'", ""))
+        cv.put(FAV_CONTENT, content.replace("'", ""))
+        cv.put(FAV_DATE, date.replace("'", ""))
+        cv.put(FAV_IMAGE_URL, imageUrl.replace("'", ""))
+
+        db.insert(FAV_TABLE, null, cv)
+        db.close()
+        return true
+    }
+
+    fun getFavorites(): ArrayList<FavObject> {
+        val db = this.readableDatabase
+        val query = "select *from $FAV_TABLE limit 15"
+        val cursor = db.rawQuery(query, null)
+
+        val array = ArrayList<FavObject>()
+        if(cursor.moveToFirst()) {
+            do {
+                //Log.d(TAG, "${cursor.getString(0)} ${cursor.getString(1)} ${cursor.getString(2)} ${cursor.getString(3)}")
+                array.add(FavObject(cursor.getString(0), cursor.getString(1)
+                ,cursor.getString(2), cursor.getString(3)))
+            } while(cursor.moveToNext())
+        } else {
+            Log.d(TAG, "none db found")
+        }
+
+        db.close()
+        return array
+    }
+
     companion object {
         val TAG = "dronadbupdate"
 
@@ -238,5 +276,11 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         val FEED_DESC = "description"
         val FEED_CATEGORY = "category"
         val FEED_READ = "read"
+
+        val FAV_TABLE = "favorites"
+        val FAV_TITLE = "fav_title"
+        val FAV_DATE = "fav_date"
+        val FAV_CONTENT = "fav_content"
+        val FAV_IMAGE_URL = "image_url"
     }
 }

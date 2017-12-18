@@ -152,5 +152,13 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
+    <com.like.LikeButton
+        app:icon_type="heart"
+        app:icon_size="25dp"
+        android:id="@+id/star_button"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
