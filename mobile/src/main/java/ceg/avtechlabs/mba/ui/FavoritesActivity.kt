@@ -17,6 +17,9 @@ import ceg.avtechlabs.mba.models.FavObject
 import ceg.avtechlabs.mba.util.Globals
 import cn.pedant.SweetAlert.SweetAlertDialog
 import kotlinx.android.synthetic.main.favorite_content.*
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.util.*
 
@@ -28,25 +31,41 @@ class FavoritesActivity : AppCompatActivity(), FavItemClickListener {
         super.onCreate(savedInstanceState)
 
         showProgressDialog()
-        favorites = DronaDBHelper(this).getFavorites()
 
-        if(favorites.size <= 0) {
+        Thread {
+            try {
+                Thread.sleep(1000)
+            } catch (ex: Exception) {}
+        }.start()
+
+        Observable.just<Unit>(Unit)
+                .map {  DronaDBHelper(this@FavoritesActivity).getFavorites() }
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { fav -> setContent(fav) }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+    }
+
+
+    private fun setContent(favorites: ArrayList<FavObject>?) {
+
+        if(favorites!!.size <= 0) {
             setContentView(R.layout.activity_favorites)
         } else {
             setContentView(R.layout.favorite_content)
             recycler_favorites.layoutManager = LinearLayoutManager(this)
             recycler_favorites.itemAnimator = DefaultItemAnimator()
             recycler_favorites.setHasFixedSize(true)
-            val adapter = FavoritesAdapter(this, favorites)
+            val adapter = FavoritesAdapter(this, favorites!!)
             adapter.setClickListener(this)
             recycler_favorites.adapter = adapter
+            this.favorites = favorites
         }
 
         hideProgressDialog()
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     private fun showProgressDialog() {
@@ -68,12 +87,13 @@ class FavoritesActivity : AppCompatActivity(), FavItemClickListener {
 
     override fun onClick(view: View, position: Int) {
         val fav = favorites[position]
-        val intent = Intent(this, NotificationReader::class.java)
+        val intent = Intent(this, FavorieReaderActivity::class.java)
         intent.putExtra(NotificationReader.INTENT_READ_TITLE, fav.title)
         intent.putExtra(NotificationReader.INTENT_READ_DESC, fav.content)
         intent.putExtra(NotificationReader.INTENT_PUB_DATA, fav.date)
         intent.putExtra(NotificationReader.INTENT_READ_URl, fav.imageUrl)
         intent.putExtra(NotificationReader.INTENT_SOURCE, Globals.SOURCE_FAV)
         startActivity(intent)
+        finish()
     }
 }

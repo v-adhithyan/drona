@@ -1,10 +1,17 @@
 package ceg.avtechlabs.mba.util
 
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
+import android.support.design.widget.CollapsingToolbarLayout
+import android.support.v4.content.ContextCompat
+import android.support.v7.graphics.Palette
 import android.text.TextUtils
 import android.util.Log
+import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
@@ -14,6 +21,8 @@ import com.google.android.gms.ads.InterstitialAd
 import com.squareup.picasso.Picasso
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog
 import com.yarolegovich.lovelydialog.LovelyInfoDialog
+import kotlinx.android.synthetic.main.activity_notification_reader.*
+import kotlinx.android.synthetic.main.activity_reader.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.microedition.khronos.opengles.GL
@@ -133,9 +142,41 @@ fun Context.getReadingTime(content: String): String {
 }
 
 fun ImageView.loadImage(imageUrl: String) {
-    if(TextUtils.isEmpty(imageUrl)) {
+    if(TextUtils.isEmpty(imageUrl) || imageUrl == null) {
         Picasso.with(context).load(R.mipmap.ic_launcher).into(this)
     } else {
         Picasso.with(context).load(imageUrl).into(this)
     }
+}
+
+fun ImageView.loadImage(context: Context, imageUrl: String, toolbar: CollapsingToolbarLayout, window: Window) {
+    if(imageUrl == null || TextUtils.isEmpty(imageUrl)) {
+        return;
+    }
+
+    Picasso.with(context).load(imageUrl).into(object: com.squareup.picasso.Target {
+        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+
+        }
+
+        override fun onBitmapFailed(errorDrawable: Drawable?) {
+
+        }
+
+        override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+            setImageBitmap(bitmap)
+            Palette.from(bitmap).generate(object: Palette.PaletteAsyncListener {
+                override fun onGenerated(palette: Palette) {
+                    val mutedColor = palette.getMutedColor(ContextCompat.getColor(context, R.color.colorPrimary));
+                    val mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+
+                    toolbar.setContentScrimColor(mutedColor);
+                    toolbar.setStatusBarScrimColor(mutedDarkColor);
+
+                    @TargetApi(21)
+                    window.statusBarColor = palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+                }
+            });
+        }
+    })
 }

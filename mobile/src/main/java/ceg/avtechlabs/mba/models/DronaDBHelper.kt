@@ -263,6 +263,15 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
         return array
     }
 
+    fun removeFromFavorites(title: String, content: String, date: String, imageUrl: String) {
+        val db = this.writableDatabase
+        val wherClause = "$FAV_TITLE = ? AND $FAV_DATE = ? AND $FAV_IMAGE_URL = ?"
+
+        db.delete(FAV_TABLE, wherClause, arrayOf(title, date, imageUrl))
+
+        db.close()
+    }
+
     companion object {
         val TAG = "dronadbupdate"
 

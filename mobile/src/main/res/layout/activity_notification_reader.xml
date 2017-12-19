@@ -119,7 +119,7 @@
                 card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="#ffffff">
 
-            <com.uncopt.android.widget.text.justify.JustifiedTextView
+            <org.sufficientlysecure.htmltextview.HtmlTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.5"

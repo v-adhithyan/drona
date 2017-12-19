@@ -64,8 +64,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:taskAffinity=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.FavoritesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.FavoritesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.FavorieReaderActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

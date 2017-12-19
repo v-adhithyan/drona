@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import android.text.Html
 import android.transition.Explode
@@ -20,7 +20,10 @@ import android.webkit.WebView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.util.*
+import ceg.avtechlabs.mba.util.Extractor
+import ceg.avtechlabs.mba.util.internetAvailable
+import ceg.avtechlabs.mba.util.loadInterstitialAd
+import ceg.avtechlabs.mba.util.showNoInternetDialog
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.google.android.gms.ads.AdRequest
@@ -49,6 +52,7 @@ class NotificationReader : AppCompatActivity() {
     var desc = ""
     var date = ""
     var source = ""
+    var imageUrl = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,22 +66,16 @@ class NotificationReader : AppCompatActivity() {
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
         link = intent.getStringExtra(INTENT_READ_URl)
-        source = intent.getStringExtra(INTENT_SOURCE)
-        if(source.equals(Globals.SOURCE_FAV)) {
-            notify_textviewTitle.text = title
-            notify_textviewDescription.text = desc
-            notify_textviewDate.text = date
-            notify_image.loadImage(link)
-        } else {
-            DronaDBHelper(this).markFeedAsRead(title, desc)
-            if(internetAvailable()) {
-                change()
-            } else {
-                showNoInternetDialog()
-            }
-        }
+        //source = intent.getStringExtra(INTENT_SOURCE)
+        DronaDBHelper(this).markFeedAsRead(title, desc)
         notify_adView.loadAd(AdRequest.Builder().build())
+        if(internetAvailable()) {
+            change()
+        } else {
+            showNoInternetDialog()
+        }
 
+        setLikeListener()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -137,8 +135,10 @@ class NotificationReader : AppCompatActivity() {
                     notify_textviewDescription.text = desc
                     Toast.makeText(this, getString(R.string.read_more), Toast.LENGTH_LONG).show()
                 } else {
-                    notify_textviewDescription.text = Html.fromHtml(article!!.document.text())
+                    desc = article!!.document.text()
+                    notify_textviewDescription.setHtml(article!!.document.text())
                 }
+                imageUrl = article!!.imageUrl
                 Picasso.with(this).load(article!!.imageUrl).into(object: com.squareup.picasso.Target {
                     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
@@ -201,10 +201,11 @@ class NotificationReader : AppCompatActivity() {
                 star_button.isEnabled = false
                 Toast.makeText(this@NotificationReader, R.string.toast_added_to_favorites, Toast.LENGTH_LONG).show()
                 Log.d("HEART", "like")
-                addToFavorites(textviewTitle.text.toString(),
-                        textviewDescription.text.toString(),
-                        textviewDate.text.toString(),
-                        textviewDescription.tag.toString())
+                addToFavorites(title,
+                        desc,
+                        date,
+                        imageUrl
+                        )
             }
 
             override fun unLiked(p0: LikeButton?) {
@@ -229,6 +230,7 @@ class NotificationReader : AppCompatActivity() {
             onBackPressed()
         }
     }
+
 
     companion object {
         val INTENT_READ_TITLE = "title"
