@@ -45,7 +45,7 @@
     <string name="snack_rt_less_than_one_min">It will take less than a minute to read this story.</string>
 
     <string name="toast_no_stories_left">You have read all stories in this category.</string>
-    <string name="toast_remaining_stories"> unread stories remaining ..</string>
+    <string name="toast_remaining_stories">  unread stories remaining ..</string>
     <string name="toast_added_to_favorites">Added to favorites ..</string>
     <string name="toast_removed_from_favorites">Removed from favorites ..</string>
     <string name="alert_no_favorites">No news in favorites.</string>

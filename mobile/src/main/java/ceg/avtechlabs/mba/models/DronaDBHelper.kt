@@ -13,19 +13,19 @@ import java.util.logging.Logger
  * Created by Adhithyan V on 30-05-2017.
  */
 
-class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.DB_NAME, null, 1) {
+class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.DB_NAME, null, 3) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table $TABLE_NAME ($COL_TITLE text, $COL_CATEGORY varchar(30))")
         db?.execSQL("create table $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
         db?.execSQL("create table $FAV_TABLE ($FAV_TITLE text, $FAV_CONTENT text, $FAV_DATE text, $FAV_IMAGE_URL text);")
-
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("drop table if exists $TABLE_NAME")
-        db?.execSQL("create table if not exists $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
-        db?.execSQL("create table if not exists $FAV_TABLE ($FAV_TITLE text, $FAV_CONTENT text, $FAV_DATE text, $FAV_IMAGE_URL text);")
+        //db?.execSQL("drop table if exists $TABLE_NAME")
+        db?.execSQL("create table IF NOT EXISTS $TABLE_NAME ($COL_TITLE text, $COL_CATEGORY varchar(30))")
+        db?.execSQL("create table IF NOT EXISTS $FEED_TABLE ($FEED_TITLE text, $FEED_DESC text, $FEED_CATEGORY text, $FEED_READ integer check(read in (0,1)));")
+        db?.execSQL("create table IF NOT EXISTS $FAV_TABLE ($FAV_TITLE text, $FAV_CONTENT text, $FAV_DATE text, $FAV_IMAGE_URL text);")
         //onCreate(db)
     }
 
@@ -40,6 +40,11 @@ class DronaDBHelper(context: Context): SQLiteOpenHelper(context, DronaDBHelper.D
             }
         }
     }*/
+
+    fun dummy() {
+        val db = this.writableDatabase
+        db.close()
+    }
 
     fun insert(title: String, category: String): Boolean {
         val db = this.writableDatabase

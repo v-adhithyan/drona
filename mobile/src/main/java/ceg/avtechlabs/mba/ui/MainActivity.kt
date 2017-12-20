@@ -14,6 +14,7 @@ import android.view.View
 import android.view.WindowManager
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.jobs.DronaJobPool
+import ceg.avtechlabs.mba.models.DronaDBHelper
 import ceg.avtechlabs.mba.notification.NotificationUtil
 import ceg.avtechlabs.mba.util.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             showFeedPreferenceChooser()
             storePreference(Globals.FIRST_RUN, true)
         }
+        DronaDBHelper(this).dummy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

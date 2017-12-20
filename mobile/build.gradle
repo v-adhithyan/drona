@@ -9,8 +9,8 @@ android {
         applicationId "ceg.avtechlabs.mba"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 7
-        versionName "2.0"
+        versionCode 9
+        versionName "2.00"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
