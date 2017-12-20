@@ -1,11 +1,10 @@
 # Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)[![](play_badge.svg)](https://play.google.com/store/apps/details?id=ceg.avtechlabs.mba)
 
-An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
+Read management related news on the go. A must have app for every managment guy.
 
-
-| Topics screen                  | Feeds screen                      | View url screen                  |
+| Topics screen                  | News reader screen                | Favorites screen screen                  |
 |:------------------------------:|:---------------------------------:|:--------------------------------:|
-|![](screenshots/intro.png) | ![](screenshots/feeds.png) | ![](screenshots/view.png)|
+|![](screenshots/intro.png) | ![](screenshots/feeds.png) | ![](screenshots/fav.png)|
 
 ## What the app does?
   Simply put the app aggregates rss feeds of management topics from various sites listed below. If you want to add a site or category, open a pull request.
@@ -16,10 +15,13 @@ An android app that helps an MBA student/grad or any other management guy to kee
 
 ### Marketing
 * [Ducttapemarketing](http://feeds2.feedburner.com/ducttapemarketing/nRUD)
+* MarketingProfs
+* Adfeed
 
 ### Finance
 * [Prof. Jayanth Varma financial markets blog](https://faculty.iima.ac.in/~jrvarma/blog/index.cgi/index.rss)
 * [NYtimes](http://rss.nytimes.com/services/xml/rss/nyt/Business.xml)
+* BusinessLine Stocks
 
 ### Economics
 * [The economists view](http://feeds2.feedburner.com/EconomistsView)
@@ -29,8 +31,7 @@ An android app that helps an MBA student/grad or any other management guy to kee
 * [All things workplace](http://feeds2.feedburner.com/allthingsworkplace)
 
 ### Others
-* [MIT](http://feeds2.feedburner.com/mitsloannews)
-* [Kellog institute of management](http://www.kellogg.northwestern.edu/news-events/news/school/kellogg_news_feed.aspx)
+* Engadget
 
 ## TODO
 - [x] Progress bar for reader activity
