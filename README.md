@@ -1,5 +1,5 @@
 ![](screenshots/banner.png)
-# Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)<a href="https://play.google.com/store/apps/details?id=ceg.avtechlabs.mba"><img src="play_badge.svg" alt="Play Store Badge" style="width: 100px;"/></a>
+# Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)<a href="https://play.google.com/store/apps/details?id=ceg.avtechlabs.mba"><img src="google-play-badge.png" alt="Play Store Badge" style="width: 100px;"/></a>
 
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
 
