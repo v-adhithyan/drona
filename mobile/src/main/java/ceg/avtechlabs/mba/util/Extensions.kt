@@ -86,14 +86,37 @@ fun Context.storePreference(key: String, message: Any) {
     editor.commit()
 }
 
+
 fun Context.getPreference(key: String): Any {
     val preference = getSharedPreferences(Globals.DRONA_PREFERENCES, 0)
 
     if(key == Globals.FIRST_RUN) {
         return preference.getBoolean(key, false)
+    } else if(key == Globals.MAX_NOTIFICATIONS) {
+        return preference.getInt(Globals.MAX_NOTIFICATIONS, 0)
     }
 
     return preference.getString(key, "")
+}
+
+fun Context.isNotificationAllowed(): Boolean {
+    var count = this.getPreference(Globals.MAX_NOTIFICATIONS).toString().toInt()
+    if (count < Globals.MAX_NOTIFICAITIONS_ALLOWED) {
+        count++
+        this.storePreference(Globals.MAX_NOTIFICATIONS, count)
+        return true
+    }
+
+    return false
+}
+
+fun Context.decrementNotificationCount() {
+
+    var count = this.getPreference(Globals.MAX_NOTIFICATIONS).toString().toInt()
+    count--
+
+    if(count < 0) {count = 0}
+    this.storePreference(Globals.MAX_NOTIFICATIONS, count)
 }
 
 fun Context.loadInterstitialAd() {

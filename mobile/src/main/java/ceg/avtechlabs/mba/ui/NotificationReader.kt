@@ -20,10 +20,7 @@ import android.webkit.WebView
 import android.widget.Toast
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.models.DronaDBHelper
-import ceg.avtechlabs.mba.util.Extractor
-import ceg.avtechlabs.mba.util.internetAvailable
-import ceg.avtechlabs.mba.util.loadInterstitialAd
-import ceg.avtechlabs.mba.util.showNoInternetDialog
+import ceg.avtechlabs.mba.util.*
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.chimbori.crux.articles.Article
 import com.google.android.gms.ads.AdRequest
@@ -61,7 +58,7 @@ class NotificationReader : AppCompatActivity() {
         window.exitTransition = Explode()
 
         //
-
+        decrementNotificationCount()
         title = intent.getStringExtra(INTENT_READ_TITLE)
         desc = intent.getStringExtra(INTENT_READ_DESC)
         date = intent.getStringExtra(INTENT_PUB_DATA)
@@ -76,6 +73,7 @@ class NotificationReader : AppCompatActivity() {
         }
 
         setLikeListener()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -8,6 +8,8 @@ class Globals {
     companion object {
         val FIRST_RUN = "first_run"
         val FEED_PREFERENCES = "feed_preferences"
+        val MAX_NOTIFICATIONS = "max_notifications"
+        val MAX_NOTIFICAITIONS_ALLOWED = 2
 
         val DRONA_PREFERENCES = "drona_preference"
 

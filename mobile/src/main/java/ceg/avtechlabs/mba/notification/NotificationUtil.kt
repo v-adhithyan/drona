@@ -10,6 +10,8 @@ import android.support.v7.app.NotificationCompat
 import ceg.avtechlabs.mba.R
 import ceg.avtechlabs.mba.ui.NotificationReader
 import ceg.avtechlabs.mba.util.Globals
+import ceg.avtechlabs.mba.util.getPreference
+import ceg.avtechlabs.mba.util.isNotificationAllowed
 import java.util.*
 
 /**
@@ -52,9 +54,21 @@ class NotificationUtil(internal var context: Context) {
                 //.setGroup(GROUP_NAME)
                 .addAction(R.drawable.next, context.getString(R.string.notification_action_read), pendingIntent)
 
+        val notificationCount = context.getPreference(Globals.MAX_NOTIFICATIONS).toString().toInt()
+        var notificationShow = false
+        var nougat = false
+
+        if(context.isNotificationAllowed() && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N)
+            notificationShow = true
+        if(android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.N) {
+            nougat = true
+        }
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         //notificationManager.notify(GROUP_ID, buildSummary())
-        notificationManager.notify(Random().nextInt(), mBuilder.build())
+
+        if(notificationShow || nougat) {
+            notificationManager.notify(Random().nextInt(), mBuilder.build())
+        }
     }
 
     private fun buildSummary(): Notification {
