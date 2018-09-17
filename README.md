@@ -4,9 +4,10 @@
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
 
 
-| Topics screen                  | Feeds screen                      | View url screen                  |
-|:------------------------------:|:---------------------------------:|:--------------------------------:|
-|![](screenshots/intro.png) | ![](screenshots/feeds.png) | ![](screenshots/view.png)|
+| Topics screen                  | Feeds screen                     | View screen                  |
+|:------------------------------:|:--------------------------------:|:----------------------------:|
+|![](screenshots/intro.png)      |![](screenshots/feeds.png)        |![](screenshots/view.png)     |
+
 
 ## What the app does?
   Simply put the app aggregates rss feeds of management topics from various sites listed below. If you want to add a site or category, open a pull request.
