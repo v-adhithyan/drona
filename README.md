@@ -4,9 +4,9 @@
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
 
 
-| Topics screen                  | Feeds screen                     | View screen                  |
-|:------------------------------:|:--------------------------------:|:----------------------------:|
-|![](screenshots/intro.png)      |![](screenshots/feeds.png)        |![](screenshots/view.png)     |
+| Topics screen                  | Feeds screen                     | 
+|:------------------------------:|:--------------------------------:|
+|![](screenshots/intro.png)      |![](screenshots/feeds.png)        |
 
 
 ## What the app does?
