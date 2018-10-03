@@ -1,4 +1,6 @@
 ![](screenshots/banner.png)
+[![Code Climate](https://codeclimate.com/github/v-adhithyan/drona.svg)](https://codeclimate.com/github/v-adhithyan/drona) 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/v-adhithyan/drona.svg?columns=all)](https://waffle.io/v-adhithyan/drona)
 # Drona [![Build Status](https://travis-ci.com/v-adhithyan/mba.svg?token=R8gkdf7qhbazTErtMYF4&branch=master)](https://travis-ci.com/v-adhithyan/mba)<a href="https://play.google.com/store/apps/details?id=ceg.avtechlabs.mba"><img src="google-play-badge.png" alt="Play Store Badge" width="200px"/></a>
 
 An android app that helps an MBA student/grad or any other management guy to keep up with the current trends in management.
