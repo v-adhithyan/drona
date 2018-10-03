@@ -16,6 +16,8 @@ An android app that helps an MBA student/grad or any other management guy to kee
 ## What the app does?
   Simply put the app aggregates rss feeds of management topics from various sites listed below. If you want to add a site or category, open a pull request.
 
+  <img src="drona.gif"  width="300px">
+
 ## Credits
   This app aggregates rss feeds various sources.
   Categories and the respective feed sources are given below.
